@@ -1,4 +1,4 @@
-# Reproducible Bioinformatics Workflows with Nextflow (alpha version)
+# Reproducible Bioinformatics Workflows with Nextflow and nf-core (alpha version)
 
 
 <br>
