@@ -103,3 +103,6 @@ plugins:
     - mkdocs-video
     - search:
         lang: en
+extra:
+  version:
+    provider: mike
