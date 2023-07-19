@@ -1,13 +1,17 @@
 site_name: Reproducible Bioinformatics Workflows with Nextflow and nf-core
+site_author: GA & NeSI
+site_dir: public
+site_url: "https://genomicsaotearoa.github.io/Nextflow_Workshop/"
 
 #Repository information
 
-repo_url: https://github.com/GenomicsAotearoa/Nextflow_Workshop.git
-repo_name:   GenomicsAotearoa/Nextflow_Workshop 
+repo_name: GenomicsAotearoa/Nextflow_Workshop
+repo_url: https://github.com/GenomicsAotearoa/Nextflow_Workshop
 
 
 theme:
   name: material
+  custom_dir: ./overrides
   logo: images/nesi_ga.png
   favicon: images/nesi_ga.png
    # 404 page
@@ -21,12 +25,12 @@ theme:
     toggle:
       icon: material/brightness-auto
       name: Switch to light mode
-    primary: green
+    primary: custom
 
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"
     scheme: default
-    primary: green
+    primary: custom
 
 
     toggle:
@@ -39,14 +43,17 @@ theme:
     toggle:
       icon: material/brightness-4
       name: Switch to system preference
-    primary: green
+    primary: custom
   
   features:
     - navigation.tracking
     - navigation.sections
     - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate
 
-    
 
   # Necessary for search to work properly
   include_search_page: false
@@ -99,10 +106,20 @@ markdown_extensions:
   - pymdownx.tilde
   - pymdownx.snippets
 
-plugins:
-    - mkdocs-video
-    - search:
-        lang: en
-extra:
-  version:
-    provider: mike
+plugins: 
+  - glightbox:
+      effect: zoom
+      zoomable: true
+  - search:
+      lang: en
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+copyright : Snakemake workshop material is licensed under a <a rel="noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution license</a>
+
+
+extra_css:
+  - stylesheets/extra.css
