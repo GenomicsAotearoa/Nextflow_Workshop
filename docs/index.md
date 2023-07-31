@@ -11,11 +11,3 @@
 
 This lesson also introduces [nf-core](https://nf-co.re/): a community-driven platform, which provide peer reviewed best practice analysis pipelines written in Nextflow and [nf-tower](https://cloud.tower.nf/)(centralized command post for the management of Nextflow data pipelines.)
 
-!!! info circle-info "Nextflow features"
-
-    - **Fast protyping** – let’s you write a computational pipeline from smaller tasks
-    - **Reproducibility** – supports Docker and Singularity containers
-    - **Portable** – can run locally, Slurm, SGE, PBS, and cloud (Google, Kubernetes and AWS)
-    - **Unified parallelism** – can process chunks through the entire pipeline (QC -> align -> call snps)
-    - **Continuous checkpoints** – each chunk and process it goes through is checkpointed
-    - **Stream oriented** – promotes programming approach extending Unix pipes model.
