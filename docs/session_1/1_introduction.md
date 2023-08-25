@@ -2,7 +2,7 @@
 
 Workflow Management Systems (WfMS), such as Snakemake, Galaxy, and Nextflow have been developed specifically to manage computational data-analysis workflows in fields such as Bioinformatics, Imaging, Physics, and Chemistry.
 
-WfMS contain multiple features that simplify the development, monitoring, execution and sharing of pipelines.
+WfMS contains multiple features that simplify the development, monitoring, execution, and sharing of pipelines.
 
 Key features include;
 
@@ -21,7 +21,7 @@ Key features include;
 
     - **Fast prototyping:** A simple syntax for writing pipelines that enables you to reuse existing scripts and tools for fast prototyping.
     
-    - **Reproducibility:** Nextflow supports several container technologies, such as Docker and Singularity, as well as the package manager Conda. This, along with the integration of the GitHub code sharing platform, allows you to write self-contained pipelines, manage versions and to reproduce any former configuration.
+    - **Reproducibility:** Nextflow supports several container technologies, such as Docker and Singularity, as well as the package manager Conda. This, along with the integration of the GitHub code-sharing platform, allows you to write self-contained pipelines, manage versions, and reproduce any former configuration.
     
     - **Portability:** Nextflow’s syntax separates the functional logic (the steps of the workflow) from the execution settings (how the workflow is executed). This allows the pipeline to be run on multiple platforms, e.g. local compute vs. a university compute cluster or a cloud service like AWS, without changing the steps of the workflow.
     
