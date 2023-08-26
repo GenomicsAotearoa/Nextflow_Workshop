@@ -14,6 +14,8 @@ nav:
     - setup/setup.md
   - Session 1:
     - session_1/1_introduction.md
+    - session_1/2_nfcore.md
+    - session_1/3_configuration.md
   - Session 2:
     - session_2/1_introduction.md
 

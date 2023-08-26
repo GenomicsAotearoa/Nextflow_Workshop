@@ -1,4 +1,12 @@
-# Introduction to Nextflow management systems
+# Introduction to Nextflow
+
+!!! abstract "Objectives"
+
+    - Learn about the core features of Nextflow
+    - Learn Nextflow terminology
+    - Learn fundamental commands and options for executing workflows
+
+## Introduction to workflow management systems
 
 Workflow Management Systems (WfMS), such as Snakemake, Galaxy, and Nextflow have been developed specifically to manage computational data-analysis workflows in fields such as Bioinformatics, Imaging, Physics, and Chemistry.
 
@@ -33,13 +41,13 @@ Key features include;
 
 In Nextflow, processes and channels are the fundamental building blocks of a workflow.
 
-A **process** is a unit of execution that represents a single computational step in a workflow. It is defined as a block of code that typically performs a one specific task and specifies its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, or R.
+A **process** is a unit of execution that represents a single computational step in a workflow. It is defined as a block of code that typically performs one specific task. Each process will specify its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, Perl, or R.
 
-Processes in are executed independently (i.e., they do not share a common writable state) as **tasks** and can run in parallel, allowing for efficient utilization of computing resources. Nextflow automatically manages the data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.
+Processes in are executed independently (i.e., they do not share a common writable state) as **tasks**. Multiple tasks can run in parallel, allowing for efficient utilization of computing resources. Nextflow is a top down workflow manager and will automatically manage data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.
 
-A **channel** is an asynchronous first-in, first-out (FIFO) queue that is used to join processes together. Channels allow data to passed between processes and can be used to manage data, parallelize tasks, and structure workflows. Any process can define one or more channels as an input and output. Ultimately the workflow execution flow itself, is implicitly defined by these declarations.
+A **channel** is an asynchronous first-in, first-out (FIFO) queue that is used to join processes together. Channels allow data to passed between processes and can be used to manage data, parallelize tasks, and structure workflows. Any process can define one or more channels as an input and output. Ultimately the workflow execution flow itself, is implicitly defined by the channel declarations.
 
-Importantly, processes can be **parameterised** to allow for flexibility in their behavior and to enable their reuse in and between workflows.
+Importantly, processes can be **parameterised** to allow for flexibility in their behavior and to enable their reuse in and between workflows. Parameters can be defined in the process declaration and can be passed to the process at runtime. Parameters can be used to specify the input and output files, as well as any other parameters required for the process to execute.
 
 ## Execution abstraction
 
@@ -47,9 +55,9 @@ While a process defines what command or script is executed, the **executor** det
 
 Nextflow provides an **abstraction** between the workflow’s functional logic and the underlying execution system. This abstraction allows users to define a workflow once and execute it on different computing platforms without having to modify the workflow definition.
 
-Nextflow provides a variety of built-in execution options, such as local execution, HPC cluster execution, and cloud-based execution, and allows users to easily switch between these options using command-line arguments.
+If not specified, Nextflow will execute locally. Executing locally is useful for workflow development and testing purposes. However, for real-world computational workflows, a high-performance computing (HPC) or cloud platform is often required.
 
-If not specified, processes are executed on your local computer. The local executor is useful for workflow development and testing purposes. However, for real-world computational workflows, a high-performance computing (HPC) or cloud platform is often required.
+Nextflow provides a variety of built-in execution options, such as local execution, HPC cluster execution, and cloud-based execution, and allows users to easily switch between these options using command-line arguments.
 
 You can find a full list of supported executors as well as how to configure them [here](https://www.nextflow.io/docs/latest/executor.html).
 
@@ -93,7 +101,7 @@ nextflow run -help
 
     ??? success "Solution"
     
-        You can find out which version of Nextflow you are using by running the following command:
+        You can find out which version of Nextflow you are using by executing:
 
         ```bash
         nextflow -version
@@ -101,7 +109,7 @@ nextflow run -help
 
 ## Managing your environment
 
-You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a workflow and will be interpreted by Nextflow. For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing environmental variables.
+You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a workflow and will be interpreted by Nextflow. For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing some environmental variables.
 
 For example, for consistency, it is good practice to pin the version of Nextflow you are using with the `NXF_VER` variable:
 
@@ -135,7 +143,7 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
 
 !!! question "Exercise"
 
-    Export the folder `folder goes here` as the folder where remote Singularity images are stored:
+    Export the folder **`folder goes here`** as the folder where remote Singularity images are stored:
 
     ??? success "Solution"
     
@@ -154,6 +162,8 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
 !!! tip "Tip"
     
         You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
+
+        You may also consider storing these as part of a [Nextflow configuration file](https://www.nextflow.io/docs/latest/config.html#config-files) that can be loaded when you execute a workflow. You will be shown how to do this later in this workshop.
 
 A complete list of environmental variables can be found [here](https://www.nextflow.io/docs/latest/config.html#environment-variables).
 
@@ -233,7 +243,7 @@ Nextflow automatically provides built-in support for version control using Git. 
 
     Execute the `hello` workflow directly from the `nextflow-io` GitHub using the `v1.1` revision tag.
 
-    ??? success "Solutuon"
+    ??? success "Solution"
 
         Use the `nextflow run` command to execute the `nextflow-io/hello` pipeline with the `v1.1` revision tag:
 
@@ -247,7 +257,7 @@ Nextflow automatically provides built-in support for version control using Git. 
 
 If your local version of a workflow is not the latest you be shown a warning and will be required to use a revision flag when executing the workflow. You can update a workflow with the Nextflow `pull` command with a revision flag.
 
-### Nextflow log**
+## Nextflow log
 
 It is important to keep a record of the commands you have run to generate your results. Nextflow helps with this by creating and storing metadata and logs about the run in hidden files and folders in your current directory (unless otherwise specified). This data can be used by Nextflow to generate reports. It can also be queried using the Nextflow `log` command:
 
@@ -279,33 +289,29 @@ There are many other fields you can query. You can view a full list of fields wi
 nextflow log -l
 ```
 
-### **Challenge**
+!!! question "Exercise"
 
-Use the `log` command to view with `process`, `hash`, and `script` fields for your tasks from your most recent Nextflow execution.
+    Use the `log` command to view with `process`, `hash`, and `script` fields for your tasks from your most recent Nextflow execution.
 
-### Solution
+    ??? success "Solution"
 
-Use the `log` command to get a list of you recent executions:
+        Use the `log` command to get a list of you recent executions:
 
-```bash
-nextflow log
-```
+        ```bash
+        nextflow log
+        ```
 
-![](../figs/1.1_nextflowlog.svg)
+        Query the process, hash, and script using the `-f` option for the most recent run:
 
-Query the process, hash, and script using the `-f` option for the most recent run:
+        ```bash
+        nextflow log <run_name> -f process,hash,script
+        ```
 
-```bash
-nextflow log crazy_faggin -f process,hash,script
-```
+## Execution cache and resume
 
-![](../figs/1.1_nextflowlogf.svg)
+Task execution **caching** is an essential feature of modern workflow managers. Accordingly, Nextflow provides an automated caching mechanism for every execution.
 
-:::
-
-### **1.1.10. Execution cache and resume**
-
-Task execution **caching** is an essential feature of modern workflow managers. As such, Nextflow provides an automated caching mechanism for every execution. When using the Nextflow `-resume` option, successfully completed tasks from previous executions are skipped and the previously cached results are used in downstream tasks.
+When using the Nextflow `-resume` option, successfully completed tasks from previous executions are skipped and the previously cached results are used in downstream tasks.
 
 Nextflow caching mechanism works by assigning a unique ID to each task. The task unique ID is generated as a 128-bit hash value composing the the complete file path, file size, and last modified timestamp. These ID's are used to create a separate execution directory where the tasks are executed and the outputs are stored. Nextflow will take care of the inputs and outputs in these folders for you.
 
@@ -350,7 +356,7 @@ To print all the relevant paths to the screen, use the `-ansi-log` option can be
 nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -ansi-log false
 ```
 
-It's very likely you will execute a workflow multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) by **resuming** a workflow from the last step that was completed successfully and/or unmodified.
+It's very likely you will execute a workflow multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) by **resuming** a workflow from the last step that was completed successfully or unmodified.
 
 By adding the `-resume` option to your `run` command you can use the cache rather than re-running successful tasks:
 
@@ -364,35 +370,35 @@ In practical terms, the workflow is executed from the beginning. However, before
 
 Notably, the `-resume` functionality is very sensitive. Even touching a file in the work directory can invalidate the cache.
 
-### **Challenge**
+!!! question "Exercise"
 
-Invalidate the cache by touching a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `touch` command). Execute the workflow again with the `-resume` option to show that the cache has been invalidated.
+    Invalidate the cache by touching a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `touch` command). Execute the workflow again with the `-resume` option to show that the cache has been invalidated.
 
-### Solution
+    ??? success "Solution"
 
-Execute the workflow for the first time (if you have not already).
+        Execute the workflow for the first time (if you have not already).
 
-```bash
-nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity
-```
+        ```bash
+        nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity
+        ```
 
-Use the task ID shown for the `FASTQC` process and use it to find and `touch` a the `sample1_R1.fastq.gz` file:
+        Use the task ID shown for the `FASTQC` process and use it to find and `touch` a the `sample1_R1.fastq.gz` file:
 
-```bash
-touch work/ff/21abfa87cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
-```
+        ```bash
+        touch work/ff/21abfa87cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+        ```
 
-Execute the workflow again with the `-resume` command option:
+        Execute the workflow again with the `-resume` command option:
 
-```bash
-nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -resume
-```
+        ```bash
+        nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -resume
+        ```
 
-You should that 2 of 4 tasks for `FASTQC` and the `MULTIQC` task were invalid and were executed again.
+        You should that 2 of 4 tasks for `FASTQC` and the `MULTIQC` task were invalid and were executed again.
 
-**Why did this happen?**
+        **Why did this happen?**
 
-In this example, the cache of two `FASTQC` tasks were invalid. The `sample1_R1.fastq.gz` file is used by in the [samplesheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) twice. Thus, touching the symlink for this file and changing the date of last modification disrupted two task executions.
+        In this example, the cache of two `FASTQC` tasks were invalid. The `sample1_R1.fastq.gz` file is used by in the [samplesheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) twice. Thus, touching the symlink for this file and changing the date of last modification disrupted two task executions.
 
 Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of it's contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
@@ -403,19 +409,19 @@ nextflow clean -help
 The `-after`, `-before`, and `-but` options are all very useful to select specific runs to `clean`. The `-dry-run` option is also very useful to see which files will be removed if you were to `-force` the `clean` command.
 
 
-### **Challenge**
+!!! question "Exercise"
 
-You Nextflow to `clean` your work `work` directory of staged files but **keep** your execution logs.
+    You Nextflow to `clean` your work `work` directory of staged files but **keep** your execution logs.
 
-### Solution
+    ??? success "Solution"
 
-Use the Nextflow `clean` command with the `-k` and `-f` options:
+        Use the Nextflow `clean` command with the `-k` and `-f` options:
 
-```bash
-nextflow clean -k -f
-```
+        ```bash
+        nextflow clean -k -f
+        ```
 
-### **1.1.11. Listing and dropping cached workflows**
+## Listing and dropping cached workflows
 
 Over time, you might want to remove a stored workflows. Nextflow also has functionality to help you to view and remove workflows that have been pulled locally.
 
@@ -431,35 +437,34 @@ If you want to remove a workflow from your cache you can remove it using the Nex
 nextflow drop <workflow>
 ```
 
+!!! question "Exercise"
 
-**Challenge**
+    View your cached workflows with the Nextflow `list` command and remove the `nextflow-io/hello` workflow with the `drop` command.
 
-View your cached workflows with the Nextflow `list` command and remove the `nextflow-io/hello` workflow with the `drop` command.
+    ??? success "Solution"
 
-### Solution
+        List your workflow assets:
 
-List your workflow assets:
+        ```bash
+        nextflow list
+        ```
 
-```bash
-nextflow list
-```
+        Drop the `nextflow-io/hello` workflow:
 
-Drop the `nextflow-io/hello` workflow:
+        ```bash
+        nextflow drop nextflow-io/hello
+        ```
 
-```bash
-nextflow drop nextflow-io/hello
-```
+        Check it has been removed:
 
-Check it has been removed:
+        ```bash
+        nextflow list
+        ```
 
-```bash
-nextflow list
-```
+!!! abstract "Key points"
 
-!!! note "Key points"
-
-   - Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.
-   - Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine.
-   - Nextflow supports version control and has automatic integrations with online code repositories.
-   - Nextflow will cache your runs and they can be resumed with the `-resume` option.
-   - You can manage workflows with Nextflow commands (e.g., `pull`, `clone`, `list`, and `drop`).
+    - Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows
+    - Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine
+    - Nextflow supports version control and has automatic integrations with online code repositories.
+    - Nextflow will cache your runs and they can be resumed with the `-resume` option
+    - You can manage workflows with Nextflow commands (e.g., `pull`, `clone`, `list`, and `drop`)
