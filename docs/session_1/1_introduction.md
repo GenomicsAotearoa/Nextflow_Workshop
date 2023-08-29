@@ -41,6 +41,10 @@ Key features include;
 
 In Nextflow, processes and channels are the fundamental building blocks of a workflow.
 
+<br>
+<p align="center"><img src="../../images/1_1_channel-process.excalidraw.png" alt="drawing" width="900"/></p> 
+<br>
+
 A **process** is a unit of execution that represents a single computational step in a workflow. It is defined as a block of code that typically performs one specific task. Each process will specify its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, Perl, or R.
 
 Processes in are executed independently (i.e., they do not share a common writable state) as **tasks**. Multiple tasks can run in parallel, allowing for efficient utilization of computing resources. Nextflow is a top down workflow manager and will automatically manage data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.
@@ -55,11 +59,15 @@ While a process defines what command or script is executed, the **executor** det
 
 Nextflow provides an **abstraction** between the workflow’s functional logic and the underlying execution system. This abstraction allows users to define a workflow once and execute it on different computing platforms without having to modify the workflow definition.
 
+<br>
+<p align="center"><img src="../../images/1_1_abstraction.excalidraw.png" alt="drawing" width="900"/></p> 
+<br>
+
 If not specified, Nextflow will execute locally. Executing locally is useful for workflow development and testing purposes. However, for real-world computational workflows, a high-performance computing (HPC) or cloud platform is often required.
 
 Nextflow provides a variety of built-in execution options, such as local execution, HPC cluster execution, and cloud-based execution, and allows users to easily switch between these options using command-line arguments.
 
-You can find a full list of supported executors as well as how to configure them [here](https://www.nextflow.io/docs/latest/executor.html).
+You can find a full list of supported executors as well as how to configure them in the [Nextflow docs](https://www.nextflow.io/docs/latest/executor.html).
 
 ## Nextflow CLI
 
@@ -87,12 +95,66 @@ You can list Nextflow options and commands with the `-h` option:
 nextflow -h
 ```
 
+```console
+Usage: nextflow [options] COMMAND [arg...]
+
+Options:
+  -C
+     Use the specified configuration file(s) overriding any defaults
+  -D
+     Set JVM properties
+  -bg
+     Execute nextflow in background
+  -c, -config
+     Add the specified file to configuration set
+  -config-ignore-includes
+     Disable the parsing of config includes
+  -d, -dockerize
+     Launch nextflow via Docker (experimental)
+  [truncated]
+
+Commands:
+  clean         Clean up project cache and work directories
+  clone         Clone a project into a folder
+  config        Print a project configuration
+  [truncated]
+```
+
 Options for a commands can also be viewed by appending the -help option to a Nextflow command.
 
 For example, options for the the run command can be viewed:
 
 ```bash
 nextflow run -help
+```
+
+```console
+Execute a pipeline project
+Usage: run [options] Project name or repository url
+  Options:
+    -E
+       Exports all current system environment
+       Default: false
+    -ansi-log
+       Enable/disable ANSI console logging
+    -bucket-dir
+       Remote bucket where intermediate result files are stored
+    -cache
+       Enable/disable processes caching
+    -disable-jobs-cancellation
+       Prevent the cancellation of child jobs on execution termination
+    -dsl1
+       Execute the workflow using DSL1 syntax
+       Default: false
+    -dsl2
+       Execute the workflow using DSL2 syntax
+       Default: false
+    -dump-channels
+       Dump channels for debugging purpose
+    -dump-hashes
+       Dump task hash keys for debugging purpose
+       Default: false
+    [truncated]
 ```
 
 !!! question "Exercise"
@@ -119,14 +181,14 @@ export NXF_VER=<version number>
 
 !!! question "Exercise"
 
-    Pin the version of Nextflow to 23.04.1 using the `NXF_VER` environmental variable and check that it has been applied.
+    Pin the version of Nextflow to 23.04.3 using the `NXF_VER` environmental variable and check that it has been applied.
 
     ??? success "Solution"
     
         Export the version using the `NXF_VER` environmental variable:
 
         ```bash
-        export NXF_VER=23.04.1
+        export NXF_VER=23.04.3
         ```
 
         Check that the new version has been applied using the -v option:
@@ -165,7 +227,7 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
 
         You may also consider storing these as part of a [Nextflow configuration file](https://www.nextflow.io/docs/latest/config.html#config-files) that can be loaded when you execute a workflow. You will be shown how to do this later in this workshop.
 
-A complete list of environmental variables can be found [here](https://www.nextflow.io/docs/latest/config.html#environment-variables).
+A complete list of environmental variables can be found in the [Nextflow docs](https://www.nextflow.io/docs/latest/config.html#environment-variables).
 
 ## Executing a workflow
 
@@ -217,7 +279,23 @@ If you `run` a workflow, it will look for a local file with the workflow name yo
         nextflow run nextflow-io/hello
         ```
 
-        More information about the Nextflow `run` command can be found [here](https://www.nextflow.io/docs/latest/cli.html#run).
+        ```console
+        N E X T F L O W  ~  version 23.04.2
+        Pulling nextflow-io/hello ...
+        downloaded from https://github.com/nextflow-io/hello.git
+        Launching `https://github.com/nextflow-io/hello` [stupefied_bernard] DSL2 - revision: 1d71f857bb [master]
+        executor >  local (4)
+        [6e/8d5b1a] process > sayHello (3) [100%] 4 of 4 ✔
+        Hola world!
+
+        Ciao world!
+
+        Bonjour world!
+
+        Hello world!
+        ```
+
+More information about the Nextflow `run` command can be found in the [Nextflow docs](https://www.nextflow.io/docs/latest/cli.html#run).
 
 ## Executing a revision
 
@@ -249,6 +327,14 @@ Nextflow automatically provides built-in support for version control using Git. 
 
         ```bash
         nextflow run nextflow-io/hello -r v1.1
+        ```
+
+        ```console
+        N E X T F L O W  ~  version 23.04.2
+        Pulling nextflow-io/hello ...
+        WARN: Cannot read project manifest -- Cause: Remote resource not found: https://api.github.com/repos/nextflow-io/hello/contents/nextflow.config?ref=v1.1
+        downloaded from https://github.com/nextflow-io/hello.git
+        Nextflow DSL1 is no longer supported — Update your script to DSL2, or use Nextflow 22.10.x or earlier
         ```
 
         !!! warning "Warning"
@@ -301,10 +387,29 @@ nextflow log -l
         nextflow log
         ```
 
+        ```console
+        TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND                       
+        2023-08-29 07:33:48     3.6s            stupefied_bernard       OK      1d71f857bb      f9e18b71-d689-4589-be34-8cd98c1aab2e    nextflow run nextflow-io/hello
+        ```
+
         Query the process, hash, and script using the `-f` option for the most recent run:
 
         ```bash
-        nextflow log <run_name> -f process,hash,script
+        nextflow log stupefied_bernard -f process,hash,script
+        ```
+
+        ```console
+        sayHello        f3/8f827f
+            echo 'Hola world!'
+            
+        sayHello        b8/b66545
+            echo 'Ciao world!'
+            
+        sayHello        3c/498a68
+            echo 'Bonjour world!'
+            
+        sayHello        6e/8d5b1a
+            echo 'Hello world!'
         ```
 
 ## Execution cache and resume
@@ -315,21 +420,21 @@ When using the Nextflow `-resume` option, successfully completed tasks from prev
 
 Nextflow caching mechanism works by assigning a unique ID to each task. The task unique ID is generated as a 128-bit hash value composing the the complete file path, file size, and last modified timestamp. These ID's are used to create a separate execution directory where the tasks are executed and the outputs are stored. Nextflow will take care of the inputs and outputs in these folders for you.
 
-A multi-step workflow is required to demonstrate cache and resume. The [`Sydney-Informatics-Hub/nf-core-demo`](https://github.com/Sydney-Informatics-Hub/nf-core-demo/tree/master) workflow was created with the nf-core `create` command and has the same structure as nf-core workflows. It is a toy example with 3 processes:
+A multi-step workflow is required to demonstrate cache and resume. The [`christopher-hakkaart/nf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) workflow was created with the nf-core `create` command and has the same structure as nf-core workflows. It is a toy example with 3 processes:
 
-1. [`SAMPLESHEET_CHECK`](https://github.com/Sydney-Informatics-Hub/nf-core-demo/blob/master/modules/local/samplesheet_check.nf)
+1. [`SAMPLESHEET_CHECK`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/local/samplesheet_check.nf)
    - Executes a custom python script to check the input [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) is valid.
-2. [`FASTQC`](https://github.com/Sydney-Informatics-Hub/nf-core-demo/blob/master/modules/nf-core/fastqc/main.nf)
+2. [`FASTQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/fastqc/main.nf)
    - Executes [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) using the `.fastq.gz` files from the [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) as inputs.
-3. [`MULTIQC`](https://github.com/Sydney-Informatics-Hub/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf)
+3. [`MULTIQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf)
    - Executes [MultiQC](https://multiqc.info/) using the FastQC reports generated by the `FASTQC` process.
 
-The [`Sydney-Informatics-Hub/nf-core-demo`](https://github.com/Sydney-Informatics-Hub/nf-core-demo/tree/master) is a very small nf-core workflow. It uses real data and bioinformatics software and requires additional configuration to run successfully. To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the [Configuring nf-core workflows](1.3_configure.md#1.3.5.-default-configuration-files) section of the workshop.
+The [`christopher-hakkaartnf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) is a very small nf-core workflow. It uses real data and bioinformatics software and requires additional configuration to run successfully. To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the [Configuring nf-core workflows](1.3_configure.md#1.3.5.-default-configuration-files) section of the workshop.
 
 To run this workflow, both the `test` profile and a software management profile (such as `singularity`) are required:
 
 ```bash
-nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity
 ```
 
 The command line output will print something like this:
