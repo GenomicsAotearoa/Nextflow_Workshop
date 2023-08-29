@@ -45,15 +45,11 @@ Upcoming events are listed on the [nf-core event page](https://nf-co.re/events) 
 
 There are several ways you can join the nf-core community. You are welcome to join any or all of these at any time!
 
-[![](../figs/1.2_slack.png)](https://nf-co.re/join/slack)
-
-[![](../figs/1.2_github.png)](https://github.com/nf-core)
-
-[![](../figs/1.2_twitter.png)](https://twitter.com/nf_core)
-
-[![](../figs/1.2_mastodon.png)](https://mstdn.science/@nf_core)
-
-[![](../figs/1.2_youtube.png)](https://www.youtube.com/c/nf-core)
+<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" width="100"/>
+<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" width="100"/>
+<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" width="110"/> 
+<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" width="90"/> 
+<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" width="140"/> 
 
 The nf-core Slack is one of the primary resources for nf-core users. There are dedicated channels for all workflows as well as channels for common topics.
 
