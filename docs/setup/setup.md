@@ -1,1 +1,2 @@
-# Set up your computer
+# Log into Nesi
+

@@ -22,8 +22,18 @@ This lesson also introduces [nf-core](https://nf-co.re/): a community-driven pla
 
 ### Trainers
 
+- [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/))
+- George Wiggins
+- Ben Halliday
+
 ### Code of Conduct
 
 ### Schedule
 
+Session 1
+
+Session 2
+
 ### Acknowledgements
+
+This workshop material was developed by ...

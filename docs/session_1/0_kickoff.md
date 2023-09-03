@@ -1,4 +1,4 @@
-# Kick-off
+# Introduction to Session 1
 
 During **Session** 1 we will establish fundamental ideas and skills that are essential for using Nextflow and customizing the execution of a nf-core workflow.
 

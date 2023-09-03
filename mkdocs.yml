@@ -13,12 +13,15 @@ nav:
   - Setup:
     - setup/setup.md
   - Session 1:
+    - session_1/0_kickoff.md
     - session_1/1_introduction.md
     - session_1/2_nfcore.md
     - session_1/3_configuration.md
     - session_1/4_commands.md
   - Session 2:
-    - session_2/1_introduction.md
+    - session_2/0_kickoff.md
+    - session_2/1_sarek.md
+    - session_2/2_runcommand.md
 
 theme:
   name: material

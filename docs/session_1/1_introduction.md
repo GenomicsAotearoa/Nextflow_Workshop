@@ -221,7 +221,7 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
         echo $NXF_SINGULARITY_CACHEDIR
         ```
 
-!!! tip "Tip"
+!!! tip "How to manage environemnt variables"
     
         You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
 
