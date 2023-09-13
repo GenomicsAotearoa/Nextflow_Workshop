@@ -8,6 +8,8 @@
 
 ## What is nf-core?
 
+<p align="center"><img src="../../images/1_2_nf-core.png" alt="drawing" width="900"/></p> 
+
 nf-core is a **community** effort to collect a curated set of **analysis workflows** built using Nextflow.
 
 nf-core provides a standardized set of **best practices**, **guidelines**, and **templates** for building and sharing bioinformatics workflows. These workflows are designed to be **modular**, **scalable**, and **portable**, allowing researchers to easily adapt and execute them using their own data and compute resources.
@@ -59,7 +61,7 @@ If you are unsure of where to ask you questions - the `#help` and `#nostupidques
 
     If you have questions about Nextflow and deployments that are not related to nf-core you can ask them on the [Nextflow Slack](https://www.nextflow.io/blog/2022/nextflow-is-moving-to-slack.html). It's worthwhile joining both Slack groups and browsing the channels to get an idea of what types of questions are being asked on each channel. Searching channels can also be a great source of information as your question may have been asked before.
 
-Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) Twitter accounts will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares ByteSize seminars about best practises, workflows, and community developments.
+Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) Twitter accounts will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practises, workflows, and community developments.
 
 !!! question "Exercise"
 
@@ -124,7 +126,7 @@ nf-core --version
         To the bottom of the file add:
 
         ```bash
-        export PATH=$PATH:/home/training/.local/bin
+        export PATH=$PATH:/<your>/<path>/.local/bin
         ```
 
         Save and close the file with `ctrl`+`S` then `ctrl`+`X`.
@@ -140,6 +142,10 @@ nf-core --version
         ```bash
         nf-core --version
         ```
+
+        !!! warning
+
+            Some of these commands may change depending on the operating system you are using.
 
 nf-core tools are for everyone and has commands to help both **users** and **developers**.
 
@@ -169,18 +175,12 @@ The [nf-core website](https://nf-co.re/) has a full list of workflows, as well a
 
 Each workflow has a dedicated page that includes expansive documentation that is split into 6 sections:
 
-- **Introduction:**
-    - An introduction and overview of the workflow
-- **Usage:**
-    - Descriptions of how to execute the workflow
-- **Parameters:**
-    - Grouped workflow parameters with descriptions
-- **Output:**
-    - Descriptions and examples of the expected output files
-- **Results:**
-    - Example output files generated from the full test dataset
-- **Releases & Statistics:**
-    - Workflow version history and statistics
+- **Introduction:** An introduction and overview of the workflow
+- **Usage:** Descriptions of how to execute the workflow
+- **Parameters:** Grouped workflow parameters with descriptions
+- **Output:** Descriptions and examples of the expected output files
+- **Results:** Example output files generated from the full test dataset
+- **Releases & Statistics:** Workflow version history and statistics
 
 Unless you are actively developing workflow code, you don't need to clone the workflow code from GitHub and can use Nextflow’s built-in functionality to `pull` and a workflow. As shown in the previous lesson, the Nextflow `pull` command can download and cache workflows from [GitHub](https://github.com/nf-core/) repositories:
 

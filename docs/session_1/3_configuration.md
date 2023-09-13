@@ -12,7 +12,15 @@ nf-core workflows follow a set of best practices and standardized conventions. n
 
 Nextflow DSL2 **workflows** are built up of **subworkflows** and **modules** that are stored as separate `.nf` files.
 
+<br>
+<p align="left"><img src="../../images/1_3_structure.excalidraw.png" alt="drawing" width="450"/></p> 
+<br>
+
 Most nf-core workflows consist of a single **workflow** file (there are a few exceptions). This is the main `<workflow>.nf` file that is used to bring everything else together. Instead of having one large monolithic script, it is broken up into a combination of **subworkflows** and **modules**.
+
+<br>
+<p align="center"><img src="../../images/1_3_worksubmod.excalidraw.png" alt="drawing" width="900"/></p> 
+<br>
 
 A **subworkflow** is a groups of modules that are used in combination with each other and have a common purpose. For example, the [`SAMTOOLS_STATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/stats/main.nf), [`SAMTOOLS_IDXSTATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/faidx/main.nf), and [`SAMTOOLS_FLAGSTAT`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/flagstat/main.nf) modules are all included in the [`BAM_STATS_SAMTOOLS`](https://github.com/nf-core/modules/blob/master/subworkflows/nf-core/bam_stats_samtools/main.nf) subworkflow.
 
@@ -179,7 +187,7 @@ You don't need to use all of these files to execute your workflow.
 
 Parameter files are `.json` files that can contain an unlimited number of parameters:
 
-```json
+```json title="my-params.json"
 {
    "<parameter1_name>": 1,
    "<parameter2_name>": "<string>",
@@ -201,7 +209,7 @@ nextflow run nf-core/<workflow> -profile test,docker -param-file <path/to/params
 
         Create a custom `.json` file that contains your favourite food, e.g., cheese:
 
-        ```json
+        ```json title="my-custom-params.json"
         {
         "multiqc_title": "cheese"
         }
@@ -233,14 +241,14 @@ Custom configuration files follow the same structure as the configuration file i
 
 Configuration properties are organized into [scopes](https://www.nextflow.io/docs/latest/config.html#config-scopes) by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. For example:
 
-```bash
+```console title="my-config.config"
 alpha.x  = 1
 alpha.y  = 'string value'
 ```
 
 Is equivalent to:
 
-```bash
+```console title="my-config.config"
 alpha {
      x = 1
      y = 'string value'
@@ -288,7 +296,7 @@ The `process` scope allows you to configure workflow processes and is used exten
 
 By default, process resources are allocated in the `conf/base.config` file using the `withLabel` selector:
 
-```bash
+```bash title="base.config"
 process {
     withLabel: BIG_JOB {
         cpus = 16
@@ -299,7 +307,7 @@ process {
 
 Similarly, the `withName` selector enables the configuration of a process by name. By default, module parameters are defined in the `conf/modules.config` file:
 
-```bash
+```bash title="modules.config"
 process {
     withName: MYPROCESS {
         cpus = 4
@@ -312,7 +320,7 @@ While some tool arguments are included as a part of a module. To make modules sh
 
 For example, if you were trying to add arguments in the `MULTIQC` process in the `christopher-hakkaart/nf-core-demo` workflow, you could use the process scope:
 
-```bash
+```console title="my_custom_config.config"
 process {
     withName : ".*:MULTIQC" {
         ext.args   = { "<your custom parameter>" }
@@ -322,7 +330,7 @@ process {
 
 However, if a process is used multiple times in the same workflow, an extended execution path of the module may be required to make it more specific:
 
-```bash
+```console title="my_custom_config.config"
 process {
     withName: "NFCORE_DEMO:DEMO:MULTIQC" {
         ext.args = "<your custom parameter>"
@@ -346,7 +354,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
         Make a custom config file that uses the `process` scope to replace the `args` for the `MULTIQC` process:
 
-        ```bash
+        ```console title="my_custom_config.config"
         process {
             withName: "NFCORE_DEMO:DEMO:MULTIQC" {
                 ext.args = "--title \"october\""
@@ -374,7 +382,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
         Use the `.json` file you created previously:
 
-        ```json
+        ```json title="my-custom-params.json"
         {
         "multiqc_title": "cheese"
         }

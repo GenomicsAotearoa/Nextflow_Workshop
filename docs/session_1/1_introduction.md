@@ -6,36 +6,23 @@
     - Learn Nextflow terminology
     - Learn fundamental commands and options for executing workflows
 
-## Introduction to workflow management systems
+## What is Nextflow?
 
-Workflow Management Systems (WfMS), such as Snakemake, Galaxy, and Nextflow have been developed specifically to manage computational data-analysis workflows in fields such as Bioinformatics, Imaging, Physics, and Chemistry.
+<p align="center"><img src="../../images/1_1_nextflow.png" alt="drawing" width="900"/></p> 
 
-WfMS contains multiple features that simplify the development, monitoring, execution, and sharing of pipelines.
+Nextflow is a **workflow orchestration engine** and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.
 
-Key features include;
+It is designed around the idea that the Linux platform is the lingua franca of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.
 
-!!! quote ""
-    
-    - **Run time management:** Management of program execution on the operating system and splitting tasks and data to run at the same time in a process called parallelisation.
-    - **Software management:** Use of technology like containers, such as Docker or Singularity, that packages up code and all its dependencies so the application runs reliably from one computing environment to another.
-    - **Portability & Interoperability:** Workflows written on one system can be run on another computing infrastructure e.g., local computer, compute cluster, or cloud infrastructure.
-    - **Reproducibility:** The use of software management systems and a pipeline specification means that the workflow will produce the same results when re-run, including on different computing platforms.
-    - **Reentrancy:** Continuous checkpoints allow workflows to resume from the last successfully executed steps.
-    
+Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment based on the dataflow programming model.
 
-## Nextflow core features
+**Nextflow’s core features are:**
 
-!!! quote-right "" 
+- Workflow portability and reproducibility
+- Scalability of parallelization and deployment
+- Integration of existing tools, systems, and industry standards
 
-    - **Fast prototyping:** A simple syntax for writing pipelines that enables you to reuse existing scripts and tools for fast prototyping.
-    
-    - **Reproducibility:** Nextflow supports several container technologies, such as Docker and Singularity, as well as the package manager Conda. This, along with the integration of the GitHub code-sharing platform, allows you to write self-contained pipelines, manage versions, and reproduce any former configuration.
-    
-    - **Portability:** Nextflow’s syntax separates the functional logic (the steps of the workflow) from the execution settings (how the workflow is executed). This allows the pipeline to be run on multiple platforms, e.g. local compute vs. a university compute cluster or a cloud service like AWS, without changing the steps of the workflow.
-    
-    - **Simple parallelism:** Nextflow is based on the dataflow programming model which greatly simplifies the splitting of tasks that can be run at the same time (parallelisation).
-    
-    - **Continuous checkpoints:** All the intermediate results produced during the pipeline execution are automatically tracked. This allows you to resume its execution from the last successfully executed step, no matter what the reason was for it stopping.
+Whether you are working with genomics data or other large and complex data sets, Nextflow can help you to streamline your workflow and improve your productivity.
 
 ## Processes and Channels
 
@@ -95,7 +82,7 @@ You can list Nextflow options and commands with the `-h` option:
 nextflow -h
 ```
 
-```console
+```console title="Output"
 Usage: nextflow [options] COMMAND [arg...]
 
 Options:
@@ -128,7 +115,7 @@ For example, options for the the run command can be viewed:
 nextflow run -help
 ```
 
-```console
+```console title="Output"
 Execute a pipeline project
 Usage: run [options] Project name or repository url
   Options:
@@ -221,7 +208,7 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
         echo $NXF_SINGULARITY_CACHEDIR
         ```
 
-!!! tip "How to manage environemnt variables"
+!!! tip "How to manage environmental variables"
     
         You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
 
@@ -265,7 +252,7 @@ If you `run` a workflow, it will look for a local file with the workflow name yo
 
 !!! warning
     
-    Be aware of what is already in your current working directory where you launch your workflow, if there are other workflows (or configuration files) you may encounter unexpected results.
+    Be aware of what is already in your current working directory where you launch your workflow. If your current working directory contains nextflow configuration files you may encounter unexpected results.
 
 !!! question "Exercise"
 
@@ -279,7 +266,7 @@ If you `run` a workflow, it will look for a local file with the workflow name yo
         nextflow run nextflow-io/hello
         ```
 
-        ```console
+        ```console title="Output"
         N E X T F L O W  ~  version 23.04.2
         Pulling nextflow-io/hello ...
         downloaded from https://github.com/nextflow-io/hello.git
@@ -329,7 +316,7 @@ Nextflow automatically provides built-in support for version control using Git. 
         nextflow run nextflow-io/hello -r v1.1
         ```
 
-        ```console
+        ```console title="Output"
         N E X T F L O W  ~  version 23.04.2
         Pulling nextflow-io/hello ...
         WARN: Cannot read project manifest -- Cause: Remote resource not found: https://api.github.com/repos/nextflow-io/hello/contents/nextflow.config?ref=v1.1
@@ -339,7 +326,9 @@ Nextflow automatically provides built-in support for version control using Git. 
 
         !!! warning "Warning"
 
-            The warning is expected as the `v1.1` workflow revision was written using an older version of Nextflow that uses the depreciated `echo` method. As both Nextflow and workflows are updated independently over time, workflows and Nextflow functions can get out of sync. While most nf-core workflows are now `dsl2` (the current way of writing workflows), some are still written in `dsl1` and may require older version of Nextflow to run.
+            The warning shown above is expected as the `v1.1` workflow revision was written using an older version of Nextflow that uses the depreciated `echo` method.
+            
+            As both Nextflow and workflows are updated independently over time, workflows and Nextflow functions can get out of sync. While most nf-core workflows are now `dsl2` (the current way of writing workflows), some are still written in `dsl1` and may require older version of Nextflow.
 
 If your local version of a workflow is not the latest you be shown a warning and will be required to use a revision flag when executing the workflow. You can update a workflow with the Nextflow `pull` command with a revision flag.
 
@@ -387,7 +376,7 @@ nextflow log -l
         nextflow log
         ```
 
-        ```console
+        ```console title="Output"
         TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND                       
         2023-08-29 07:33:48     3.6s            stupefied_bernard       OK      1d71f857bb      f9e18b71-d689-4589-be34-8cd98c1aab2e    nextflow run nextflow-io/hello
         ```
@@ -398,7 +387,7 @@ nextflow log -l
         nextflow log stupefied_bernard -f process,hash,script
         ```
 
-        ```console
+        ```console title="Output"
         sayHello        f3/8f827f
             echo 'Hola world!'
             
@@ -423,13 +412,15 @@ Nextflow caching mechanism works by assigning a unique ID to each task. The task
 A multi-step workflow is required to demonstrate cache and resume. The [`christopher-hakkaart/nf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) workflow was created with the nf-core `create` command and has the same structure as nf-core workflows. It is a toy example with 3 processes:
 
 1. [`SAMPLESHEET_CHECK`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/local/samplesheet_check.nf)
-   - Executes a custom python script to check the input [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) is valid.
+    - Executes a custom python script to check the input [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) is valid.
 2. [`FASTQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/fastqc/main.nf)
-   - Executes [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) using the `.fastq.gz` files from the [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) as inputs.
+    - Executes [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) using the `.fastq.gz` files from the [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) as inputs.
 3. [`MULTIQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf)
-   - Executes [MultiQC](https://multiqc.info/) using the FastQC reports generated by the `FASTQC` process.
+    - Executes [MultiQC](https://multiqc.info/) using the FastQC reports generated by the `FASTQC` process.
 
-The [`christopher-hakkaartnf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) is a very small nf-core workflow. It uses real data and bioinformatics software and requires additional configuration to run successfully. To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the configuring nf-core workflows section of the workshop.
+The [`christopher-hakkaartnf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) is a very small nf-core workflow. It uses real data and bioinformatics software and requires additional configuration to run successfully.
+
+To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the [configuring nf-core workflows](../session_1/3_configuration.md) section of the workshop.
 
 To run this workflow, both the `test` profile and a software management profile (such as `singularity`) are required:
 
@@ -439,16 +430,82 @@ nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity
 
 The command line output will print something like this:
 
-Executing this workflow will create a `work` directory and a `my_results` directory with selected results files.
+```console title="Output"
+N E X T F L O W  ~  version 23.04.1
+Launching `https://github.com/christopher-hakkaart/nf-core-demo` [clever_hugle] DSL2 - revision: 22c16f334e [main]
 
-In the schematic above, the hexadecimal numbers, such as `ff/21abfa`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
+
+------------------------------------------------------
+                                        ,--./,-.
+        ___     __   __   __   ___     /,-._.--~'
+  |\ | |__  __ /  ` /  \ |__) |__         }  {
+  | \| |       \__, \__/ |  \ |___     \`-._,-`-,
+                                        `._,._,'
+  nf-core/demo v1.0dev-g22c16f3
+------------------------------------------------------
+Core Nextflow options
+  revision                  : main
+  runName                   : clever_hugle
+  containerEngine           : singularity
+  launchDir                 : /workspace/chris
+  workDir                   : /workspace/chris/work
+  projectDir                : /home/chris/.nextflow/assets/christopher-hakkaart/nf-core-demo
+  userName                  : chris
+  profile                   : test,singularity
+  configFiles               : /home/chris/.nextflow/assets/christopher-hakkaart/nf-core-demo/nextflow.config
+
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : results
+
+Reference genome options
+  genome                    : R64-1-1
+  fasta                     : s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Max job request options
+  max_cpus                  : 2
+  max_memory                : 6.GB
+  max_time                  : 6.h
+
+Generic options
+  tracedir                  : null/pipeline_info
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+If you use nf-core/demo for your analysis please cite:
+
+* The nf-core framework
+  https://doi.org/10.1038/s41587-020-0439-x
+
+* Software dependencies
+  https://github.com/nf-core/demo/blob/master/CITATIONS.md
+------------------------------------------------------
+Downloading plugin nf-amazon@1.16.2
+executor >  local (6)
+[ce/34e2dd] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_a... [100%] 1 of 1 ✔
+[cd/d632e3] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE_T1)                                        [100%] 4 of 4 ✔
+[46/b8b812] process > NFCORE_DEMO:DEMO:MULTIQC                                                       [100%] 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
+Completed at: 13-Sep-2023 20:02:45
+Duration    : 1m 42s
+CPU hours   : (a few seconds)
+Succeeded   : 6
+```
+
+Executing this workflow will create a `work` directory and a `results` directory with selected results files.
+
+In the output above, the hexadecimal numbers, such as `cd/d632e3`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
 
 You can inspect the files produced by a task by looking inside the `work` directory and using these numbers to find the task-specific execution path:
 
-The files that have been selected for publication in the `my_results` folder can also be explored:
+The files that have been selected for publication in the `results` folder can also be explored:
 
 ```bash
-ls my_results
+ls results
 ```
 
 If you look inside the `work` directory of a `FASTQC` task, you will find the files that were staged and created when this task was executed:
@@ -458,18 +515,26 @@ The `FASTQC` process runs four times, executing in a different work directories 
 To print all the relevant paths to the screen, use the `-ansi-log` option can be used when executing your workflow:
 
 ```bash
-nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -ansi-log false
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -ansi-log false
 ```
 
-It's very likely you will execute a workflow multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) by **resuming** a workflow from the last step that was completed successfully or unmodified.
+It's very likely you will execute a workflow multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you **resume** a workflow from the last step that was completed successfully or unmodified.
 
 By adding the `-resume` option to your `run` command you can use the cache rather than re-running successful tasks:
 
 ```bash
-nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -resume
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -resume
 ```
 
-If you `run` the Sydney-Informatics-Hub/nf-core-demo workflow again without making any changes you will see that the cache is used:
+If you `run` the `christopher-hakkaart/nf-core-demo workflow` again without making any changes you will see that the cache is used:
+
+```console title="Output"
+[truncated]
+[ce/34e2dd] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_a... [100%] 1 of 1, cached: 1 ✔
+[0e/be670c] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE_T1)                                        [100%] 4 of 4, cached: 4 ✔
+[46/b8b812] process > NFCORE_DEMO:DEMO:MULTIQC                                                       [100%] 1 of 1, cached: 1 ✔
+[truncated]
+```
 
 In practical terms, the workflow is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files. If this condition is satisfied, the task execution is skipped and previously computed results are used as the process results.
 
@@ -484,19 +549,19 @@ Notably, the `-resume` functionality is very sensitive. Even touching a file in 
         Execute the workflow for the first time (if you have not already).
 
         ```bash
-        nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity
         ```
 
-        Use the task ID shown for the `FASTQC` process and use it to find and `touch` a the `sample1_R1.fastq.gz` file:
+        Use the task ID shown for the `FASTQC` process and use it to find and `touch` the `sample1_R1.fastq.gz` file:
 
         ```bash
-        touch work/ff/21abfa87cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+        touch work/0e/be670c87cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
         ```
 
         Execute the workflow again with the `-resume` command option:
 
         ```bash
-        nextflow run Sydney-Informatics-Hub/nf-core-demo -profile test,singularity -resume
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -resume
         ```
 
         You should that 2 of 4 tasks for `FASTQC` and the `MULTIQC` task were invalid and were executed again.
