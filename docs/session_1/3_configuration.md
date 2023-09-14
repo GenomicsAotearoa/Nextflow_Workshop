@@ -241,14 +241,14 @@ Custom configuration files follow the same structure as the configuration file i
 
 Configuration properties are organized into [scopes](https://www.nextflow.io/docs/latest/config.html#config-scopes) by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. For example:
 
-```console title="my-config.config"
+```console title="custom.config"
 alpha.x  = 1
 alpha.y  = 'string value'
 ```
 
 Is equivalent to:
 
-```console title="my-config.config"
+```console title="custom.config"
 alpha {
      x = 1
      y = 'string value'
@@ -274,7 +274,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
         Include the custom `.config` file in your execution command with the `-c` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -resume -c my_custom_config.config
+        nextflow run christopher-hakkaart/nf-core-demo -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -320,7 +320,7 @@ While some tool arguments are included as a part of a module. To make modules sh
 
 For example, if you were trying to add arguments in the `MULTIQC` process in the `christopher-hakkaart/nf-core-demo` workflow, you could use the process scope:
 
-```console title="my_custom_config.config"
+```console title="custom.config"
 process {
     withName : ".*:MULTIQC" {
         ext.args   = { "<your custom parameter>" }
@@ -330,7 +330,7 @@ process {
 
 However, if a process is used multiple times in the same workflow, an extended execution path of the module may be required to make it more specific:
 
-```console title="my_custom_config.config"
+```console title="custom.config"
 process {
     withName: "NFCORE_DEMO:DEMO:MULTIQC" {
         ext.args = "<your custom parameter>"
@@ -354,7 +354,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
         Make a custom config file that uses the `process` scope to replace the `args` for the `MULTIQC` process:
 
-        ```console title="my_custom_config.config"
+        ```console title="custom.config"
         process {
             withName: "NFCORE_DEMO:DEMO:MULTIQC" {
                 ext.args = "--title \"october\""
@@ -365,7 +365,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your run command again with the custom configuration file:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -c my_custom_config.config -resume
+        nextflow run christopher-hakkaart/nf-core-demo -c custom.config -resume
         ```
 
         Check that it has been applied:
