@@ -3,37 +3,37 @@
 !!! abstract "Objectives"
 
     - Learn more about nf-core tooling for users.
-    - Use `nf-core list` to view information about nf-core workflows.
-    - Use `nf-core download` to download a workflow and it's singularity images.
+    - Use `nf-core list` to view information about nf-core pipelines.
+    - Use `nf-core download` to download a pipeline and it's singularity images.
     - Use `nf-core launch` to create a parameters file.
 
 ## nf-core tools for users
 
-nf-core tools has additional commands to help **users** execute workflows. Although you do not need to use these commands to execute the nf-core workflows, they can greatly improve and simplify your experience.
+nf-core tools has additional commands to help **users** execute pipelines. Although you do not need to use these commands to execute the nf-core pipelines, they can greatly improve and simplify your experience.
 
 There are also nf-core tools for **developers**. However, these will not be covered as a part of this workshop. If you are curious to learn more about these tools you can find more information on the nf-core websites [tools page](https://nf-co.re/tools/). There are also lots of excellent ByteSize talks on the [nf-core YouTube channel](https://www.youtube.com/c/nf-core).
 
 ## `nf-core list`
 
-The nf-core `list` command can be used to print a list of remote nf-core workflows along with your local workflow information.
+The nf-core `list` command can be used to print a list of remote nf-core pipelines along with your local pipeline information.
 
 ```bash
 nf-core list
 ```
 
-The output shows the latest workflow version number and when it was released. You will also be shown if and when a workflow was pulled locally and whether you have the latest version.
+The output shows the latest pipeline version number and when it was released. You will also be shown if and when a pipeline was pulled locally and whether you have the latest version.
 
-Keywords can also be supplied to help filter the workflows based on matches in titles, descriptions, or topics:
+Keywords can also be supplied to help filter the pipelines based on matches in titles, descriptions, or topics:
 
 ```bash
 nf-core list dna
 ```
 
-Options can also be used to sort the workflows by latest release (`-s release`, default), when you last pulled a workflow locally (`-s pulled`), alphabetically (`-s name`), or number by the number of GitHub stars (`-s stars`).
+Options can also be used to sort the pipelines by latest release (`-s release`, default), when you last pulled a pipeline locally (`-s pulled`), alphabetically (`-s name`), or number by the number of GitHub stars (`-s stars`).
 
 !!! question "Exercise"
 
-    Filter the list of nf-core workflows for those that are for `dna` and sort them by stars. Which `dna` workflow has the most stars?
+    Filter the list of nf-core pipelines for those that are for `dna` and sort them by stars. Which `dna` pipeline has the most stars?
 
     ??? success "Solution"
 
@@ -45,29 +45,29 @@ Options can also be used to sort the workflows by latest release (`-s release`, 
 
 ## `nf-core launch`
 
-A workflow can have a large number of optional parameters. To help with this, the `nf-core launch` command is designed to help you write parameter files for when you launch your workflow.
+A pipeline can have a large number of optional parameters. To help with this, the `nf-core launch` command is designed to help you write parameter files for when you launch your pipeline.
 
-The nf-core `launch` command takes one argument - either the name of an nf-core workflow which will be pulled automatically **or** the path to a directory containing a Nextflow workflow:
+The nf-core `launch` command takes one argument - either the name of an nf-core pipeline which will be pulled automatically **or** the path to a directory containing a Nextflow pipeline:
 
 ```bash
-nf-core launch nf-core/<workflow>
+nf-core launch nf-core/<pipeline>
 ```
 
-When running this command, you will first be asked about which version of the workflow you would like to execute. Next, you will be given the choice between a web-based graphical interface or an interactive command-line wizard tool to enter the workflow parameters. Both interfaces show documentation alongside each parameter, will generate a run ID, and will validate your inputs.
+When running this command, you will first be asked about which version of the pipeline you would like to execute. Next, you will be given the choice between a web-based graphical interface or an interactive command-line wizard tool to enter the pipeline parameters. Both interfaces show documentation alongside each parameter, will generate a run ID, and will validate your inputs.
 
-The nf-core `launch` tool uses the `nextflow_schema.json` file from a workflow to give parameter descriptions, defaults, and grouping. If no file for the workflow is found, one will be automatically generated at runtime.
+The nf-core `launch` tool uses the `nextflow_schema.json` file from a pipeline to give parameter descriptions, defaults, and grouping. If no file for the pipeline is found, one will be automatically generated at runtime.
 
 The `launch` tool will save your parameter variables as a `.json` file called `nf-params.json`. It will also suggest an execution command that includes the `-params-file` flag and your new `nf-params.json` file.
 
-The command line wizard will finish by asking if you want to launch the workflow. Any profiles or options that were set using the wizard will be included in your `run` command.
+The command line wizard will finish by asking if you want to launch the pipeline. Any profiles or options that were set using the wizard will be included in your `run` command.
 
 !!! question "Exercise"
 
-    Use `nf-core launch` to launch the the `christopher-hakkaart/nf-core-demo` workflow. Use the `test` and `singularity` profiles and name your output folder `my_test_output`.
+    Use `nf-core launch` to launch the the `christopher-hakkaart/nf-core-demo` pipeline. Use the `test` and `singularity` profiles and name your output folder `my_test_output`.
 
     ??? success "Solution"
 
-        Use the nf-core `launch` command for the `christopher-hakkaart/nf-core-demo` workflow. Your `nf-params.json` file should look like this:
+        Use the nf-core `launch` command for the `christopher-hakkaart/nf-core-demo` pipeline. Your `nf-params.json` file should look like this:
 
         ```json
         {
@@ -83,7 +83,7 @@ The command line wizard will finish by asking if you want to launch the workflow
 
 !!! tip "The launch website"
 
-    You can also use the launch command directly from the [nf-core launch website](https://nf-co.re/launch). In this case, you can configure your workflow using the wizard and then copy the outputs to your terminal or use the run id generated by the wizard. You will need to be connected to the internet to use the run id.
+    You can also use the launch command directly from the [nf-core launch website](https://nf-co.re/launch). In this case, you can configure your pipeline using the wizard and then copy the outputs to your terminal or use the run id generated by the wizard. You will need to be connected to the internet to use the run id.
 
     ```bash
     nf-core launch --id <run_id>
@@ -91,9 +91,9 @@ The command line wizard will finish by asking if you want to launch the workflow
 
 ## `nf-core download`
 
-Sometimes you may need to execute an nf-core workflow on a server or HPC system that has no internet connection. In this case, you will need to fetch the workflow files and manually transfer them to your offline system. To make this process easier and ensure accurate retrieval of correctly versioned code and software containers, nf-core has the `download` command.
+Sometimes you may need to execute an nf-core pipeline on a server or HPC system that has no internet connection. In this case, you will need to fetch the pipeline files and manually transfer them to your offline system. To make this process easier and ensure accurate retrieval of correctly versioned code and software containers, nf-core has the `download` command.
 
-The nf-core `download` command will download both the workflow code and the institutional nf-core/configs files. It can also optionally download singularity image file.
+The nf-core `download` command will download both the pipeline code and the institutional nf-core/configs files. It can also optionally download singularity image file.
 
 ```bash
 nf-core download
@@ -102,7 +102,7 @@ nf-core download
 If run without any arguments, the download tool will interactively prompt you for the required information. Each prompt option has a flag and if all flags are supplied then it will run without a request for any additional user input:
 
 - **Pipeline name**
-    - Name of workflow you would like to download.
+    - Name of pipeline you would like to download.
 - **Pipeline revision**
     - The revision you would like to download.
 - **Pull containers**
@@ -115,20 +115,26 @@ Alternatively, you could build your own execution command with the command line 
 
 !!! question "Exercise"
 
-    Use the nf-core `download` command to download the `christopher-hakkaart/nf-core-test` workflow **with** it's **uncompressed** Singularity images. You can use either the command line options or prompts.
+    Use the nf-core `download` command to download the `christopher-hakkaart/nf-core-test` pipeline **with** it's **uncompressed** Singularity images.
 
     ??? success "Solution"
 
-        Use the nf-core `download` command for the `christopher-hakkaart/nf-core-test` workflow and follow the prompts.
+        Use the nf-core `download` command for the `christopher-hakkaart/nf-core-test` pipeline and follow the prompts.
 
-        If you were to write your own command and options it would look like this:
+        Your output should look like this:
 
-        ```bash
-        nf-core download christopher-hakkaart/nf-core-test --revision main --container singularity --compress none
+        ```console
+        INFO Saving 'christopher-hakkaart/nf-core-demo'                                                                                                                               
+          Pipeline revision: 'main'                                                                                                                                               
+          Use containers: 'singularity'                                                                                                                                           
+          Container library: 'quay.io'                                                                                                                                            
+          Using $NXF_SINGULARITY_CACHEDIR': /Users/chrishakkaart/tools/singularity'                                                                                               
+          Output directory: 'christopher-hakkaart-nf-core-demo_main'                                                                                                              
+          Include default institutional configuration: 'False'    
         ```
 
 !!! abstract "Key points"
 
-    - The nf-core `list` command can be used to view local and remote information about nf-core workflows.
-    - The nf-core `download` command is a powerful way to download a workflow and its Singularity images.
-    - The nf-core `launch` command can be a useful tool for writing parameter files.
+    - The nf-core `list` command can be used to view local and remote information about nf-core pipelines
+    - The nf-core `launch` command can be a useful tool for writing parameter files
+    - The nf-core `download` command is a powerful way to download a pipeline and its Singularity images

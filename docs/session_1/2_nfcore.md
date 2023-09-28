@@ -12,7 +12,7 @@
 
 nf-core is a **community** effort to collect a curated set of **analysis workflows** built using Nextflow.
 
-nf-core provides a standardized set of **best practices**, **guidelines**, and **templates** for building and sharing bioinformatics workflows. These workflows are designed to be **modular**, **scalable**, and **portable**, allowing researchers to easily adapt and execute them using their own data and compute resources.
+nf-core provides a standardised set of **best practices**, **guidelines**, and **templates** for building and sharing bioinformatics workflows. These workflows are designed to be **modular**, **scalable**, and **portable**, allowing researchers to easily adapt and execute them using their own data and compute resources.
 
 The community is a diverse group of bioinformaticians, developers, and researchers from around the world who collaborate on **developing** and **maintaining** a growing collection of high-quality workflows. These workflows cover a range of applications, including transcriptomics, proteomics, and metagenomics.
 
@@ -47,11 +47,13 @@ Upcoming events are listed on the [nf-core event page](https://nf-co.re/events) 
 
 There are several ways you can join the nf-core community. You are welcome to join any or all of these at any time!
 
-<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" width="100"/>
-<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" width="100"/>
-<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" width="110"/> 
-<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" width="90"/> 
-<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" width="140"/> 
+<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" width="90"/>
+<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" width="90"/>
+<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" width="100"/> 
+<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" width="80"/> 
+<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" width="120"/>
+<a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" width="90"/>
+<a href="https://www.linkedin.com/company/nf-core"><img src="../../images/1_2_linkedin.png" width="90"/>
 
 The nf-core Slack is one of the primary resources for nf-core users. There are dedicated channels for all workflows as well as channels for common topics.
 
@@ -169,7 +171,7 @@ nf-core tools is updated with new features and fixes regularly so it's best to k
 
 ## Executing an nf-core workflow
 
-There are currently **86 workflows** (August 2023) available as part of nf-core. These workflows are at various stages of development with 53 released, 21 under development, and 12 archived.
+There are currently **88 workflows** (September 2023) available as part of nf-core. These workflows are at various stages of development with 53 released, 23 under development, and 12 archived.
 
 The [nf-core website](https://nf-co.re/) has a full list of workflows, as well as their documentation, which can be explored.
 

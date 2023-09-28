@@ -26,7 +26,7 @@ Whether you are working with genomics data or other large and complex data sets,
 
 ## Processes and Channels
 
-In Nextflow, processes and channels are the fundamental building blocks of a workflow.
+In Nextflow, **processes** and **channels** are the fundamental building blocks of a workflow.
 
 <br>
 <p align="center"><img src="../../images/1_1_channel-process.excalidraw.png" alt="drawing" width="900"/></p> 
@@ -156,6 +156,16 @@ Usage: run [options] Project name or repository url
         nextflow -version
         ```
 
+        You should see the following:
+
+        ```console title="Output"
+        N E X T F L O W
+        version 22.10.3 build 5835
+        created 21-11-2022 21:42 UTC (22-11-2022 10:42 NZDT)
+        cite doi:10.1038/nbt.3820
+        http://nextflow.io
+        ```
+
 ## Managing your environment
 
 You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a workflow and will be interpreted by Nextflow. For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing some environmental variables.
@@ -166,23 +176,9 @@ For example, for consistency, it is good practice to pin the version of Nextflow
 export NXF_VER=<version number>
 ```
 
-!!! question "Exercise"
+!!! warning "NXF_VER behaviour on NeSI"
 
-    Pin the version of Nextflow to 23.04.3 using the `NXF_VER` environmental variable and check that it has been applied.
-
-    ??? success "Solution"
-    
-        Export the version using the `NXF_VER` environmental variable:
-
-        ```bash
-        export NXF_VER=23.04.3
-        ```
-
-        Check that the new version has been applied using the -v option:
-
-        ```bash
-        nextflow -v
-        ```
+    The behaviour of pinning a Nextflow verison is different on NeSI and won't work as expected.
 
 Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the `NXF_SINGULARITY_CACHEDIR` or the `NXF_CONDA_CACHEDIR` variables:
 
@@ -199,7 +195,7 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
         Export the singularity cache using the `NXF_SINGULARITY_CACHEDIR` environmental variable:
 
         ```bash
-        export NXF_SINGULARITY_CACHEDIR=/home/training/singularity_cache
+        export NXF_SINGULARITY_CACHEDIR=</home/training/singularity_cache>
         ```
 
         Check that the `NXF_SINGULARITY_CACHEDIR` has been exported:
@@ -211,8 +207,6 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
 !!! tip "How to manage environmental variables"
     
         You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
-
-        You may also consider storing these as part of a [Nextflow configuration file](https://www.nextflow.io/docs/latest/config.html#config-files) that can be loaded when you execute a workflow. You will be shown how to do this later in this workshop.
 
 A complete list of environmental variables can be found in the [Nextflow docs](https://www.nextflow.io/docs/latest/config.html#environment-variables).
 
