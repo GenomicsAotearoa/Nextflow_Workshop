@@ -1027,3 +1027,12 @@
   -webkit-mask-image: var(--md-admonition-icon--html5);
           mask-image: var(--md-admonition-icon--html5);
 }
+
+/* Dark mode figures */
+body[data-md-color-scheme="slate"] figure img,
+body[data-md-color-scheme="slate"] .excalidraw svg {
+    filter: invert(100%) hue-rotate(180deg);
+}
+.excalidraw svg rect {
+    fill: transparent;
+}

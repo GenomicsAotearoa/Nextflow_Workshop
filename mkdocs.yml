@@ -8,6 +8,21 @@ site_url: "https://genomicsaotearoa.github.io/Nextflow_Workshop/"
 repo_name: GenomicsAotearoa/Nextflow_Workshop
 repo_url: https://github.com/GenomicsAotearoa/Nextflow_Workshop
 
+nav:
+  - Home: index.md
+  - Setup:
+    - setup/setup.md
+  - Session 1:
+    - session_1/0_kickoff.md
+    - session_1/1_introduction.md
+    - session_1/2_nfcore.md
+    - session_1/3_configuration.md
+    - session_1/4_commands.md
+  - Session 2:
+    - session_2/0_kickoff.md
+    - session_2/1_sarek.md
+    - session_2/2_runcommand.md
+    - session_2/3_hpc.md
 
 theme:
   name: material

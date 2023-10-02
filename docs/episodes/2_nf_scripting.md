@@ -1,2 +1,0 @@
-# Nextflow scripting
-
