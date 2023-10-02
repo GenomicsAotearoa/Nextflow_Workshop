@@ -18,6 +18,34 @@ Each lesson in this session will build on previous lessons. By the end of this s
 
 Follow [set up instructions](../setup/setup.md) to log back into Nesi.
 
+## Load modules and activate the nf-core conda environment
+
+If your previous session has ended you may need to load the required modules and activate the nf-core conda environment again:
+
+```bash
+# Purge modules
+module purge
+
+# Load modules
+module load Miniconda3
+source $(conda info --base)/etc/profile.d/conda.sh
+module load Singularity/3.11.3
+module load Java/17
+module load Python/3.10.5-gimkl-2022a
+module load Graphviz/2.42.2-GCC-9.2.0
+
+# Add channels
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+
+# Activate conda
+conda activate nf-core
+
+# Export environment variables
+export NXF_VER=23.04.0
+export NXF_SINGULARITY_CACHEDIR=/nesi/nobackup/nesi02659/nextflow-workshop
+```
 
 ## Create a new work directory
 

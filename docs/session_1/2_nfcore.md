@@ -117,28 +117,6 @@ nf-core --version
         pip install nf-core
         ```
 
-        Add the path to the installed scripts and tools to your `~/.bashrc` file.
-
-        Open your ~/.bashrc file:
-
-        ```bash
-        nano ~/.bashrc
-        ```
-
-        To the bottom of the file add:
-
-        ```bash
-        export PATH=$PATH:/<your>/<path>/.local/bin
-        ```
-
-        Save and close the file with `ctrl`+`S` then `ctrl`+`X`.
-
-        Then run:
-
-        ```bash
-        source ~/.bashrc
-        ```
-
         Use the nf-core `--version` option to print your nf-core tools version:
 
         ```bash
@@ -207,7 +185,13 @@ Nextflow will `pull` the default git branch if a workflow version is not specifi
         Use Nextlfow to `pull` the `sarek` workflow from the `nf-core` GitHub repository:
 
         ```bash
-        nextflow pull nf-core/sarek
+        nextflow pull nf-core/sarek -r main
+        ```
+
+        Check that it has been pulled by listing your cached pipelines:
+
+        ```bash
+        nextflow list
         ```
 
 !!! abstract "Key points"

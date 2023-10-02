@@ -1,4 +1,4 @@
-# nf-core for users
+# nf-core tools for users
 
 !!! abstract "Objectives"
 
@@ -7,13 +7,13 @@
     - Use `nf-core download` to download a pipeline and it's singularity images.
     - Use `nf-core launch` to create a parameters file.
 
-## nf-core tools for users
+## nf-core tools
 
 nf-core tools has additional commands to help **users** execute pipelines. Although you do not need to use these commands to execute the nf-core pipelines, they can greatly improve and simplify your experience.
 
 There are also nf-core tools for **developers**. However, these will not be covered as a part of this workshop. If you are curious to learn more about these tools you can find more information on the nf-core websites [tools page](https://nf-co.re/tools/). There are also lots of excellent ByteSize talks on the [nf-core YouTube channel](https://www.youtube.com/c/nf-core).
 
-## `nf-core list`
+### `nf-core list`
 
 The nf-core `list` command can be used to print a list of remote nf-core pipelines along with your local pipeline information.
 
@@ -89,7 +89,7 @@ The command line wizard will finish by asking if you want to launch the pipeline
     nf-core launch --id <run_id>
     ```
 
-## `nf-core download`
+### `nf-core download`
 
 Sometimes you may need to execute an nf-core pipeline on a server or HPC system that has no internet connection. In this case, you will need to fetch the pipeline files and manually transfer them to your offline system. To make this process easier and ensure accurate retrieval of correctly versioned code and software containers, nf-core has the `download` command.
 

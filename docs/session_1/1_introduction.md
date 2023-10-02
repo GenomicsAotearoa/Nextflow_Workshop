@@ -4,13 +4,13 @@
 
     - Learn about the core features of Nextflow
     - Learn Nextflow terminology
-    - Learn fundamental commands and options for executing workflows
+    - Learn fundamental commands and options for executing pipelines
 
 ## What is Nextflow?
 
 <p align="center"><img src="../../images/1_1_nextflow.png" alt="drawing" width="900"/></p> 
 
-Nextflow is a **workflow orchestration engine** and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.
+Nextflow is a **workflow orchestration engine** and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines.
 
 It is designed around the idea that the Linux platform is the lingua franca of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.
 
@@ -18,39 +18,39 @@ Nextflow extends this approach, adding the ability to define complex program int
 
 **Nextflow’s core features are:**
 
-- Workflow portability and reproducibility
+- Pipeline portability and reproducibility
 - Scalability of parallelization and deployment
 - Integration of existing tools, systems, and industry standards
 
-Whether you are working with genomics data or other large and complex data sets, Nextflow can help you to streamline your workflow and improve your productivity.
+Whether you are working with genomics data or other large and complex data sets, Nextflow can help you to streamline your pipeline and improve your productivity.
 
 ## Processes and Channels
 
-In Nextflow, **processes** and **channels** are the fundamental building blocks of a workflow.
+In Nextflow, **processes** and **channels** are the fundamental building blocks of a pipeline.
 
 <br>
 <p align="center"><img src="../../images/1_1_channel-process.excalidraw.png" alt="drawing" width="900"/></p> 
 <br>
 
-A **process** is a unit of execution that represents a single computational step in a workflow. It is defined as a block of code that typically performs one specific task. Each process will specify its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, Perl, or R.
+A **process** is a unit of execution that represents a single computational step in a pipeline. It is defined as a block of code that typically performs one specific task. Each process will specify its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, Perl, or R.
 
-Processes in are executed independently (i.e., they do not share a common writable state) as **tasks**. Multiple tasks can run in parallel, allowing for efficient utilization of computing resources. Nextflow is a top down workflow manager and will automatically manage data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.
+Processes in are executed independently (i.e., they do not share a common writable state) as **tasks**. Multiple tasks can run in parallel, allowing for efficient utilization of computing resources. Nextflow is a top down pipeline manager and will automatically manage data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.
 
-A **channel** is an asynchronous first-in, first-out (FIFO) queue that is used to join processes together. Channels allow data to passed between processes and can be used to manage data, parallelize tasks, and structure workflows. Any process can define one or more channels as an input and output. Ultimately the workflow execution flow itself, is implicitly defined by the channel declarations.
+A **channel** is an asynchronous first-in, first-out (FIFO) queue that is used to join processes together. Channels allow data to passed between processes and can be used to manage data, parallelize tasks, and structure pipelines. Any process can define one or more channels as an input and output. Ultimately the pipeline execution flow itself, is implicitly defined by the channel declarations.
 
-Importantly, processes can be **parameterised** to allow for flexibility in their behavior and to enable their reuse in and between workflows. Parameters can be defined in the process declaration and can be passed to the process at runtime. Parameters can be used to specify the input and output files, as well as any other parameters required for the process to execute.
+Importantly, processes can be **parameterised** to allow for flexibility in their behavior and to enable their reuse in and between pipelines. Parameters can be defined in the process declaration and can be passed to the process at runtime. Parameters can be used to specify the input and output files, as well as any other parameters required for the process to execute.
 
 ## Execution abstraction
 
 While a process defines what command or script is executed, the **executor** determines how and where the script is executed.
 
-Nextflow provides an **abstraction** between the workflow’s functional logic and the underlying execution system. This abstraction allows users to define a workflow once and execute it on different computing platforms without having to modify the workflow definition.
+Nextflow provides an **abstraction** between the pipeline’s functional logic and the underlying execution system. This abstraction allows users to define a pipeline once and execute it on different computing platforms without having to modify the pipeline definition.
 
 <br>
 <p align="center"><img src="../../images/1_1_abstraction.excalidraw.png" alt="drawing" width="900"/></p> 
 <br>
 
-If not specified, Nextflow will execute locally. Executing locally is useful for workflow development and testing purposes. However, for real-world computational workflows, a high-performance computing (HPC) or cloud platform is often required.
+If not specified, Nextflow will execute locally. Executing locally is useful for pipeline development and testing purposes. However, for real-world computational pipelines, a high-performance computing (HPC) or cloud platform is often required.
 
 Nextflow provides a variety of built-in execution options, such as local execution, HPC cluster execution, and cloud-based execution, and allows users to easily switch between these options using command-line arguments.
 
@@ -58,23 +58,23 @@ You can find a full list of supported executors as well as how to configure them
 
 ## Nextflow CLI
 
-Nextflow implements a declarative **domain-specific language (DSL)** that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language. As a concise DSL, Nextflow handles recurrent use cases while having the flexibility and power to handle corner cases.
+Nextflow implements a declarative **domain-specific language (DSL)** that simplifies the writing of complex data analysis pipelines as an extension of a general-purpose programming language. As a concise DSL, Nextflow handles recurrent use cases while having the flexibility and power to handle corner cases.
 
 Nextflow is an extension of the Groovy programming language which, in turn, is a super-set of the Java programming language. Groovy can be thought of as “Python for Java” and simplifies the code.
 
-Nextflow provides a robust command line interface for the management and execution of workflows. Nextflow can be used on any POSIX compatible system (Linux, OS X, etc). It requires Bash 3.2 (or later) and Java 11 (or later) to be installed.
+Nextflow provides a robust command line interface for the management and execution of pipelines. Nextflow can be used on any POSIX compatible system (Linux, OS X, etc). It requires Bash 3.2 (or later) and Java 11 (or later) to be installed.
 
 Nextflow is distributed as a self-installing package and does not require any special installation procedure.
 
 !!! info "How to install Nextflow locally"
 
     1. Download the executable package using either `wget -qO- https://get.nextflow.io | bash` or `curl -s https://get.nextflow.io | bash`
-    2. Make the binary executable on your system by running `chmod +x nextflow`.
-    3. Move the nextflow file to a directory accessible by your $PATH variable, e.g, `mv nextflow ~/bin/`
+    2. Make the binary executable on your system by running `chmod +x nextflow`
+    3. Move the nextflow file to a directory accessible by your `$PATH` variable, e.g, `mv nextflow ~/bin/`
 
 ## Nextflow options and commands
 
-Nextflow provides a robust command line interface for the management and execution of workflows. The top-level interface consists of options and commands.
+Nextflow provides a robust command line interface for the management and execution of pipelines. The top-level interface consists of options and commands.
 
 You can list Nextflow options and commands with the `-h` option:
 
@@ -160,15 +160,17 @@ Usage: run [options] Project name or repository url
 
         ```console title="Output"
         N E X T F L O W
-        version 22.10.3 build 5835
-        created 21-11-2022 21:42 UTC (22-11-2022 10:42 NZDT)
+        version 23.04.4 build 5881
+        created 25-09-2023 15:34 UTC (26-09-2023 04:34 NZDT)
         cite doi:10.1038/nbt.3820
         http://nextflow.io
         ```
 
 ## Managing your environment
 
-You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a workflow and will be interpreted by Nextflow. For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing some environmental variables.
+You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a pipeline and will be interpreted by Nextflow.
+
+For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing some of these.
 
 For example, for consistency, it is good practice to pin the version of Nextflow you are using with the `NXF_VER` variable:
 
@@ -176,26 +178,55 @@ For example, for consistency, it is good practice to pin the version of Nextflow
 export NXF_VER=<version number>
 ```
 
-!!! warning "NXF_VER behaviour on NeSI"
+!!! question "Exercise"
 
-    The behaviour of pinning a Nextflow verison is different on NeSI and won't work as expected.
+    Change the version of Nextflow you are using to `23.04.0` by exporting an environmental variable:
+
+    ??? success "Solution"
+    
+        Export the singularity cache using the `NXF_VER` environmental variable:
+
+        ```bash
+        export NXF_VER=23.04.0
+        ```
+
+        Check that the `NXF_VER` has been applied:
+
+        ```bash
+        nextflow -version
+        ```
+
+        You should see nextflow update and print the following:
+
+        ```console title="Output"
+        N E X T F L O W
+        version 23.04.0 build 5857
+        created 01-04-2023 21:09 UTC (02-04-2023 09:09 NZDT)
+        cite doi:10.1038/nbt.3820
+        http://nextflow.io
+        ```
+
+
+!!! warning "Environmental variables on NeSI"
+
+    The behaviour of Nextflow environmental variables won't work as expected if using a NeSI Nextflow module.
 
 Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the `NXF_SINGULARITY_CACHEDIR` or the `NXF_CONDA_CACHEDIR` variables:
 
 ```bash
-export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
+export NXF_SINGULARITY_CACHEDIR=<custom/path/to/conda/cache>
 ```
 
 !!! question "Exercise"
 
-    Export the folder **`folder goes here`** as the folder where remote Singularity images are stored:
+    Export the folder `/nesi/nobackup/nesi02659/nextflow-workshop` as the folder where remote Singularity images are stored:
 
     ??? success "Solution"
     
         Export the singularity cache using the `NXF_SINGULARITY_CACHEDIR` environmental variable:
 
         ```bash
-        export NXF_SINGULARITY_CACHEDIR=</home/training/singularity_cache>
+        export NXF_SINGULARITY_CACHEDIR=/nesi/nobackup/nesi02659/nextflow-workshop
         ```
 
         Check that the `NXF_SINGULARITY_CACHEDIR` has been exported:
@@ -210,11 +241,11 @@ export NXF_CONDA_CACHEDIR=<custom/path/to/conda/cache>
 
 A complete list of environmental variables can be found in the [Nextflow docs](https://www.nextflow.io/docs/latest/config.html#environment-variables).
 
-## Executing a workflow
+## Executing a pipeline
 
-Nextflow seamlessly integrates with code repositories such as [GitHub](https://github.com/). This feature allows you to manage your project code and use public Nextflow workflows quickly, consistently, and transparently.
+Nextflow seamlessly integrates with code repositories such as [GitHub](https://github.com/). This feature allows you to manage your project code and use public Nextflow pipelines quickly, consistently, and transparently.
 
-The Nextflow `pull` command will download a workflow from a hosting platform into your global cache `$HOME/.nextflow/assets` folder. 
+The Nextflow `pull` command will download a pipeline from a hosting platform into your global cache `$HOME/.nextflow/assets` folder. 
 
 If you are pulling a project hosted in a remote code repository, you can specify its qualified name or the repository URL.
 
@@ -230,48 +261,48 @@ Or by using the complete URL:
 nextflow pull http://github.com/foo/bar
 ```
 
-Alternatively, the Nextflow `clone` command can be used to download a workflow into a local directory of your choice:
+Alternatively, the Nextflow `clone` command can be used to download a pipeline into a local directory of your choice:
 
 ```bash
 nextflow clone foo/bar <your/path>
 ```
 
-The Nextflow `run` command is used to initiate the execution of a workflow:
+The Nextflow `run` command is used to initiate the execution of a pipeline:
 
 ```bash
 nextflow run foo/bar
 ```
 
-If you `run` a workflow, it will look for a local file with the workflow name you’ve specified. If that file does not exist, it will look for a public repository with the same name on GitHub (unless otherwise specified). If it is found, Nextflow will automatically `pull` the workflow to your global cache and execute it.
+If you `run` a pipeline, it will look for a local file with the pipeline name you’ve specified. If that file does not exist, it will look for a public repository with the same name on GitHub (unless otherwise specified). If it is found, Nextflow will automatically `pull` the pipeline to your global cache and execute it.
 
 !!! warning
     
-    Be aware of what is already in your current working directory where you launch your workflow. If your current working directory contains nextflow configuration files you may encounter unexpected results.
+    Be aware of what is already in your current working directory where you launch your pipeline. If your current working directory contains nextflow configuration files you may encounter unexpected results.
 
 !!! question "Exercise"
 
-    Execute the `hello` workflow directly from `nextflow-io` [GitHub](https://github.com/nextflow-io/hello) repository.
+    Execute the `hello` pipeline directly from `nextflow-io` [GitHub](https://github.com/nextflow-io/hello) repository.
 
     ??? success "Solution"
 
-        Use the `run` command to execute the [nextflow-io/hello](https://github.com/nextflow-io/hello) workflow:
+        Use the `run` command to execute the [nextflow-io/hello](https://github.com/nextflow-io/hello) pipeline:
 
         ```bash
         nextflow run nextflow-io/hello
         ```
 
         ```console title="Output"
-        N E X T F L O W  ~  version 23.04.2
+        N E X T F L O W  ~  version 23.04.0
         Pulling nextflow-io/hello ...
         downloaded from https://github.com/nextflow-io/hello.git
-        Launching `https://github.com/nextflow-io/hello` [stupefied_bernard] DSL2 - revision: 1d71f857bb [master]
+        Launching `https://github.com/nextflow-io/hello` [silly_sax] DSL2 - revision: 1d71f857bb [master]
         executor >  local (4)
-        [6e/8d5b1a] process > sayHello (3) [100%] 4 of 4 ✔
+        [e6/2132d2] process > sayHello (3) [100%] 4 of 4 ✔
         Hola world!
 
-        Ciao world!
-
         Bonjour world!
+
+        Ciao world!
 
         Hello world!
         ```
@@ -280,27 +311,27 @@ More information about the Nextflow `run` command can be found in the [Nextflow 
 
 ## Executing a revision
 
-When a Nextflow workflow is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the workflow and to ensure that the same version of the workflow is used consistently across different runs.
+When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.
 
-The Nextflow `info` command can be used to view workflow properties, such as the project name, repository, local path, main script, and revisions. The `*` indicates which revision of the workflow you have stickied and will be executed when using the `run` command.
-
-```bash
-nextflow info <workflow>
-```
-
-It is recommended that you use the revision flag every time you execute a workflow to ensure that the version is correct.
-
-To use a specific revision, you simply need to add it to the command line with the `--revision` or `-r` flag. For example, to run a workflow with the `v1.0` revision, you would use the following:
+The Nextflow `info` command can be used to view pipeline properties, such as the project name, repository, local path, main script, and revisions. The `*` indicates which revision of the pipeline you have stickied and will be executed when using the `run` command.
 
 ```bash
-nextflow run <workflow> -r v1.0
+nextflow info <pipeline>
 ```
 
-Nextflow automatically provides built-in support for version control using Git. With this, users can easily manage and track changes made to a workflow over time. A revision can be a git `branch`, `tag` or commit `SHA` number, and can be used interchangeably.
+It is recommended that you use the revision flag every time you execute a pipeline to ensure that the version is correct.
+
+To use a specific revision, you simply need to add it to the command line with the `--revision` or `-r` flag. For example, to run a pipeline with the `v1.0` revision, you would use the following:
+
+```bash
+nextflow run <pipeline> -r v1.0
+```
+
+Nextflow automatically provides built-in support for version control using Git. With this, users can easily manage and track changes made to a pipeline over time. A revision can be a git `branch`, `tag` or commit `SHA` number, and can be used interchangeably.
 
 !!! question "Exercise"
 
-    Execute the `hello` workflow directly from the `nextflow-io` GitHub using the `v1.1` revision tag.
+    Execute the `hello` pipeline directly from the `nextflow-io` GitHub using the `v1.1` revision tag.
 
     ??? success "Solution"
 
@@ -311,20 +342,38 @@ Nextflow automatically provides built-in support for version control using Git. 
         ```
 
         ```console title="Output"
-        N E X T F L O W  ~  version 23.04.2
-        Pulling nextflow-io/hello ...
-        WARN: Cannot read project manifest -- Cause: Remote resource not found: https://api.github.com/repos/nextflow-io/hello/contents/nextflow.config?ref=v1.1
-        downloaded from https://github.com/nextflow-io/hello.git
+        N E X T F L O W  ~  version 23.04.0
+        NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]
         Nextflow DSL1 is no longer supported — Update your script to DSL2, or use Nextflow 22.10.x or earlier
         ```
 
         !!! warning "Warning"
 
-            The warning shown above is expected as the `v1.1` workflow revision was written using an older version of Nextflow that uses the depreciated `echo` method.
+            The warning shown above is expected as the `v1.1` pipeline revision was written using an older version of Nextflow that uses the depreciated `echo` method.
             
-            As both Nextflow and workflows are updated independently over time, workflows and Nextflow functions can get out of sync. While most nf-core workflows are now `dsl2` (the current way of writing workflows), some are still written in `dsl1` and may require older version of Nextflow.
+            As both Nextflow and pipelines are updated independently over time, pipelines and Nextflow functions can get out of sync. While most nf-core pipelines are now `dsl2` (the current way of writing pipelines), some are still written in `dsl1` and may require older version of Nextflow.
 
-If your local version of a workflow is not the latest you be shown a warning and will be required to use a revision flag when executing the workflow. You can update a workflow with the Nextflow `pull` command with a revision flag.
+            You can use an older version of nextflow on the fly by adding adding the environmental variable to the start of the run command 
+            
+            ```bash
+            NXF_VER=22.10.0 nextflow run nextflow-io/hello -r v1.1
+            ```
+
+            ```console title="Output"
+            N E X T F L O W  ~  version 22.10.0
+            NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]
+            Launching `https://github.com/nextflow-io/hello` [amazing_lovelace] DSL1 - revision: baba3959d7 [v1.1]
+            WARN: The use of `echo` method has been deprecated
+            executor >  local (4)
+            [e6/cfda06] process > sayHello (4) [100%] 4 of 4 ✔
+            Bojour world! (version 1.1)
+
+            Hello world! (version 1.1)
+
+            Ciao world! (version 1.1)
+
+            Hola world! (version 1.1)
+            ```
 
 ## Nextflow log
 
@@ -334,7 +383,7 @@ It is important to keep a record of the commands you have run to generate your r
 nextflow log
 ```
 
-The `log` command has multiple options to facilitate the queries and is especially useful while debugging a workflow and inspecting execution metadata. You can view all of the possible `log` options with `-h` flag:
+The `log` command has multiple options to facilitate the queries and is especially useful while debugging a pipeline and inspecting execution metadata. You can view all of the possible `log` options with `-h` flag:
 
 ```bash
 nextflow log -h
@@ -397,13 +446,13 @@ nextflow log -l
 
 ## Execution cache and resume
 
-Task execution **caching** is an essential feature of modern workflow managers. Accordingly, Nextflow provides an automated caching mechanism for every execution.
+Task execution **caching** is an essential feature of modern pipeline managers. Accordingly, Nextflow provides an automated caching mechanism for every execution.
 
 When using the Nextflow `-resume` option, successfully completed tasks from previous executions are skipped and the previously cached results are used in downstream tasks.
 
 Nextflow caching mechanism works by assigning a unique ID to each task. The task unique ID is generated as a 128-bit hash value composing the the complete file path, file size, and last modified timestamp. These ID's are used to create a separate execution directory where the tasks are executed and the outputs are stored. Nextflow will take care of the inputs and outputs in these folders for you.
 
-A multi-step workflow is required to demonstrate cache and resume. The [`christopher-hakkaart/nf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) workflow was created with the nf-core `create` command and has the same structure as nf-core workflows. It is a toy example with 3 processes:
+A multi-step pipeline is required to demonstrate cache and resume. The [`christopher-hakkaart/nf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) pipeline was created with the nf-core `create` command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:
 
 1. [`SAMPLESHEET_CHECK`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/local/samplesheet_check.nf)
     - Executes a custom python script to check the input [sample sheet](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv) is valid.
@@ -412,21 +461,21 @@ A multi-step workflow is required to demonstrate cache and resume. The [`christo
 3. [`MULTIQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf)
     - Executes [MultiQC](https://multiqc.info/) using the FastQC reports generated by the `FASTQC` process.
 
-The [`christopher-hakkaartnf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) is a very small nf-core workflow. It uses real data and bioinformatics software and requires additional configuration to run successfully.
+The [`christopher-hakkaartnf-core-demo`](https://github.com/christopher-hakkaart/nf-core-demo/tree/master) is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.
 
-To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the [configuring nf-core workflows](../session_1/3_configuration.md) section of the workshop.
+To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the [configuring nf-core pipelines](../session_1/3_configuration.md) section of the workshop.
 
-To run this workflow, both the `test` profile and a software management profile (such as `singularity`) are required:
+To run this pipeline, both the `test` profile and a software management profile (such as `singularity`) are required:
 
 ```bash
-nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main
 ```
 
 The command line output will print something like this:
 
 ```console title="Output"
-N E X T F L O W  ~  version 23.04.1
-Launching `https://github.com/christopher-hakkaart/nf-core-demo` [clever_hugle] DSL2 - revision: 22c16f334e [main]
+N E X T F L O W  ~  version 23.04.0
+Launching `https://github.com/christopher-hakkaart/nf-core-demo` [voluminous_kay] DSL2 - revision: 17521af3a8 [main]
 
 
 ------------------------------------------------------
@@ -435,18 +484,18 @@ Launching `https://github.com/christopher-hakkaart/nf-core-demo` [clever_hugle] 
   |\ | |__  __ /  ` /  \ |__) |__         }  {
   | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                         `._,._,'
-  nf-core/demo v1.0dev-g22c16f3
+  nf-core/demo v1.0dev-g17521af
 ------------------------------------------------------
 Core Nextflow options
   revision                  : main
-  runName                   : clever_hugle
+  runName                   : voluminous_kay
   containerEngine           : singularity
-  launchDir                 : /workspace/chris
-  workDir                   : /workspace/chris/work
-  projectDir                : /home/chris/.nextflow/assets/christopher-hakkaart/nf-core-demo
-  userName                  : chris
+  launchDir                 : /scale_wlg_persistent/filesets/home/chrishakk/session1
+  workDir                   : /scale_wlg_persistent/filesets/home/chrishakk/session1/work
+  projectDir                : /home/chrishakk/.nextflow/assets/christopher-hakkaart/nf-core-demo
+  userName                  : chrishakk
   profile                   : test,singularity
-  configFiles               : /home/chris/.nextflow/assets/christopher-hakkaart/nf-core-demo/nextflow.config
+  configFiles               : /home/chrishakk/.nextflow/assets/christopher-hakkaart/nf-core-demo/nextflow.config
 
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -478,21 +527,20 @@ If you use nf-core/demo for your analysis please cite:
 * Software dependencies
   https://github.com/nf-core/demo/blob/master/CITATIONS.md
 ------------------------------------------------------
-Downloading plugin nf-amazon@1.16.2
-executor >  local (6)
-[ce/34e2dd] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_a... [100%] 1 of 1 ✔
-[cd/d632e3] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE_T1)                                        [100%] 4 of 4 ✔
-[46/b8b812] process > NFCORE_DEMO:DEMO:MULTIQC                                                       [100%] 1 of 1 ✔
--[nf-core/demo] Pipeline completed successfully-
-Completed at: 13-Sep-2023 20:02:45
-Duration    : 1m 42s
+Downloading plugin nf-amazon@1.16.1
+[f2/e5eb26] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1 ✔
+[bb/f98425] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE_T1)                                                 [100%] 4 of 4 ✔
+[dd/728742] process > NFCORE_DEMO:DEMO:MULTIQC                                                                [100%] 1 of 1 ✔
+-
+Completed at: 29-Sep-2023 22:16:49
+Duration    : 2m 27s
 CPU hours   : (a few seconds)
 Succeeded   : 6
 ```
 
-Executing this workflow will create a `work` directory and a `results` directory with selected results files.
+Executing this pipeline will create a `work` directory and a `results` directory with selected results files.
 
-In the output above, the hexadecimal numbers, such as `cd/d632e3`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
+In the output above, the hexadecimal numbers, such as `bb/f98425`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
 
 You can inspect the files produced by a task by looking inside the `work` directory and using these numbers to find the task-specific execution path:
 
@@ -504,58 +552,58 @@ ls results
 
 If you look inside the `work` directory of a `FASTQC` task, you will find the files that were staged and created when this task was executed:
 
-The `FASTQC` process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory [1a/3c54ed] represents just one of the four sets of input data that was processed.
+The `FASTQC` process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory [bb/f98425] represents just one of the four sets of input data that was processed.
 
-To print all the relevant paths to the screen, use the `-ansi-log` option can be used when executing your workflow:
+To print all the relevant paths to the screen, use the `-ansi-log` option can be used when executing your pipeline:
 
 ```bash
-nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -ansi-log false
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -ansi-log false
 ```
 
-It's very likely you will execute a workflow multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you **resume** a workflow from the last step that was completed successfully or unmodified.
+It's very likely you will execute a pipeline multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you **resume** a pipeline from the last step that was completed successfully or unmodified.
 
 By adding the `-resume` option to your `run` command you can use the cache rather than re-running successful tasks:
 
 ```bash
-nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -resume
+nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -resume
 ```
 
-If you `run` the `christopher-hakkaart/nf-core-demo workflow` again without making any changes you will see that the cache is used:
+If you `run` the `christopher-hakkaart/nf-core-deme` pipeline again without making any changes you will see that the cache is used:
 
 ```console title="Output"
 [truncated]
-[ce/34e2dd] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_a... [100%] 1 of 1, cached: 1 ✔
-[0e/be670c] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE_T1)                                        [100%] 4 of 4, cached: 4 ✔
-[46/b8b812] process > NFCORE_DEMO:DEMO:MULTIQC                                                       [100%] 1 of 1, cached: 1 ✔
+[5f/07e477] process > NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1, cached: 1 ✔
+[b2/873706] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE_T1)                                                 [100%] 4 of 4, cached: 4 ✔
+[ca/e8e0a8] process > NFCORE_DEMO:DEMO:MULTIQC                                                                [100%] 1 of 1, cached: 1 ✔
 [truncated]
 ```
 
-In practical terms, the workflow is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files. If this condition is satisfied, the task execution is skipped and previously computed results are used as the process results.
+In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files. If this condition is satisfied, the task execution is skipped and previously computed results are used as the process results.
 
 Notably, the `-resume` functionality is very sensitive. Even touching a file in the work directory can invalidate the cache.
 
 !!! question "Exercise"
 
-    Invalidate the cache by touching a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `touch` command). Execute the workflow again with the `-resume` option to show that the cache has been invalidated.
+    Invalidate the cache by touching a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `touch` command). Execute the pipeline again with the `-resume` option to show that the cache has been invalidated.
 
     ??? success "Solution"
 
-        Execute the workflow for the first time (if you have not already).
+        Execute the pipeline for the first time (if you have not already).
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main
         ```
 
         Use the task ID shown for the `FASTQC` process and use it to find and `touch` the `sample1_R1.fastq.gz` file:
 
         ```bash
-        touch work/0e/be670c87cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+        touch work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
         ```
 
-        Execute the workflow again with the `-resume` command option:
+        Execute the pipeline again with the `-resume` command option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -resume
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -resume
         ```
 
         You should that 2 of 4 tasks for `FASTQC` and the `MULTIQC` task were invalid and were executed again.
@@ -585,35 +633,35 @@ The `-after`, `-before`, and `-but` options are all very useful to select specif
         nextflow clean -k -f
         ```
 
-## Listing and dropping cached workflows
+## Listing and dropping cached pipelines
 
-Over time, you might want to remove a stored workflows. Nextflow also has functionality to help you to view and remove workflows that have been pulled locally.
+Over time, you might want to remove a stored pipelines. Nextflow also has functionality to help you to view and remove pipelines that have been pulled locally.
 
-The Nextflow `list` command prints the projects stored in your global cache folder (`$HOME/.nextflow/assets`). These are the workflows that were pulled when you executed either of the Nextflow `pull` or `run` commands:
+The Nextflow `list` command prints the projects stored in your global cache folder (`$HOME/.nextflow/assets`). These are the pipelines that were pulled when you executed either of the Nextflow `pull` or `run` commands:
 
 ```bash
 nextflow list
 ```
 
-If you want to remove a workflow from your cache you can remove it using the Nextflow `drop` command:
+If you want to remove a pipeline from your cache you can remove it using the Nextflow `drop` command:
 
 ```bash
-nextflow drop <workflow>
+nextflow drop < pipeline>
 ```
 
 !!! question "Exercise"
 
-    View your cached workflows with the Nextflow `list` command and remove the `nextflow-io/hello` workflow with the `drop` command.
+    View your cached pipelines with the Nextflow `list` command and remove the `nextflow-io/hello` pipeline with the `drop` command.
 
     ??? success "Solution"
 
-        List your workflow assets:
+        List your pipeline assets:
 
         ```bash
         nextflow list
         ```
 
-        Drop the `nextflow-io/hello` workflow:
+        Drop the `nextflow-io/hello` pipeline:
 
         ```bash
         nextflow drop nextflow-io/hello
@@ -627,8 +675,8 @@ nextflow drop <workflow>
 
 !!! abstract "Key points"
 
-    - Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows
+    - Nextflow is a pipeline orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines
     - Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine
     - Nextflow supports version control and has automatic integrations with online code repositories.
     - Nextflow will cache your runs and they can be resumed with the `-resume` option
-    - You can manage workflows with Nextflow commands (e.g., `pull`, `clone`, `list`, and `drop`)
+    - You can manage pipelines with Nextflow commands (e.g., `pull`, `clone`, `list`, and `drop`)

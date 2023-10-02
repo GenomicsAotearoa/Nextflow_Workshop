@@ -22,6 +22,7 @@ nav:
     - session_2/0_kickoff.md
     - session_2/1_sarek.md
     - session_2/2_runcommand.md
+    - session_2/3_hpc.md
 
 theme:
   name: material
