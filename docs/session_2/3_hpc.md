@@ -13,7 +13,7 @@ By default your executor will be set to `local`. However, Nextflow supports all 
 
 For example, if you would like to use the `slurm` executor. This can be done by adding the following to a config file:
 
-```console "custom.config"
+```console title="custom.config"
 executor {
     name = 'slurm'
 }

@@ -280,7 +280,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
         Include the custom `.config` file in your execution command with the `-c` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -resume -c custom.config 
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -resume -c custom.config 
         ```
 
         Check that it has been applied:
