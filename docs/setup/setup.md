@@ -1,4 +1,4 @@
-# Log into Nesi
+# Log into Nesi Jupyter
 
 During this workshop we will be running the material on the NeSI platform, using the Jupyter interface, however it is also possible to run this material locally on your own machine.
 
