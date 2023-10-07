@@ -38,4 +38,4 @@ conda activate nf-core
 
 This will take a few minutes to complete...
 
-More details about environment modules can be found on the NeSI support page.
+More details about environment modules can be found on the [NeSI support page](https://support.nesi.org.nz/hc/en-gb/articles/360000360576-Finding-Software).
