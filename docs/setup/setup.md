@@ -4,7 +4,7 @@ During this workshop we will be running the material on the NeSI platform, using
 
 One of the differences between running on NeSI or your own machine is that on NeSI we pre-install popular software and make it available to our users, whereas on your own machine you need to install the software yourself (e.g., using a package manager such as conda).
 
-??? jupyter "Connect to Jupyter on NeSI"
+??? jupyter "Connect to Jupyter on NeSI - Make sure to spawn `4CPU`, `8GB` Jupyter sessions"
 
     1. Connect to [https://jupyter.nesi.org.nz](https://jupyter.nesi.org.nz)
     2. <p>Enter NeSI username, HPC password, and 6 digit second factor token (as set on <a href="https://my.nesi.org.nz/account/hpc-account">MyNeSI</a>)<br>![image](../images/jupyter_login_labels_updated.png)</p>
