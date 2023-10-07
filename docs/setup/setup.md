@@ -16,11 +16,11 @@ One of the differences between running on NeSI or your own machine is that on Ne
 
 This workshop will use a combination of "environment modules" and manually installed software.
 
-We will need to prepare our environment by running the following command to source init script which clear the environment, load required software and activate the pre-configured conda environment
+!!! terminal-2 "We will need to prepare our environment by running the following command to source init script which clear the environment, load required software and activate the pre-configured conda environment"
 
-```bash
-source /nesi/project/nesi02659/nextflow-workshop/init-nf-day1
-```
+    ```bash
+    source /nesi/project/nesi02659/nextflow-workshop/init-nf-day1
+    ```
 
 ??? screwdriver-wrench "Supplementary - How did we prepare the conda environment"
 

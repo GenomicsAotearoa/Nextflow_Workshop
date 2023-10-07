@@ -20,11 +20,11 @@ Follow [set up instructions](../setup/setup.md) to log back into Nesi.
 
 ## Load modules and activate the nf-core conda environment
 
-If your previous session has ended you may need to load the required modules and activate the nf-core conda environment again by running the following `source` command
+!!! terminal-2 "If your previous session has ended you may need to load the required modules and activate the nf-core conda environment again by running the following `source` command"
 
-```bash
-source /nesi/project/nesi02659/nextflow-workshop/init-nf-day2
-```
+    ```bash
+    source /nesi/project/nesi02659/nextflow-workshop/init-nf-day2
+    ```
 
 
 ## Create a new work directory
