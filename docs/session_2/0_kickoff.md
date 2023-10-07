@@ -29,8 +29,8 @@ Follow [set up instructions](../setup/setup.md) to log back into Nesi.
 
 ## Create a new work directory
 
-Create a new directory for all session 2 activities and move into it: 
+!!! terminal-2 "Create a new directory for all session 2 activities and move into it:"
 
-```default
-mkdir ~/session2 && cd $_
-```
+    ```default
+    mkdir ~/session2 && cd $_
+    ```

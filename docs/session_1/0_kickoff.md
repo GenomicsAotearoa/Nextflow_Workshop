@@ -10,9 +10,9 @@ The ideas and skills you learn will be applied during **Session 2** when you exp
 
 It is good practice to organize projects into their own folders to make it easier to track and replicate experiments over time.
 
-Start by creating a new directory for all of today’s activities and move into it:
+!!! terminal-2 "Start by creating a new directory for all of today’s activities and move into it:"
 
-```bash
-mkdir ~/session1 && cd $_
-```
+    ```bash
+    mkdir ~/session1 && cd $_
+    ```
 
