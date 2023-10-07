@@ -16,27 +16,31 @@ One of the differences between running on NeSI or your own machine is that on Ne
 
 This workshop will use a combination of "environment modules" and manually installed software.
 
-We will need to prepare our environment by running the following commands to clear the environment and then load the required software. This installation is only required once per session:
+We will need to prepare our environment by running the following command to source init script which clear the environment, load required software and activate the pre-configured conda environment
 
 ```bash
-module purge
-module load Miniconda3
-source $(conda info --base)/etc/profile.d/conda.sh
-module load Singularity/3.11.3
-module load Java/17
-module load Python/3.10.5-gimkl-2022a
-module load Graphviz/2.42.2-GCC-9.2.0
-
-conda config --add channels defaults
-conda config --add channels bioconda
-conda config --add channels conda-forge
-
-mkdir /nesi/nobackup/nesi02659/conda-pkgs/$USER && conda config --add pkgs_dirs /nesi/nobackup/nesi02659/conda-pkgs/$USER 
-conda create --name nf-core python=3.11 nf-core nextflow --solver=libmamba -y
-
-conda activate nf-core
+source /nesi/project/nesi02659/nextflow-workshop/init-nf-day1
 ```
 
-This will take a few minutes to complete...
+??? screwdriver-wrench "Supplementary - How did we prepare the conda environment"
+
+
+    ```bash
+    module purge
+    module load Miniconda3
+    source $(conda info --base)/etc/profile.d/conda.sh
+
+    conda config --add channels defaults
+    conda config --add channels bioconda
+    conda config --add channels conda-forge
+
+    export CONDA_ENVS_PATH=/nesi/project/nesi02659/.conda/envs
+
+    #make sure the conda pkgs gets-redirected to nobackkup/scratch space
+    #for more information, refer to https://support.nesi.org.nz/hc/en-gb/articles/360001580415-Miniconda3#prevent-conda-from-using-home-storage
+    mkdir /nesi/nobackup/nesi02659/conda-pkgs/$USER && conda config --add pkgs_dirs /nesi/nobackup/nesi02659/conda-pkgs/$USER
+     
+    conda create --name nf-core python=3.11 nf-core nextflow --solver=libmamba -y
+    ```
 
 More details about environment modules can be found on the [NeSI support page](https://support.nesi.org.nz/hc/en-gb/articles/360000360576-Finding-Software).
