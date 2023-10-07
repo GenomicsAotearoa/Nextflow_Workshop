@@ -31,7 +31,8 @@ conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
 
-conda create --name nf-core python=3.11 nf-core nextflow
+mkdir /nesi/nobackup/nesi02659/conda-pkgs/$USER && conda config --add pkgs_dirs /nesi/nobackup/nesi02659/conda-pkgs/$USER 
+conda create --name nf-core python=3.11 nf-core nextflow --solver=libmamba -y
 
 conda activate nf-core
 ```
