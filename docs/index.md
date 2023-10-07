@@ -10,26 +10,26 @@
 
 This lesson also introduces [nf-core](https://nf-co.re/), a community-driven platform, which provides peer-reviewed best practice analysis pipelines written in Nextflow.
 
-### Trainers
+!!! tutor "Trainers"
 
-- [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/))
+    - [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/))
 
-### Schedule
+!!! calendar-days "Schedule"
 
-#### Session 1
-
-- Introduction to Session 1
-- Introduction to Nextflow
-- Introduction to nf-core
-- Configuring nf-core pipelines
-- nf-core tools for users
-
-#### Session 2
-
-- Introduction to Session 2
-- nf-core/sarek
-- Configuring your run
-- Configuring your deployment
+    #### Session 1
+    
+    - Introduction to Session 1
+    - Introduction to Nextflow
+    - Introduction to nf-core
+    - Configuring nf-core pipelines
+    - nf-core tools for users
+    
+    #### Session 2
+    
+    - Introduction to Session 2
+    - nf-core/sarek
+    - Configuring your run
+    - Configuring your deployment
 
 ### Acknowledgements
 
