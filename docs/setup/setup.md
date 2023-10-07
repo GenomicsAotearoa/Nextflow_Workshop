@@ -9,7 +9,7 @@ One of the differences between running on NeSI or your own machine is that on Ne
     1. Connect to [https://jupyter.nesi.org.nz](https://jupyter.nesi.org.nz)
     2. <p>Enter NeSI username, HPC password, and 6 digit second factor token (as set on <a href="https://my.nesi.org.nz/account/hpc-account">MyNeSI</a>)<br>![image](../images/jupyter_login_labels_updated.png)</p>
     3. <p>Choose server options as below
-    <br>make sure to choose the correct project code `nesi02659`, number of CPUs **4**, memory **8GB** prior to pressing ![image](./nesi_images/start_button.png){width="60"} button. <br>![image](../images/jupyter_server2023.png){width="700"}
+    <br>make sure to choose the correct project code `nesi02659`, number of CPUs **4**, memory **8GB** prior to pressing ![image](../images/start_button.png){width="60"} button. <br>![image](../images/jupyter_server2023.png){width="700"}
     4. <p>Start a terminal session from the JupyterLab launcher<br>![image](../images/terminal_view.png){width="500"}
 
 ## Loading required software
