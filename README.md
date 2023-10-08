@@ -1,2 +1,2 @@
-# Nextflow_Workshop
-A workshop to help you integrate Nextflow in your analysis workflows for reproducible and scalable pipelines. 
+# Reproducible Bioinformatics Workflows with Nextflow and nf-core
+A workshop to help you integrate Nextflow in your analysis workflows for reproducible and scalable pipelines. Workshop material is hosted on https://genomicsaotearoa.github.io/Nextflow_Workshop/
