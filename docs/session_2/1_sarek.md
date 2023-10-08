@@ -1,6 +1,6 @@
 # nf-core/sarek
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Understand the Sarek pipeline structure and default usage
     - Understand the levels of customisation available for nf-core pipelines
@@ -99,14 +99,18 @@ nextflow run nf-core/sarek -profile test,singularity --outdir test_sarek -r 3.2.
         ```bash
         nextflow run nf-core/sarek -profile test,singularity --outdir test_sarek -r 3.2.3
         ```
-!!! note "Test data"
+!!! square-pen "Test data"
 
     The `--input` and `--genome` parameters are not required when using the [`test` profile](https://github.com/nf-core/sarek/blob/3.2.3/conf/test.config). The test data and small reference files are included with the pipeline code and are automatically used when the `test` profile is specified. 
 
 In this example
 
-!!! abstract "Key points"
+<br>
 
-  - nf-core pipelines are provided with sensible default settings and required inputs.
-  - The `--help` flag can be used to view the recommended run command and all available parameters.
-  - The `test` profile can be used to show that a pipeline is working as expected.
+!!! circle-info ""
+
+!!! cboard-list-2 "Key points"
+
+    - nf-core pipelines are provided with sensible default settings and required inputs.
+    - The `--help` flag can be used to view the recommended run command and all available parameters.
+    - The `test` profile can be used to show that a pipeline is working as expected.

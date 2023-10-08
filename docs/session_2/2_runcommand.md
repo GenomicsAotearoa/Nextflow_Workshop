@@ -1,6 +1,6 @@
 # Configuring your run
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Understand the different parts of a run command
     - Learn how to customise a run command
@@ -321,7 +321,7 @@ Nextflow can also produce multiple reports and charts that show several runtime 
 - Adding `-with-dag` to your run command enables the rendering of the pipeline execution direct acyclic graph representation.
     - This feature requires the installation of [Graphviz](https://graphviz.org/) on your computer. Beginning in version 22.04, Nextflow can render the DAG as a Mermaid diagram. Mermaid diagrams are particularly useful because they can be embedded in GitHub Flavored Markdown without having to render them yourself.
 
-!!! note 
+!!! square-pen "Note" 
 
     The execution report (`-with-report`), trace report (`-with-trace`), timeline trace (`-with-timeline`), and dag (`-with-dag`) must be specified when the pipeline is executed. By contrast, the `log` option is useful after a pipeline has already run and is available for every executed pipeline.
 
@@ -333,7 +333,10 @@ Nextflow can also produce multiple reports and charts that show several runtime 
     nextflow run nf-core/sarek --input samplesheet.csv -params-file my-params.json -profile singularity -r 3.2.3 --tools "freebayes,strelka" -with-report -with-trace -with-timeline -with-dag -resume
     ```
 
-!!! abstract "Key points"
+<br>
+!!! circle-info ""
+
+!!! cboard-list-2 "Key points"
 
     - Sarek comes with a test profiles that can be used to test the pipeline on your infrastructure
     - Sample sheets are `csv` files that contain important meta data and the paths to your files

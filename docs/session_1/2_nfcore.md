@@ -1,6 +1,6 @@
 # Introduction to nf-core
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Learn about the core features of nf-core.
     - Learn how to use nf-core tooling.
@@ -193,8 +193,10 @@ Nextflow will `pull` the default git branch if a workflow version is not specifi
         ```bash
         nextflow list
         ```
+<br>
+!!! circle-info ""
 
-!!! abstract "Key points"
+!!! cboard-list-2 "Key points"
 
     - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow.
     - You can join/follow nf-core on multiple different social channels (Slack, YouTube, Twitter...)

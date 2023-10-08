@@ -1,6 +1,6 @@
 # nf-core tools for users
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Learn more about nf-core tooling for users.
     - Use `nf-core list` to view information about nf-core pipelines.
@@ -132,8 +132,10 @@ Alternatively, you could build your own execution command with the command line 
           Output directory: 'christopher-hakkaart-nf-core-demo_main'                                                                                                              
           Include default institutional configuration: 'False'    
         ```
+<br>
+!!! circle-info ""
 
-!!! abstract "Key points"
+!!! cboard-list-2 "Key points"
 
     - The nf-core `list` command can be used to view local and remote information about nf-core pipelines
     - The nf-core `launch` command can be a useful tool for writing parameter files

@@ -1,6 +1,6 @@
 # Configuring nf-core pipelines
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Learn about the structure of an nf-core pipeline.
     - Learn how to customize the execution of an nf-core pipeline.
@@ -408,7 +408,10 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
         In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "kiwi".
 
-!!! abstract "Key points"
+<br>
+!!! circle-info ""
+
+!!! cboard-list-2 "Key points"
 
     - nf-core pipelines follow a similar structure.
     - nf-core pipelines are configured using multiple configuration sources.

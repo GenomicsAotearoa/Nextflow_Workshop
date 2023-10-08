@@ -1,6 +1,6 @@
 # Configuring your deployment
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Understand some of the features of Nextflow that help with reproducibility
 
@@ -123,7 +123,11 @@ The [nf-core/configs](https://github.com/nf-core/configs) is loaded by default b
 
 If you are preparing a config for your group or institution, please consider submitting it to [nf-core/configs] to help others in the community.
 
-!!! abstract "Key points"
+
+<br>
+!!! cicle-info ""
+
+!!! cboard-list-2 "Key points"
 
     - Sarek comes with a test profiles that can be used to test the pipeline on your infrastructure
     - Sample sheets are `csv` files that contain important meta data and the paths to your files

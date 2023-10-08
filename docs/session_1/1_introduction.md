@@ -1,6 +1,6 @@
 # Introduction to Nextflow
 
-!!! abstract "Objectives"
+!!! clipboard-list "Objectives"
 
     - Learn about the core features of Nextflow
     - Learn Nextflow terminology
@@ -678,8 +678,10 @@ nextflow drop < pipeline>
         ```bash
         nextflow list
         ```
+<br>
+!!! circle-info ""
 
-!!! abstract "Key points"
+!!! cboard-list-2 "Key points"
 
     - Nextflow is a pipeline orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines
     - Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine

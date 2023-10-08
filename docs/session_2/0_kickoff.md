@@ -10,7 +10,7 @@ We will explore the pipeline source code and apply various customisations using 
 
 Each lesson in this session will build on previous lessons. By the end of this session you will have a deeper understanding of the customisation techniques and the impact they have on the pipeline execution.
 
-!!! note "Applying what you learn"
+!!! square-pen "Applying what you learn"
 
     Although activities in this session will use version 3.2.3 of the [nf-core/sarek](https://nf-co.re/sarek/3.2.3) pipeline, all customisation scenarios we explore are applicable to other nf-core pipelines.
 
