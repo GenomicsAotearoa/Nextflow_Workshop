@@ -77,7 +77,7 @@ Joining multiple nf-core and Nextflow channels is important to keep up to date w
 
 This workshop will make use of nf-core tools, a set of helper tools for use with Nextflow workflows. These tools have been developed to provide a range of additional functionality for **using**, **developing**, and **testing** workflows.
 
-!!! tip "How to download nf-core tools"
+??? tip "How to download nf-core tools - *Don't have to do this install today as it is already installed to your workshop environment.*"
 
     nf-core tools is written in Python and is available from the [Python Package Index (PyPI)](https://pypi.org/project/nf-core/):
 
