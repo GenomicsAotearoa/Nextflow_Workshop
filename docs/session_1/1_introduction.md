@@ -472,7 +472,7 @@ nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main
 ```
 ??? warning "This run requires 6GB of memory"
 
-    If your sssion was spawned with less than 8GB of memory, above run will fail with the following error 
+    If your session was spawned with less than 8GB of memory, above run will fail with the following error 
     ```
     Caused by:
     Process requirement exceeds available memory -- req: 6 GB; avail: 4 GB

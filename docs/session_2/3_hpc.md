@@ -26,15 +26,15 @@ executor {
 
     ??? success "Solution"
 
-    ```bash
-    nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -c custom.config
-    ``` 
+        ```bash
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -c custom.config
+        ``` 
 
-    Check your job has been submitted using the `squeue` command:
+        Check your job has been submitted using the `squeue` command:
 
-    ```bash
-    squeue --me
-    ```
+        ```bash
+        squeue --me
+        ```
 
 # Configuring your executor
 

@@ -185,7 +185,7 @@ Nextflow will `pull` the default git branch if a workflow version is not specifi
         Use Nextlfow to `pull` the `sarek` workflow from the `nf-core` GitHub repository:
 
         ```bash
-        nextflow pull nf-core/sarek -r master
+        nextflow pull nf-core/sarek -r 3.2.3
         ```
 
         Check that it has been pulled by listing your cached pipelines:

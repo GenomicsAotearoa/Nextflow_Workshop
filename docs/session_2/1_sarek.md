@@ -103,8 +103,6 @@ nextflow run nf-core/sarek -profile test,singularity --outdir test_sarek -r 3.2.
 
     The `--input` and `--genome` parameters are not required when using the [`test` profile](https://github.com/nf-core/sarek/blob/3.2.3/conf/test.config). The test data and small reference files are included with the pipeline code and are automatically used when the `test` profile is specified. 
 
-In this example
-
 <br>
 
 !!! circle-info ""

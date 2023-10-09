@@ -108,10 +108,10 @@ nextflow nf-core/<workflow> --<parameter> string
         nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main --multiqc_title kiwi -resume
         ```
 
-        In this example, you can check your parameter has been applied by listing the files created in the results folder (`my_results`):
+        In this example, you can check your parameter has been applied by listing the files created in the results folder (`results`):
 
         ```bash
-        ls my_results/multiqc/
+        ls results/multiqc/
         ```
 
         `--multiqc_title` is a parameter that directly impacts a result file. For parameters that are not as obvious, you may need to check your `log` to ensure your changes have been applied. You **should not** rely on the changes to parameters printed to the command line when you execute your run:
@@ -204,7 +204,7 @@ Parameter files are `.json` files that can contain an unlimited number of parame
 You can override default parameters by creating a custom `.json` file and passing it as a command-line argument using the `-param-file` option.
 
 ```bash
-nextflow run nf-core/<workflow> -profile test,singularity -param-file <path/to/params.json> -r main
+nextflow run nf-core/<workflow> -profile test,singularity -r main -param-file <path/to/params.json>
 ```
 
 !!! question "Exercise"
@@ -224,13 +224,13 @@ nextflow run nf-core/<workflow> -profile test,singularity -param-file <path/to/p
         Include the custom `.json` file in your execution command with the `-params-file` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -params-file my_custom_params.json 
+        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -params-file my_custom_params.json 
         ```
 
         Check that it has been applied:
 
         ```bash
-        ls my_results/multiqc/
+        ls results/multiqc/
         ```
 
 **Configuration files**
@@ -273,7 +273,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
 
         Create a custom `.config` file that contains your favourite colour, e.g., blue:
 
-        ```bash
+        ```console title="custom.config"
         params.multiqc_title = "blue"
         ```
 
@@ -286,7 +286,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
         Check that it has been applied:
 
         ```bash
-        ls my_results/multiqc/
+        ls results/multiqc/
         ```
 
         **Why did this fail?**
@@ -362,6 +362,8 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
     Create a new `.config` file that uses the `process` scope to overwrite the `args` for the `MULTIQC` process. Change the `args` to your favourite **month** of the year, e.g, `"--title \"october\""`.
 
+    In this example, the `\` is used to escape the `"` in the string. This is required to ensure the string is passed correctly to the `MULTIQC` module.
+
     ??? success "Solution"
 
         Make a custom config file that uses the `process` scope to replace the `args` for the `MULTIQC` process:
@@ -383,12 +385,12 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Check that it has been applied:
 
         ```bash
-        ls my_results/multiqc/
+        ls results/multiqc/
         ```
 
 !!! question "Exercise" 
 
-    Demonstrate the configuration hierarchy using the `christopher-hakkaart/nf-core-demo` pipeline by adding a params file (`-params-file`), and a command line flag (`--multiqc_title`) to your execution. You can use the files you have already created.
+    Demonstrate the configuration hierarchy using the `christopher-hakkaart/nf-core-demo` pipeline by adding a params file (`-params-file`), and a command line flag (`--multiqc_title`) to your execution. You can use the files you have already created. Make sure that the `--multiqc_title` is different to the `multiqc_title` in your params file and different to the title you have used in the past.
 
     ??? success "Solution"
 
@@ -403,10 +405,10 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your command with your params file (`-params-file`) and a command line flag (`--multiqc_title`):
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -resume -params-file my_custom_params.json --multiqc_title "kiwi"
+        nextflow run christopher-hakkaart/nf-core-demo -r main -resume -params-file my_custom_params.json --multiqc_title "cake"
         ```
 
-        In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "kiwi".
+        In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "cake".
 
 <br>
 !!! circle-info ""

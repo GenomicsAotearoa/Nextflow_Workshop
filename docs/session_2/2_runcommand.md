@@ -78,7 +78,9 @@ The following parameters can be used to specify the required reference/annotatio
     --vep_genome "WBcel235" \
     --vep_species "caenorhabditis_elegans" \
     --vep_version "106.1" \
-    --tools "freebayes"
+    --max_cpus 2 \
+    --max_memory 6.5GB \
+    --tools "freebayes" \
     --outdir "my_results"
 ```
 
@@ -134,6 +136,8 @@ The completed run command will execute a small test set of files using the freeb
             --vep_genome "WBcel235" \
             --vep_species "caenorhabditis_elegans" \
             --vep_version "106.1" \
+            --max_cpus 2 \
+            --max_memory 6.5GB \
             --tools "freebayes" \
             --outdir "my_results" \
             -profile singularity \
@@ -169,6 +173,8 @@ In the previous section we supplied a series of pipeline parameters as flags in 
         --vep_genome "WBcel235" \
         --vep_species "caenorhabditis_elegans" \
         --vep_version "106.1" \
+        --max_cpus 4 \
+        --max_memory 6.5GB \
         --output "my_results"
         -profile singularity \
         -r 3.2.3
@@ -192,6 +198,8 @@ In the previous section we supplied a series of pipeline parameters as flags in 
             "vep_genome": "WBcel235",
             "vep_species": "caenorhabditis_elegans",
             "vep_version": "106.1",
+            "max_cpus": 4,
+            "max_memory": "6.5 GB",
             "outdir": "my_results_2"
         }
         ```
@@ -210,7 +218,7 @@ Due to the order of priority, you can modify parameters you want to change witho
 
     Include both `freebayes` and `strelka` as variant callers using the `tools` parameter and run the pipeline again.
 
-    For this option, you will need to use the `--tools` flag and include both variant callers in the same string separated by a comma, e.g., `-- tools "<tool1>,<tool2>"`
+    For this option, you will need to use the `--tools` flag and include both variant callers in the same string separated by a comma, e.g., `--tools "<tool1>,<tool2>"`
 
     You can also use `-resume` to resume the pipeline from the last successful step.
 
