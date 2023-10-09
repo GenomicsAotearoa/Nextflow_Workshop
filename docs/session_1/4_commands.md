@@ -115,11 +115,11 @@ Alternatively, you could build your own execution command with the command line 
 
 !!! question "Exercise"
 
-    Use the nf-core `download` command to download the `christopher-hakkaart/nf-core-test` pipeline **with** it's **uncompressed** Singularity images.
+    Use the nf-core `download` command to download the `christopher-hakkaart/nf-core-demo` pipeline **with** it's **uncompressed** Singularity images.
 
     ??? success "Solution"
 
-        Use the nf-core `download` command for the `christopher-hakkaart/nf-core-test` pipeline and follow the prompts.
+        Use the nf-core `download` command for the `christopher-hakkaart/nf-core-demo` pipeline and follow the prompts.
 
         Your output should look like this:
 
