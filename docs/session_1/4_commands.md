@@ -78,7 +78,7 @@ The command line wizard will finish by asking if you want to launch the pipeline
         Your final `run` command should look like this:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -params-file nf-params.json
+        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -params-file nf-params.json
         ```
 
 !!! tip "The launch website"
