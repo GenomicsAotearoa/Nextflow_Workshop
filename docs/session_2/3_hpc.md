@@ -2,8 +2,9 @@
 
 !!! clipboard-list "Objectives"
 
-    - Understand some of the features of Nextflow that help with reproducibility
-
+    - Learn ways to configure your deployment using an executor
+    - Learn how to configure resources for your pipeline
+    - Learn about nf-core configs
 
 # Choosing your executor
 
@@ -87,6 +88,8 @@ process {
     }
 }
 ```
+
+## Mixing executors
 
 Another scenario might be that you only want to send specific jobs to your cluster, or a different.
 

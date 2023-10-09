@@ -33,4 +33,6 @@ This lesson also introduces [nf-core](https://nf-co.re/), a community-driven pla
 
 ### Acknowledgements
 
-This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) from [Seqera Labs](https://seqera.io/). It is based on the [Reproducible workflows with nf-core](https://sydney-informatics-hub.github.io/customising-nfcore-workshop/) run by Sydney Informatics Hub, University of Sydney.
+This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/)) with a huge amount of support from [George Wiggins](https://github.com/wigge206) ([University of Otago](https://www.otago.ac.nz/); [Genetics Otago](https://blogs.otago.ac.nz/go/)), [Ben Halliday](https://github.com/BenjHalliday) ([University of Otago](https://www.otago.ac.nz/); [Genetics Otago](https://blogs.otago.ac.nz/go/)), and [Dinindu Senanayake](https://github.com/DininduSenanayake) ([NeSI](https://www.nesi.org.nz/); [Genomics Aotearoa](https://www.genomics-aotearoa.org.nz/)).
+
+The workshop content was inspired by material written for [Foundational Nextflow Training](https://training.nextflow.io/) and the [Reproducible workflows with nf-core](https://sydney-informatics-hub.github.io/customising-nfcore-workshop/) run by Sydney Informatics Hub, University of Sydney.
