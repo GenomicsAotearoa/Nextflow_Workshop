@@ -314,7 +314,7 @@ Each of these can be modified independently of the others and be applied using a
         process {
 
             withName: 'FREEBAYES' {
-                ext.args         = '--min-alternate-fraction 0.05 --min-mapping-quality 1'
+                ext.args         = '--min-alternate-fraction 0.05'
             }
         }
         ```
