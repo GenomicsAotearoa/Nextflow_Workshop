@@ -379,7 +379,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your run command again with the custom configuration file:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -resume -c custom.config
+        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -405,7 +405,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your command with your params file (`-params-file`) and a command line flag (`--multiqc_title`):
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -resume -params-file my_custom_params.json --multiqc_title "cake"
+        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -resume -params-file my_custom_params.json --multiqc_title "cake"
         ```
 
         In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "cake".
