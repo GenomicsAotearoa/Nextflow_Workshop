@@ -236,8 +236,8 @@ export NXF_SINGULARITY_CACHEDIR=<custom/path/to/conda/cache>
         ```
 
 !!! tip "How to manage environmental variables"
-    
-        You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
+
+    You may want to include these, or other environmental variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
 
 A complete list of environmental variables can be found in the [Nextflow docs](https://www.nextflow.io/docs/latest/config.html#environment-variables).
 
