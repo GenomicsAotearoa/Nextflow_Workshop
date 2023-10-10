@@ -43,7 +43,7 @@ Options can also be used to sort the pipelines by latest release (`-s release`, 
         nf-core list dna -s stars
         ```
 
-## `nf-core launch`
+### `nf-core launch`
 
 A pipeline can have a large number of optional parameters. To help with this, the `nf-core launch` command is designed to help you write parameter files for when you launch your pipeline.
 
