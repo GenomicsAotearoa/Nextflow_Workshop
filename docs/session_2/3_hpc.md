@@ -49,7 +49,7 @@ executor {
 }
 ```
 
-Similarly, you might want to control the resources requested by your pipeline. For HPC's, you can't use the `cpu` and `memory` parameters as these are set by the scheduler. Instead, you can use parameters defined by nf-core pipelines to set limits and cause your pipeline to fail before it starts to request resources that are not available on the cluster.
+Similarly, you might want to control the resources requested by your pipeline. For HPC's, you can't use the `cpu` and `memory` parameters as these are set by the scheduler. Instead, you can use parameters defined by nf-core pipelines to set limits to stop a task requesting more resources than what is available.
 
 ```console title="custom.config"
 executor {
