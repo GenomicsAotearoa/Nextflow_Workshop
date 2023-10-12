@@ -34,9 +34,10 @@ Note how Sarek can accept different data types as inputs and how the samplesheet
 
     - **patient:** test
     - **sex:** XX
-    - **status:** test
-    - **sample:** test_L1
-    - **fastq_1:** https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/- genomics/homo_sapiens/illumina/fastq/test_1.fastq.gz
+    - **status:** 0
+    - **sample:** test
+    - **lane:** test_L1
+    - **fastq_1:** https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_1.fastq.gz
     - **fastq_2:** https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz
 
     ??? success "Solution"
