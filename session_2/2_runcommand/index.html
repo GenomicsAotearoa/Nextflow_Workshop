@@ -1,0 +1,1300 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="GA & NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Nextflow_Workshop/session_2/2_runcommand/">
+      
+      
+        <link rel="prev" href="../1_sarek/">
+      
+      
+        <link rel="next" href="../3_hpc/">
+      
+      
+      <link rel="icon" href="../../images/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Configuring your run - Reproducible Bioinformatics Workflows with Nextflow and nf-core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuring-your-run" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:white; display:inline;font-size: 160%;">This repository is in the early stages of development (Alpha Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-header__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Reproducible Bioinformatics Workflows with Nextflow and nf-core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuring your run
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-nav__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    Reproducible Bioinformatics Workflows with Nextflow and nf-core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log into Nesi Jupyter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Session 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_1/0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_1/1_introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Nextflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_1/2_nfcore/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to nf-core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_1/3_configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring nf-core pipelines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_1/4_commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core tools for users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Session 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_sarek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core/sarek
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuring your run
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your run
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to start
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where to start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input (--input)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-data-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference data (--genome)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profiles-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profiles (--profile)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it all together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-and-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics and reports
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_hpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to start
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Where to start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input (--input)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-data-genome" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference data (--genome)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profiles-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profiles (--profile)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it all together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration files
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metrics-and-reports" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metrics and reports
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuring-your-run">Configuring your run<a class="headerlink" href="#configuring-your-run" title="Permanent link">&para;</a></h1>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives</p>
+<ul>
+<li>Understand the different parts of a run command</li>
+<li>Learn how to customise a run command</li>
+<li>Learn how to use a parameter file and configuration files to customise a run command</li>
+</ul>
+</div>
+<h2 id="where-to-start">Where to start<a class="headerlink" href="#where-to-start" title="Permanent link">&para;</a></h2>
+<p>A recommended run command can be found for each pipeline on the nf-core website and is a useful starting point for customising a run command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span>--genome<span class="w"> </span>GATK.GRCh38<span class="w"> </span>-profile<span class="w"> </span>docker
+</code></pre></div>
+<p>From here, the command can be customised to suit your needs. The following sections will describe the different components of the command and how they can be customised.</p>
+<p>In this example, the same small test data files that are used in the test profile will be used to demonstrate how to create you own sample sheet. However, you will be writing the files rather than relying on the test profile. The same concepts will apply to data on your local storage.</p>
+<h3 id="input-input">Input (<code>--input</code>)<a class="headerlink" href="#input-input" title="Permanent link">&para;</a></h3>
+<p>The Sarek pipeline requires a samplesheet as an input parameter. This is a <code>csv</code> file that contains information about the samples that will be processed. The samplesheet is used to specify the location of the input data, the sample name, and additional metadata.</p>
+<p>A samplesheet is created manually and can be stored anywhere on your computer. The samplesheet can be named anything you like, but it must be specified using the <code>--input</code> flag.</p>
+<p>More information about how to structure a samplesheet for Sarek can be found in the <a href="https://nf-co.re/sarek/3.2.3/docs/usage/#input-sample-sheet-configurations">usage documentation</a>.</p>
+<p>Note how Sarek can accept different data types as inputs and how the samplesheet is different for each.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the <a href="https://nf-co.re/sarek/3.2.3/docs/usage/#input-sample-sheet-configurations">usage documentation</a> to create <code>samplesheet.csv</code> in your working directory. It must include the following data in the required format:</p>
+<ul>
+<li><strong>patient:</strong> test</li>
+<li><strong>sex:</strong> XX</li>
+<li><strong>status:</strong> 0</li>
+<li><strong>sample:</strong> test</li>
+<li><strong>lane:</strong> test_L1</li>
+<li><strong>fastq_1:</strong> <a href="https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_1.fastq.gz">https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_1.fastq.gz</a></li>
+<li><strong>fastq_2:</strong> <a href="https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz">https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz</a></li>
+</ul>
+<details class="success">
+<summary>Solution</summary>
+<p>Your <code>csv</code> file should look like the following:</p>
+<div class="highlight"><span class="filename">samplesheet.csv</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>patient,sex,status,sample,lane,fastq_1,fastq_2
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>test,XX,0,test,test_L1,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test_2.fastq.gz
+</code></pre></div>
+</details>
+</div>
+<h3 id="reference-data-genome">Reference data (<code>--genome</code>)<a class="headerlink" href="#reference-data-genome" title="Permanent link">&para;</a></h3>
+<p>Many nf-core pipelines need a reference genome for alignment, annotation, or similar.</p>
+<p>To make the use of reference genomes easier, Illumina developed a centralised resource called iGenomes where the most commonly used reference genome files are organised in a consistent structure.</p>
+<p>nf-core have uploaded a copy of iGenomes onto AWS S3 and nf-core pipelines are configured to use this by default. All AWS iGenomes paths are specified in pipelines that support them in <code>conf/igenomes.config</code>. By default, the pipeline will automatically download the required reference files when you it is executed with an appropriate genome key (e.g., <code>--genome GRCh37</code>). The pipeline will only download what it requires.</p>
+<p>Downloading reference genome files takes time and bandwidth so, if possible, it is recommend that you <a href="https://ewels.github.io/AWS-iGenomes/">download a local copy of your relevant iGenomes references</a> and <a href="https://nf-co.re/docs/usage/troubleshooting#using-a-local-version-of-igenomes">configure your execution</a> to use the local version.</p>
+<p>When executing Sarek with common genomes, such as GRCh38 and GRCh37, iGenomes is shipped with the necessary reference files. However, depending on your deployment, it is sometimes necessary to use custom references for some or all files. Specific details for different deployment situations are described in the <a href="https://nf-co.re/sarek/3.2.3/docs/usage/#how-to-run-sarek-when-not-all-reference-files-are-in-igenomes">usage documentation</a>.</p>
+<p>The small test <code>fastq.gz</code> files in the samplesheet created above would throw errors if it was run with a full size reference genome from iGenomes. Instead, smaller files from the nf-core test datasets repository need to be used. As these files are not included in iGenomes they must be specified manually using parameters.</p>
+<p>The following parameters can be used to specify the required reference/annotation files for the small test data files:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">    --igenomes_ignore \</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">    --dbsnp &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz&quot; \</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">    --fasta &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta&quot; \</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">    --germline_resource &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz&quot; \</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">    --intervals &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.interval_list&quot; \</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">    --known_indels &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz&quot; \</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="go">    --snpeff_db 105 \</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">    --snpeff_genome &quot;WBcel235&quot; \</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="go">    --snpeff_version &quot;5.1&quot; \</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="go">    --vep_cache_version &quot;106&quot; \</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="go">    --vep_genome &quot;WBcel235&quot; \</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="go">    --vep_species &quot;caenorhabditis_elegans&quot; \</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="go">    --vep_version &quot;106.1&quot; \</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="go">    --max_cpus 2 \</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="go">    --max_memory 6.5GB \</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="go">    --tools &quot;freebayes&quot; \</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="go">    --outdir &quot;my_results&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Tools</p>
+<p>The <code>--tools</code> parameter is included above to trigger the execution of the freebayes variant caller. Multiple variant callers are available as a part of Sarek, however, in this example, only one is included.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>--igenomes_ignore</code> parameter must be included when using custom reference/annotation files. Without it, by default, the reference/annotation files that are typically required by Sarek are downloaded for <code>GATK.GRCh38</code>. Some pipelines have this feature by default while others require the genome flag (or alternate) for every execution.</p>
+</div>
+<h3 id="profiles-profile">Profiles (<code>--profile</code>)<a class="headerlink" href="#profiles-profile" title="Permanent link">&para;</a></h3>
+<p>Software profiles are used to specify the software environment in which the pipeline will be executed. By simply including a profile (e.g., <code>singularity</code>), Nextflow will download, store, and manage the software used in the Sarek pipeline.</p>
+<p>To ensure reproducibility, it is recommended that you use container technology, e.g., <code>docker</code> or <code>singularity</code>. </p>
+<h2 id="putting-it-all-together">Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permanent link">&para;</a></h2>
+<p>The previous sections have shown different parts of a recommended run command. These can be combined to create a custom run command that will execute Sarek on the small test data files.</p>
+<p>The completed run command will execute a small test set of files using the freebayes variant caller. The command will use the small test data files from the nf-core test datasets repository and custom reference/annotation files that are hosted on github.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use all of the information above to build a custom run command that will execute version 3.2.3 of Sarek on the samplesheet you created.</p>
+<details class="tip">
+<summary>Hint</summary>
+<p>Include the sample sheet you made earlier with <code>--input samplesheet.csv</code>. Remember is must be in your working directory or you must specify the full or relative path to the file. If you named your samplesheet differently it must be reflected in your command.</p>
+<p>Include the parameters shown above to specify the reference/annotation files. You can copy these directly into your run command.</p>
+<p>Use Singularity to manage your software with <code>-profile singularity</code>.</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<p>Your run command should look like the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span>--igenomes_ignore<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span>--dbsnp<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span>--fasta<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span>--germline_resource<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span>--intervals<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.interval_list&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span>--known_indels<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span>--snpeff_db<span class="w"> </span><span class="m">105</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span>--snpeff_genome<span class="w"> </span><span class="s2">&quot;WBcel235&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span>--snpeff_version<span class="w"> </span><span class="s2">&quot;5.1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span>--vep_cache_version<span class="w"> </span><span class="s2">&quot;106&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span>--vep_genome<span class="w"> </span><span class="s2">&quot;WBcel235&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span>--vep_species<span class="w"> </span><span class="s2">&quot;caenorhabditis_elegans&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span>--vep_version<span class="w"> </span><span class="s2">&quot;106.1&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span>--max_cpus<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span>--max_memory<span class="w"> </span><span class="m">6</span>.5GB<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span>--tools<span class="w"> </span><span class="s2">&quot;freebayes&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span>--outdir<span class="w"> </span><span class="s2">&quot;my_results&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span>-profile<span class="w"> </span>singularity<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span>-r<span class="w"> </span><span class="m">3</span>.2.3
+</code></pre></div>
+<p>If everything has worked - you will see the pipeline launching in your terminal 🚀</p>
+</details>
+</div>
+<h2 id="customizing-parameters">Customizing parameters<a class="headerlink" href="#customizing-parameters" title="Permanent link">&para;</a></h2>
+<p>In Session 1, we learned how to <a href="../../session_1/3_configuration/">customise a simple nf-core pipeline</a>. Here, we will apply these skills to customise the execution of the Sarek pipeline.</p>
+<p>In the previous section we supplied a series of pipeline parameters as flags in your run command (<code>--</code>). Here, we will package these into a <code>.json</code> file and use the <code>-params-file</code> option.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Package the parameters from the previous lesson into a <code>.json</code> file and run the pipeline using the <code>-params-file</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">nextflow run nf-core/sarek \</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">    --input samplesheet.csv \</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">    --igenomes_ignore \</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">    --dbsnp &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz&quot; \</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">    --fasta &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta&quot; \</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">    --germline_resource &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz&quot; \</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">    --intervals &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.interval_list&quot; \</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">    --known_indels &quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz&quot; \</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">    --snpeff_db 105 \</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">    --snpeff_genome &quot;WBcel235&quot; \</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">    --snpeff_version &quot;5.1&quot; \</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">    --tools &quot;freebayes&quot; \</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    --vep_cache_version &quot;106&quot; \</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    --vep_genome &quot;WBcel235&quot; \</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">    --vep_species &quot;caenorhabditis_elegans&quot; \</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">    --vep_version &quot;106.1&quot; \</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="go">    --max_cpus 4 \</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="go">    --max_memory 6.5GB \</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="go">    --output &quot;my_results&quot;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="go">    -profile singularity \</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="go">    -r 3.2.3</span>
+</code></pre></div>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><span class="filename">my-params.json</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nt">&quot;igenomes_ignore&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">&quot;dbsnp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">&quot;fasta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.fasta&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nt">&quot;germline_resource&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/gnomAD.r2.1.1.vcf.gz&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">&quot;intervals&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/genome.interval_list&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">&quot;known_indels&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/genomics/homo_sapiens/genome/vcf/mills_and_1000G.indels.vcf.gz&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&quot;snpeff_db&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">&quot;snpeff_genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WBcel235&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&quot;snpeff_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.1&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">&quot;tools&quot;</span><span class="p">:</span><span class="w">  </span><span class="s2">&quot;freebayes&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nt">&quot;vep_cache_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">106</span><span class="p">,</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nt">&quot;vep_genome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WBcel235&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nt">&quot;vep_species&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;caenorhabditis_elegans&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nt">&quot;vep_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;106.1&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nt">&quot;max_cpus&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nt">&quot;max_memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.5 GB&quot;</span><span class="p">,</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nt">&quot;outdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_results_2&quot;</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="p">}</span>
+</code></pre></div>
+<p>Your execution command will now look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span>-params-file<span class="w"> </span>my-params.json<span class="w"> </span>-profile<span class="w"> </span>singularity<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.2.3
+</code></pre></div>
+<p>Note that in this example we kept <code>--input samplesheet.csv</code> in the execution command. However, this could have put this in the <code>.json</code> file. You can pick and choose which parameters go in a params file and which parameters go in your execution command.</p>
+</details>
+</div>
+<p>Due to the order of priority, you can modify parameters you want to change without having to edit your newly created parameters file.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Include both <code>freebayes</code> and <code>strelka</code> as variant callers using the <code>tools</code> parameter and run the pipeline again.</p>
+<p>For this option, you will need to use the <code>--tools</code> flag and include both variant callers in the same string separated by a comma, e.g., <code>--tools "&lt;tool1&gt;,&lt;tool2&gt;"</code></p>
+<p>You can also use <code>-resume</code> to resume the pipeline from the last successful step.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span>-params-file<span class="w"> </span>my-params.json<span class="w"> </span>-profile<span class="w"> </span>singularity<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.2.3<span class="w"> </span>--tools<span class="w"> </span><span class="s2">&quot;freebayes,strelka&quot;</span><span class="w"> </span>-resume<span class="w"> </span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="configuration-files">Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">&para;</a></h2>
+<p>Sometimes Sarek won't have a parameter that you need to customize the execution of a tool. In this situation, you will need to apply a configuration file to the pipeline.</p>
+<p>As shown in the example from <a href="../../session_1/3_configuration/">Session 1</a>, you can selectively apply a configuration file to a process using the <code>withName</code> directive.</p>
+<div class="admonition tip">
+<p class="admonition-title">Be specific with your selector</p>
+<p>Remember to make your selector specific to the process you are trying to customise. It can be helpful to use the same selectors that are already included in the configuration file.</p>
+</div>
+<p>Sarek is a little different from other pipelines because it has multiple different config files that are used for different tools or groups of tools. This is stylistic and helps to keep the config files organised.</p>
+<p>For example, there are a number of options that are applied when calling variants with <code>FREEBAYES</code> and are all stored in a <a href="https://github.com/nf-core/sarek/blob/3.2.3/conf/modules/freebayes.config">freebayes.config</a> file together:</p>
+<div class="highlight"><span class="filename">freebayes.config</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">process {</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    withName: &#39;MERGE_FREEBAYES&#39; {</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="go">        ext.prefix       = { &quot;${meta.id}.freebayes&quot; }</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="go">        publishDir       = [</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">            mode: params.publish_dir_mode,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">            path: { &quot;${params.outdir}/variant_calling/freebayes/${meta.id}/&quot; },</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="go">            saveAs: { filename -&gt; filename.equals(&#39;versions.yml&#39;) ? null : filename }</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="go">        ]</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="go">    }</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="go">    withName: &#39;FREEBAYES&#39; {</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="go">        ext.args         = &#39;--min-alternate-fraction 0.1 --min-mapping-quality 1&#39;</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="go">        //To make sure no naming conflicts ensure with module BCFTOOLS_SORT &amp; the naming being correct in the output folder</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="go">        ext.prefix       = { meta.num_intervals &lt;= 1 ? &quot;${meta.id}&quot; : &quot;${meta.id}.${target_bed.simpleName}&quot; }</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="go">        ext.when         = { params.tools &amp;&amp; params.tools.split(&#39;,&#39;).contains(&#39;freebayes&#39;) }</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="go">        publishDir       = [</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="go">            enabled: false</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="go">        ]</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="go">    }</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="go">    withName: &#39;BCFTOOLS_SORT&#39; {</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="go">        ext.prefix       = { meta.num_intervals &lt;= 1 ? meta.id + &quot;.freebayes&quot; : vcf.name - &quot;.vcf&quot; + &quot;.sort&quot; }</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a><span class="go">        publishDir       = [</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="go">            mode: params.publish_dir_mode,</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="go">            path: { &quot;${params.outdir}/variant_calling/&quot; },</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="go">            pattern: &quot;*vcf.gz&quot;,</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a><span class="go">            saveAs: { meta.num_intervals &gt; 1 ? null : &quot;freebayes/${meta.id}/${it}&quot; }</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a><span class="go">        ]</span>
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a><span class="go">    }</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31" href="#__codelineno-8-31"></a>
+<a id="__codelineno-8-32" name="__codelineno-8-32" href="#__codelineno-8-32"></a><span class="go">    withName : &#39;TABIX_VC_FREEBAYES&#39; {</span>
+<a id="__codelineno-8-33" name="__codelineno-8-33" href="#__codelineno-8-33"></a><span class="go">        publishDir       = [</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34" href="#__codelineno-8-34"></a><span class="go">            mode: params.publish_dir_mode,</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35" href="#__codelineno-8-35"></a><span class="go">            path: { &quot;${params.outdir}/variant_calling/freebayes/${meta.id}/&quot; },</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36" href="#__codelineno-8-36"></a><span class="go">            saveAs: { filename -&gt; filename.equals(&#39;versions.yml&#39;) ? null : filename }</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37" href="#__codelineno-8-37"></a><span class="go">        ]</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38" href="#__codelineno-8-38"></a><span class="go">    }</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39" href="#__codelineno-8-39"></a>
+<a id="__codelineno-8-40" name="__codelineno-8-40" href="#__codelineno-8-40"></a><span class="go">    // PAIR_VARIANT_CALLING</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41" href="#__codelineno-8-41"></a><span class="go">    if (params.tools &amp;&amp; params.tools.split(&#39;,&#39;).contains(&#39;freebayes&#39;)) {</span>
+<a id="__codelineno-8-42" name="__codelineno-8-42" href="#__codelineno-8-42"></a><span class="go">        withName: &#39;.*:BAM_VARIANT_CALLING_SOMATIC_ALL:BAM_VARIANT_CALLING_FREEBAYES:FREEBAYES&#39; {</span>
+<a id="__codelineno-8-43" name="__codelineno-8-43" href="#__codelineno-8-43"></a><span class="go">            ext.args       = &quot;--pooled-continuous \</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44" href="#__codelineno-8-44"></a><span class="go">                            --pooled-discrete \</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45" href="#__codelineno-8-45"></a><span class="go">                            --genotype-qualities \</span>
+<a id="__codelineno-8-46" name="__codelineno-8-46" href="#__codelineno-8-46"></a><span class="go">                            --report-genotype-likelihood-max \</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47" href="#__codelineno-8-47"></a><span class="go">                            --allele-balance-priors-off \</span>
+<a id="__codelineno-8-48" name="__codelineno-8-48" href="#__codelineno-8-48"></a><span class="go">                            --min-alternate-fraction 0.03 \</span>
+<a id="__codelineno-8-49" name="__codelineno-8-49" href="#__codelineno-8-49"></a><span class="go">                            --min-repeat-entropy 1 \</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50" href="#__codelineno-8-50"></a><span class="go">                            --min-alternate-count 2 &quot;</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51" href="#__codelineno-8-51"></a><span class="go">        }</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52" href="#__codelineno-8-52"></a><span class="go">    }</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53" href="#__codelineno-8-53"></a><span class="go">}</span>
+</code></pre></div>
+<p>Each of these can be modified independently of the others and be applied using a custom configuration file.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Create a custom configuration file that will modify the <code>--min-alternate-fraction</code> parameter for <code>FREEBAYES</code> to <code>0.05</code> and apply it to the pipeline.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span>-params-file<span class="w"> </span>my-params.json<span class="w"> </span>-profile<span class="w"> </span>singularity<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.2.3<span class="w"> </span>--tools<span class="w"> </span><span class="s2">&quot;freebayes,strelka&quot;</span><span class="w"> </span>-resume<span class="w"> </span>-c<span class="w"> </span>my-config.config
+</code></pre></div>
+<div class="highlight"><span class="filename">my-config.config</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">process {</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">    withName: &#39;FREEBAYES&#39; {</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">        ext.args         = &#39;--min-alternate-fraction 0.05&#39;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">    }</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="go">}</span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="metrics-and-reports">Metrics and reports<a class="headerlink" href="#metrics-and-reports" title="Permanent link">&para;</a></h2>
+<p>Nextflow can also produce multiple reports and charts that show several runtime metrics and your execution information. You can enable this functionality by adding Nextflow options to your run command:</p>
+<ul>
+<li>Adding <code>-with-report</code> to your run command will create a HTML execution report which includes many useful metrics about a pipeline execution. </li>
+<li>Adding <code>-with-trace</code> option to creates an execution tracing file that contains some useful information about each process executed in your pipeline script.</li>
+<li>Adding <code>-with-timeline</code> to your run command enables the creation of the pipeline timeline report showing how processes were executed over time.</li>
+<li>Adding <code>-with-dag</code> to your run command enables the rendering of the pipeline execution direct acyclic graph representation.<ul>
+<li>This feature requires the installation of <a href="https://graphviz.org/">Graphviz</a> on your computer. Beginning in version 22.04, Nextflow can render the DAG as a Mermaid diagram. Mermaid diagrams are particularly useful because they can be embedded in GitHub Flavored Markdown without having to render them yourself.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition square-pen">
+<p class="admonition-title">Note</p>
+<p>The execution report (<code>-with-report</code>), trace report (<code>-with-trace</code>), timeline trace (<code>-with-timeline</code>), and dag (<code>-with-dag</code>) must be specified when the pipeline is executed. By contrast, the <code>log</code> option is useful after a pipeline has already run and is available for every executed pipeline.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Try to run the following command and view the reports generated by Nextflow:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/sarek<span class="w"> </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span>-params-file<span class="w"> </span>my-params.json<span class="w"> </span>-profile<span class="w"> </span>singularity<span class="w"> </span>-r<span class="w"> </span><span class="m">3</span>.2.3<span class="w"> </span>--tools<span class="w"> </span><span class="s2">&quot;freebayes,strelka&quot;</span><span class="w"> </span>-with-report<span class="w"> </span>-with-trace<span class="w"> </span>-with-timeline<span class="w"> </span>-with-dag<span class="w"> </span>-resume
+</code></pre></div>
+</div>
+<p><br></p>
+<div class="admonition circle-info"></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Key points</p>
+<ul>
+<li>Sarek comes with a test profiles that can be used to test the pipeline on your infrastructure</li>
+<li>Sample sheets are <code>csv</code> files that contain important meta data and the paths to your files</li>
+<li>Reference files are available from iGenomes</li>
+<li>Parameters go in parameters files and everything else goes in a configuration file</li>
+<li>There are additional flags you can use to generate reports and metric for you own records</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../1_sarek/" class="md-footer__link md-footer__link--prev" aria-label="Previous: nf-core/sarek">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                nf-core/sarek
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../3_hpc/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuring your deployment">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Configuring your deployment
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Reproducible Bioinformatics Workflows with Nextflow and nf-core is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

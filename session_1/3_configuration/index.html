@@ -1,0 +1,1297 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="GA & NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Nextflow_Workshop/session_1/3_configuration/">
+      
+      
+        <link rel="prev" href="../2_nfcore/">
+      
+      
+        <link rel="next" href="../4_commands/">
+      
+      
+      <link rel="icon" href="../../images/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Configuring nf-core pipelines - Reproducible Bioinformatics Workflows with Nextflow and nf-core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuring-nf-core-pipelines" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:white; display:inline;font-size: 160%;">This repository is in the early stages of development (Alpha Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-header__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Reproducible Bioinformatics Workflows with Nextflow and nf-core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuring nf-core pipelines
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-nav__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    Reproducible Bioinformatics Workflows with Nextflow and nf-core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log into Nesi Jupyter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Session 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Nextflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_nfcore/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to nf-core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuring nf-core pipelines
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Configuring nf-core pipelines
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-in-the-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters in the command line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default configuration files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared configuration files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom configuration files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core tools for users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Session 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/1_sarek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core/sarek
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/2_runcommand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your run
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/3_hpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pipeline-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipeline structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters-in-the-command-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters in the command line
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default configuration files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shared-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shared configuration files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom configuration files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuring-nf-core-pipelines">Configuring nf-core pipelines<a class="headerlink" href="#configuring-nf-core-pipelines" title="Permanent link">&para;</a></h1>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives</p>
+<ul>
+<li>Learn about the structure of an nf-core pipeline.</li>
+<li>Learn how to customize the execution of an nf-core pipeline.</li>
+<li>Customize a toy example of an nf-core pipeline.</li>
+</ul>
+</div>
+<h2 id="pipeline-structure">Pipeline structure<a class="headerlink" href="#pipeline-structure" title="Permanent link">&para;</a></h2>
+<p>nf-core pipelines follow a set of best practices and standardised conventions. nf-core pipelines start from a <strong>common template</strong> and follow the same structure. Although you won’t need to edit code in the pipeline project directory, having a basic understanding of the project structure and some core terminology will help you understand how to configure its execution.</p>
+<p>Nextflow DSL2 <span style="color:#087f5b;"><strong>workflow</strong></span> are built up of <span style="color:#c92a2a;"><strong>subworkflows</strong></span> and <span style="color:#364fc7;"><strong>modules</strong></span> that are stored as separate <code>.nf</code> files.</p>
+<p><br></p>
+<p align="left"><a class="glightbox" href="../../images/1_3_structure.excalidraw.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_3_structure.excalidraw.png" alt="drawing" width="400"/></a></p>
+<p><br></p>
+<p>Most nf-core pipelines consist of a single <span style="color:#087f5b;"><strong>workflow</strong></span> file (there are a few exceptions). This is the main <code>&lt;workflow&gt;.nf</code> file that is used to bring everything else together. Instead of having one large monolithic script, it is broken up into a combination of <span style="color:#c92a2a;"><strong>subworkflows</strong></span> and <span style="color:#364fc7;"><strong>modules</strong></span>.</p>
+<p><br></p>
+<p align="center"><a class="glightbox" href="../../images/1_3_worksubmod.excalidraw.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_3_worksubmod.excalidraw.png" alt="drawing" width="900"/></a></p>
+<p><br></p>
+<p>A <span style="color:#c92a2a;"><strong>subworkflows</strong></span> is a groups of modules that are used in combination with each other and have a common purpose. For example, the <a href="https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/stats/main.nf"><code>SAMTOOLS_STATS</code></a>, <a href="https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/faidx/main.nf"><code>SAMTOOLS_IDXSTATS</code></a>, and <a href="https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/flagstat/main.nf"><code>SAMTOOLS_FLAGSTAT</code></a> modules are all included in the <a href="https://github.com/nf-core/modules/blob/master/subworkflows/nf-core/bam_stats_samtools/main.nf"><code>BAM_STATS_SAMTOOLS</code></a> subworkflow.</p>
+<p>Subworkflows improve pipeline readability and help with the reuse of modules within a pipeline. Within a nf-core pipeline, a subworkflow can be an nf-core subworkflow or as a local subworkflow. Like an nf-core pipeline, an nf-core subworkflow is developed by the community is shared in the <a href="https://github.com/nf-core/modules/tree/master/subworkflows/nf-core">nf-core subworkflows GitHub repository</a>. Local subworkflows are pipeline specific that are not shared in the nf-core subworkflows repository.</p>
+<p>A <span style="color:#364fc7;"><strong>modules</strong></span> is a wrapper for a process, the basic processing primitive to execute a user script. It can specify <a href="https://www.nextflow.io/docs/latest/process.html#directives">directives</a>, <a href="https://www.nextflow.io/docs/latest/process.html#inputs">inputs</a>, <a href="https://www.nextflow.io/docs/latest/process.html#outputs">outputs</a>, <a href="https://www.nextflow.io/docs/latest/process.html#when">when statements</a>, and a <a href="https://www.nextflow.io/docs/latest/process.html#script">script</a> block.</p>
+<p>Most modules will execute a single tool in the script block and will make use of the directives, inputs, outputs, and when statements dynamically. Like subworkflows, modules can also be developed and shared in the <a href="https://github.com/nf-core/modules/tree/master/modules/nf-core">nf-core modules GitHub repository</a> or stored as a local module. All modules from the nf-core repository are version controlled and tested to ensure reproducibility. Local modules are pipeline specific that are not shared in the nf-core modules repository.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will almost certainly want to modify these to fit your own purposes and system requirements.</p>
+<p><strong>You do not need to edit the pipeline code to configure nf-core pipelines.</strong></p>
+<p>When a pipeline is launched, Nextflow will look for configuration files in several locations. As each source can contain conflicting settings, the sources are ranked to decide which settings to apply. Configuration sources are reported below and listed in order of priority:</p>
+<ol>
+<li>Parameters specified on the command line (<code>--parameter</code>)</li>
+<li>Parameters that are provided using the <code>-params-file</code> option</li>
+<li>Config file that are provided using the <code>-c</code> option</li>
+<li>The config file named <code>nextflow.config</code> in the current directory</li>
+<li>The config file named <code>nextflow.config</code> in the pipeline project directory</li>
+<li>The config file <code>$HOME/.nextflow/config</code></li>
+<li>Values defined within the pipeline script itself (e.g., <code>main.nf</code>)</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>nf-core pipeline parameters must be passed via the command line (<code>--&lt;parameter&gt;</code>) or Nextflow <code>-params-file</code> option. Custom config files, including those provided by the <code>-c</code> option, can be used to provide any configuration <strong>except</strong> for parameters.</p>
+</div>
+<p>Notably, while some of these files are already included in the nf-core pipeline repository (e.g., the <code>nextflow.config</code> file in the nf-core pipeline repository), some are automatically identified on your local system (e.g., the <code>nextflow.config</code> in the launch directory), and others are only included if they are specified using <code>run</code> options (e.g., <code>-params-file</code>, and <code>-c</code>).</p>
+<p>Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipelines execution.</p>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<p><strong>Parameters</strong> are pipeline specific settings that can be used to customise the execution of a pipeline. </p>
+<p>Every nf-core pipeline has a full list of parameters on the nf-core website. When viewing these parameters online, you will also be shown a description and the type of the parameter. Some parameters will have additional text to help you understand when and how a parameter should be used.</p>
+<p>Parameters and their descriptions can also be viewed in the command line using the <code>run</code> command with the <code>--help</code> parameter:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>--help
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>View the parameters for the <code>christopher-hakkaart/nf-core-demo</code> pipeline using the command line:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>The <code>christopher-hakkaart/nf-core-demo</code> pipeline parameters can be printed using the <code>run</code> command and the <code>--help</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>--help
+</code></pre></div>
+</details>
+</div>
+<h3 id="parameters-in-the-command-line">Parameters in the command line<a class="headerlink" href="#parameters-in-the-command-line" title="Permanent link">&para;</a></h3>
+<p>At the highest level, parameters can be customised using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (<code>--</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>--&lt;parameter&gt;
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">When to use <code>--</code> and <code>-</code></p>
+<p>Nextflow options are prefixed with a single dash (<code>-</code>) and pipeline parameters are prefixed with a double dash (<code>--</code>).</p>
+</div>
+<p>Depending on the parameter type, you may be required to add additional information after your parameter flag. For example, for a string parameter, you would add the string after the parameter flag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>--&lt;parameter&gt;<span class="w"> </span>string
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Give the MultiQC report for the <code>christopher-hakkaart/nf-core-demo</code> pipeline the name of your <strong>favorite animal</strong> using the <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27"><code>multiqc_title</code></a> parameter using a command line flag:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Add the <code>--multiqc_title</code> flag to your command and execute it. Use the <code>-resume</code> option to save time:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>--multiqc_title<span class="w"> </span>kiwi<span class="w"> </span>-resume
+</code></pre></div>
+<p>In this example, you can check your parameter has been applied by listing the files created in the results folder (<code>results</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ls<span class="w"> </span>results/multiqc/
+</code></pre></div>
+<p><code>--multiqc_title</code> is a parameter that directly impacts a result file. For parameters that are not as obvious, you may need to check your <code>log</code> to ensure your changes have been applied. You <strong>should not</strong> rely on the changes to parameters printed to the command line when you execute your run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nextflow<span class="w"> </span>log
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>nextflow<span class="w"> </span>log<span class="w"> </span>&lt;run<span class="w"> </span>name&gt;<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;process,script&quot;</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="default-configuration-files">Default configuration files<a class="headerlink" href="#default-configuration-files" title="Permanent link">&para;</a></h3>
+<p>All parameters will have a default setting that is defined using the <code>nextflow.config</code> file in the pipeline project directory. By default, most parameters are set to <code>null</code> or <code>false</code> and are only activated by a profile or configuration file.</p>
+<p>There are also several <code>includeConfig</code> statements in the <code>nextflow.config</code> file that are used to include additional <code>.config</code> files from the <code>conf/</code> folder. Each additional <code>.config</code> file contains categorised configuration information for your pipeline execution, some of which can be optionally included:</p>
+<ul>
+<li><code>base.config</code><ul>
+<li>Included by the pipeline by default.</li>
+<li>Generous resource allocations using labels.</li>
+<li>Does not specify any method for software management and expects software to be available (or specified elsewhere).</li>
+</ul>
+</li>
+<li><code>igenomes.config</code><ul>
+<li>Included by the pipeline by default.</li>
+<li>Default configuration to access reference files stored on <a href="https://ewels.github.io/AWS-iGenomes/">AWS iGenomes</a>.</li>
+</ul>
+</li>
+<li><code>modules.config</code><ul>
+<li>Included by the pipeline by default.</li>
+<li>Module-specific configuration options (both mandatory and optional).</li>
+</ul>
+</li>
+<li><code>test.config</code><ul>
+<li>Only included if specified as a profile.</li>
+<li>A configuration profile to test the pipeline with a small test dataset.</li>
+</ul>
+</li>
+<li><code>test_full.config</code><ul>
+<li>Only included if specified as a profile.</li>
+<li>A configuration profile to test the pipeline with a full-size test dataset.</li>
+</ul>
+</li>
+</ul>
+<p>Notably, configuration files can also contain the definition of one or more profiles. A profile is a set of configuration attributes that can be activated when launching a pipeline by using the <code>-profile</code> command option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>-profile<span class="w"> </span>&lt;profile&gt;
+</code></pre></div>
+<p>Profiles used by nf-core pipelines include:</p>
+<ul>
+<li><strong>Software management profiles</strong><ul>
+<li>Profiles for the management of software using software management tools, e.g., <code>docker</code>, <code>singularity</code>, and <code>conda</code>.</li>
+</ul>
+</li>
+<li><strong>Test profiles</strong><ul>
+<li>Profiles to execute the pipeline with a standardised set of test data and parameters, e.g., <code>test</code> and <code>test_full</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Multiple profiles can be specified in a comma-separated (<code>,</code>) list when you execute your command. The order of profiles is important as they will be read from left to right:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>-profile<span class="w"> </span>test,singularity
+</code></pre></div>
+<p>nf-core pipelines are required to define <strong>software containers</strong> and <strong>conda environments</strong> that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more convenient and more reproducible.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the <code>test</code> profile and the respective software management profile 'out of the box'.</p>
+<p>The <code>test</code> data profile will pull small test files directly from the <code>nf-core/test-data</code> GitHub repository and run it on your local system. The <code>test</code> profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline. Some pipelines have multiple test <code>profiles</code> for you to try.</p>
+</div>
+<h3 id="shared-configuration-files">Shared configuration files<a class="headerlink" href="#shared-configuration-files" title="Permanent link">&para;</a></h3>
+<p>An <code>includeConfig</code> statement in the <code>nextflow.config</code> file is also used to include custom institutional profiles that have been submitted to the nf-core <a href="https://github.com/nf-core/configs">config repository</a>. At run time, nf-core pipelines will fetch these configuration profiles from the <a href="https://github.com/nf-core/configs">nf-core config repository</a> and make them available.</p>
+<p>For shared resources such as an HPC cluster, you may consider developing a shared institutional profile. You can follow <a href="https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile">this tutorial</a> for more help.</p>
+<h3 id="custom-configuration-files">Custom configuration files<a class="headerlink" href="#custom-configuration-files" title="Permanent link">&para;</a></h3>
+<p>Nextflow will also look for files that are external to the pipeline project directory. These files include:</p>
+<ul>
+<li>The config file <code>$HOME/.nextflow/config</code></li>
+<li>A config file named <code>nextflow.config</code> in your current directory</li>
+<li>Custom files specified using the command line<ul>
+<li>A parameter file that is provided using the <code>-params-file</code> option</li>
+<li>A config file that are provided using the <code>-c</code> option</li>
+</ul>
+</li>
+</ul>
+<p>You don't need to use all of these files to execute your pipeline.</p>
+<p><strong>Parameter files</strong></p>
+<p>Parameter files are <code>.json</code> files that can contain an unlimited number of parameters:</p>
+<div class="highlight"><span class="filename">my-params.json</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">   </span><span class="nt">&quot;&lt;parameter1_name&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">   </span><span class="nt">&quot;&lt;parameter2_name&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">   </span><span class="nt">&quot;&lt;parameter3_name&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>You can override default parameters by creating a custom <code>.json</code> file and passing it as a command-line argument using the <code>-param-file</code> option.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-param-file<span class="w"> </span>&lt;path/to/params.json&gt;
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Give the MultiQC report for the <code>christopher-hakkaart/nf-core-demo</code> pipeline the name of your <strong>favorite food</strong> using the <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27"><code>multiqc_title</code></a> parameter in a parameters file:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Create a custom <code>.json</code> file that contains your favourite food, e.g., cheese:</p>
+<div class="highlight"><span class="filename">my-custom-params.json</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nt">&quot;multiqc_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cheese&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Include the custom <code>.json</code> file in your execution command with the <code>-params-file</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-params-file<span class="w"> </span>my_custom_params.json<span class="w"> </span>
+</code></pre></div>
+<p>Check that it has been applied:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ls<span class="w"> </span>results/multiqc/
+</code></pre></div>
+</details>
+</div>
+<p><strong>Configuration files</strong></p>
+<p>Configuration files are <code>.config</code> files that can contain various pipeline properties. Custom paths passed in the command-line using the <code>-c</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nf-core/&lt;workflow&gt;<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-c<span class="w"> </span>&lt;path/to/custom.config&gt;
+</code></pre></div>
+<p>Multiple custom <code>.config</code> files can be included at execution by separating them with a comma (<code>,</code>).</p>
+<p>Custom configuration files follow the same structure as the configuration file included in the pipeline directory.</p>
+<p>Configuration properties are organised into <a href="https://www.nextflow.io/docs/latest/config.html#config-scopes">scopes</a> by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. For example:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">alpha.x  = 1</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">alpha.y  = &#39;string value&#39;</span>
+</code></pre></div>
+<p>Is equivalent to:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">alpha {</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="go">     x = 1</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">     y = &#39;string value&#39;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="go">}</span>
+</code></pre></div>
+<p>Scopes allow you to quickly configure settings required to deploy a pipeline on different infrastructure using different software management. For example, the <code>executor</code> scope can be used to provide settings for the deployment of a pipeline on a HPC cluster. Similarly, the <code>singularity</code> scope controls how Singularity containers are executed by Nextflow.</p>
+<p>Multiple scopes can be included in the same <code>.config</code> file using a mix of dot prefixes and curly brackets. A full list of scopes is described in detail <a href="https://www.nextflow.io/docs/latest/config.html#config-scopes">here</a>.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Give the MultiQC report for the <code>christopher-hakkaart/nf-core-demo</code> pipeline the name of your favorite color using the <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27"><code>multiqc_title</code></a> parameter in a custom <code>.config</code> file:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Create a custom <code>.config</code> file that contains your favourite colour, e.g., blue:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">params.multiqc_title = &quot;blue&quot;</span>
+</code></pre></div>
+<p>Include the custom <code>.config</code> file in your execution command with the <code>-c</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-resume<span class="w"> </span>-c<span class="w"> </span>custom.config<span class="w"> </span>
+</code></pre></div>
+<p>Check that it has been applied:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>ls<span class="w"> </span>results/multiqc/
+</code></pre></div>
+<p><strong>Why did this fail?</strong></p>
+<p>You <strong>can not</strong> use the <code>params</code> scope in custom configuration files. Parameters can only be configured using the <code>-params-file</code> option and the command line. While it parameter is listed as a parameter on the <code>STDOUT</code>, it <strong>was not</strong> applied to the executed command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nextflow<span class="w"> </span>log
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>nextflow<span class="w"> </span>log<span class="w"> </span>&lt;run<span class="w"> </span>name&gt;<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;process,script&quot;</span>
+</code></pre></div>
+</details>
+</div>
+<p>The <code>process</code> scope allows you to configure pipeline processes and is used extensively to define resources and additional arguments for modules.</p>
+<p>By default, process resources are allocated in the <code>conf/base.config</code> file using the <code>withLabel</code> selector:</p>
+<div class="highlight"><span class="filename">base.config</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>process<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span>withLabel:<span class="w"> </span>BIG_JOB<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">        </span><span class="nv">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">        </span><span class="nv">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">64</span>.GB
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="o">}</span>
+</code></pre></div>
+<p>Similarly, the <code>withName</code> selector enables the configuration of a process by name. By default, module parameters are defined in the <code>conf/modules.config</code> file:</p>
+<div class="highlight"><span class="filename">modules.config</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>process<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span>withName:<span class="w"> </span>MYPROCESS<span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">        </span><span class="nv">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">        </span><span class="nv">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span>.GB
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="o">}</span>
+</code></pre></div>
+<p>While some tool arguments are included as a part of a module. To make modules sharable across pipelines, most tool arguments are defined in the <code>conf/modules.conf</code> file in the pipeline code under the <code>ext.args</code> entry.</p>
+<p>Importantly, having these arguments outside of the module also allows them to be customised at runtime.</p>
+<p><br></p>
+<p align="left"><a class="glightbox" href="../../images/1_3_args.excalidraw.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_3_args.excalidraw.png" alt="drawing" width="900"/></a></p>
+<p><br></p>
+<p>For example, if you were trying to add arguments in the <code>MULTIQC</code> process in the <code>christopher-hakkaart/nf-core-demo</code> pipeline, you could use the process scope:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">process {</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">    withName : &quot;.*:MULTIQC&quot; {</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">        ext.args   = { &quot;&lt;your custom parameter&gt;&quot; }</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">    }</span>
+</code></pre></div>
+<p>However, if a process is used multiple times in the same pipeline, an extended execution path of the module may be required to make it more specific:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">process {</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">    withName: &quot;NFCORE_DEMO:DEMO:MULTIQC&quot; {</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">        ext.args = &quot;&lt;your custom parameter&gt;&quot;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="go">    }</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">}</span>
+</code></pre></div>
+<p>The extended execution path is built from the pipelines, subworkflows, and module used to execute the process.</p>
+<p>In the example above, the nf-core <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf"><code>MULTIQC</code></a> module, was called by the <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/workflows/demo.nf"><code>DEMO</code></a> pipeline, which was called by the <a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/main.nf"><code>NFCORE_DEMO</code></a> pipeline in the <code>main.nf</code> file.</p>
+<div class="admonition tip">
+<p class="admonition-title">How to build an extended execution path</p>
+<p>It can be tricky to evaluate the path used to execute a module. If you are unsure of how to build the path you can copy it from the <code>conf/modules.conf</code> file. How arguments are added to a process can also vary. Be vigilant.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Create a new <code>.config</code> file that uses the <code>process</code> scope to overwrite the <code>args</code> for the <code>MULTIQC</code> process. Change the <code>args</code> to your favourite <strong>month</strong> of the year, e.g, <code>"--title \"october\""</code>.</p>
+<p>In this example, the <code>\</code> is used to escape the <code>"</code> in the string. This is required to ensure the string is passed correctly to the <code>MULTIQC</code> module.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Make a custom config file that uses the <code>process</code> scope to replace the <code>args</code> for the <code>MULTIQC</code> process:</p>
+<div class="highlight"><span class="filename">custom.config</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="go">process {</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="go">    withName: &quot;NFCORE_DEMO:DEMO:MULTIQC&quot; {</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="go">        ext.args = &quot;--title \&quot;october\&quot;&quot;</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="go">    }</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="go">}</span>
+</code></pre></div>
+<p>Execute your run command again with the custom configuration file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-resume<span class="w"> </span>-c<span class="w"> </span>custom.config
+</code></pre></div>
+<p>Check that it has been applied:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>ls<span class="w"> </span>results/multiqc/
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Demonstrate the configuration hierarchy using the <code>christopher-hakkaart/nf-core-demo</code> pipeline by adding a params file (<code>-params-file</code>), and a command line flag (<code>--multiqc_title</code>) to your execution. You can use the files you have already created. Make sure that the <code>--multiqc_title</code> is different to the <code>multiqc_title</code> in your params file and different to the title you have used in the past.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use the <code>.json</code> file you created previously:</p>
+<div class="highlight"><span class="filename">my-custom-params.json</span><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="p">{</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nt">&quot;multiqc_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cheese&quot;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="p">}</span>
+</code></pre></div>
+<p>Execute your command with your params file (<code>-params-file</code>) and a command line flag (<code>--multiqc_title</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-resume<span class="w"> </span>-params-file<span class="w"> </span>my_custom_params.json<span class="w"> </span>--multiqc_title<span class="w"> </span><span class="s2">&quot;cake&quot;</span>
+</code></pre></div>
+<p>In this example, as the command line is at the top of the hierarchy, the <code>multiqc_title</code> will be "cake".</p>
+</details>
+</div>
+<p><br></p>
+<div class="admonition circle-info"></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Key points</p>
+<ul>
+<li>nf-core pipelines follow a similar structure.</li>
+<li>nf-core pipelines are configured using multiple configuration sources.</li>
+<li>Configuration sources are ranked to decide which settings to apply.</li>
+<li>Pipeline parameters must be passed via the command line (<code>--&lt;parameter&gt;</code>) or Nextflow <code>-params-file</code> option.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../2_nfcore/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction to nf-core">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction to nf-core
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../4_commands/" class="md-footer__link md-footer__link--next" aria-label="Next: nf-core tools for users">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                nf-core tools for users
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Reproducible Bioinformatics Workflows with Nextflow and nf-core is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>

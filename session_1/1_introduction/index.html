@@ -1,0 +1,1548 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="GA & NeSI">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Nextflow_Workshop/session_1/1_introduction/">
+      
+      
+        <link rel="prev" href="../0_kickoff/">
+      
+      
+        <link rel="next" href="../2_nfcore/">
+      
+      
+      <link rel="icon" href="../../images/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Introduction to Nextflow - Reproducible Bioinformatics Workflows with Nextflow and nf-core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-nextflow" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+<!-- Custom Banner -->
+<div class="banner">
+    <p style="color:white; display:inline;font-size: 160%;">This repository is in the early stages of development (Alpha Version)</p>
+</div>
+
+<!-- Original Header -->
+
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-header__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Reproducible Bioinformatics Workflows with Nextflow and nf-core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to Nextflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Reproducible Bioinformatics Workflows with Nextflow and nf-core" class="md-nav__button md-logo" aria-label="Reproducible Bioinformatics Workflows with Nextflow and nf-core" data-md-component="logo">
+      
+  <img src="../../images/nesi_ga.png" alt="logo">
+
+    </a>
+    Reproducible Bioinformatics Workflows with Nextflow and nf-core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Nextflow_Workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Nextflow_Workshop
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Log into Nesi Jupyter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Session 1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction to Nextflow
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Nextflow
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Nextflow?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processes-and-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processes and Channels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution abstraction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-options-and-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow options and commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing your environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a pipeline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a revision
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-cache-and-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution cache and resume
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listing-and-dropping-cached-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Listing and dropping cached pipelines
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_nfcore/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to nf-core
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring nf-core pipelines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core tools for users
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Session 2
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Session 2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/0_kickoff/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction to Session 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/1_sarek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core/sarek
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/2_runcommand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your run
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../session_2/3_hpc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuring your deployment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is Nextflow?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processes-and-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processes and Channels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution abstraction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow CLI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-options-and-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow options and commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#managing-your-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing your environment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a pipeline
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-a-revision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing a revision
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nextflow-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nextflow log
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execution-cache-and-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution cache and resume
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listing-and-dropping-cached-pipelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Listing and dropping cached pipelines
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="introduction-to-nextflow">Introduction to Nextflow<a class="headerlink" href="#introduction-to-nextflow" title="Permanent link">&para;</a></h1>
+<div class="admonition clipboard-list">
+<p class="admonition-title">Objectives</p>
+<ul>
+<li>Learn about the core features of Nextflow</li>
+<li>Learn Nextflow terminology</li>
+<li>Learn fundamental commands and options for executing pipelines</li>
+</ul>
+</div>
+<h2 id="what-is-nextflow">What is Nextflow?<a class="headerlink" href="#what-is-nextflow" title="Permanent link">&para;</a></h2>
+<p align="center"><a class="glightbox" href="../../images/1_1_nextflow.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_1_nextflow.png" alt="drawing" width="900"/></a></p>
+
+<p>Nextflow is a <strong>workflow orchestration engine</strong> and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines.</p>
+<p>It is designed around the idea that the Linux platform is the lingua franca of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.</p>
+<p>Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment based on the dataflow programming model.</p>
+<p><strong>Nextflow’s core features are:</strong></p>
+<ul>
+<li>Pipeline portability and reproducibility</li>
+<li>Scalability of parallelization and deployment</li>
+<li>Integration of existing tools, systems, and industry standards</li>
+</ul>
+<p>Whether you are working with genomics data or other large and complex data sets, Nextflow can help you to streamline your pipeline and improve your productivity.</p>
+<h2 id="processes-and-channels">Processes and Channels<a class="headerlink" href="#processes-and-channels" title="Permanent link">&para;</a></h2>
+<p>In Nextflow, <strong>processes</strong> and <strong>channels</strong> are the fundamental building blocks of a pipeline.</p>
+<p><br></p>
+<p align="center"><a class="glightbox" href="../../images/1_1_channel-process.excalidraw.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_1_channel-process.excalidraw.png" alt="drawing" width="900"/></a></p>
+<p><br></p>
+<p>A <strong>process</strong> is a unit of execution that represents a single computational step in a pipeline. It is defined as a block of code that typically performs one specific task. Each process will specify its input and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any language that can be executed from the command line, such as Bash, Python, Perl, or R.</p>
+<p>Processes in are executed independently (i.e., they do not share a common writable state) as <strong>tasks</strong>. Multiple tasks can run in parallel, allowing for efficient utilization of computing resources. Nextflow is a top down pipeline manager and will automatically manage data dependencies between processes, ensuring that each process is executed only when its input data is available and all of its dependencies have been satisfied.</p>
+<p>A <strong>channel</strong> is an asynchronous first-in, first-out (FIFO) queue that is used to join processes together. Channels allow data to passed between processes and can be used to manage data, parallelize tasks, and structure pipelines. Any process can define one or more channels as an input and output. Ultimately the pipeline execution flow itself, is implicitly defined by the channel declarations.</p>
+<p>Importantly, processes can be <strong>parameterised</strong> to allow for flexibility in their behavior and to enable their reuse in and between pipelines. Parameters can be defined in the process declaration and can be passed to the process at runtime. Parameters can be used to specify the input and output files, as well as any other parameters required for the process to execute.</p>
+<h2 id="execution-abstraction">Execution abstraction<a class="headerlink" href="#execution-abstraction" title="Permanent link">&para;</a></h2>
+<p>While a process defines what command or script is executed, the <strong>executor</strong> determines how and where the script is executed.</p>
+<p>Nextflow provides an <strong>abstraction</strong> between the pipeline’s functional logic and the underlying execution system. This abstraction allows users to define a pipeline once and execute it on different computing platforms without having to modify the pipeline definition.</p>
+<p><br></p>
+<p align="center"><a class="glightbox" href="../../images/1_1_abstraction.excalidraw.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img src="../../images/1_1_abstraction.excalidraw.png" alt="drawing" width="900"/></a></p>
+<p><br></p>
+<p>If not specified, Nextflow will execute locally. Executing locally is useful for pipeline development and testing purposes. However, for real-world computational pipelines, a high-performance computing (HPC) or cloud platform is often required.</p>
+<p>Nextflow provides a variety of built-in execution options, such as local execution, HPC cluster execution, and cloud-based execution, and allows users to easily switch between these options using command-line arguments.</p>
+<p>You can find a full list of supported executors as well as how to configure them in the <a href="https://www.nextflow.io/docs/latest/executor.html">Nextflow docs</a>.</p>
+<h2 id="nextflow-cli">Nextflow CLI<a class="headerlink" href="#nextflow-cli" title="Permanent link">&para;</a></h2>
+<p>Nextflow implements a declarative <strong>domain-specific language (DSL)</strong> that simplifies the writing of complex data analysis pipelines as an extension of a general-purpose programming language. As a concise DSL, Nextflow handles recurrent use cases while having the flexibility and power to handle corner cases.</p>
+<p>Nextflow is an extension of the Groovy programming language which, in turn, is a super-set of the Java programming language. Groovy can be thought of as “Python for Java” and simplifies the code.</p>
+<p>Nextflow provides a robust command line interface for the management and execution of pipelines. Nextflow can be used on any POSIX compatible system (Linux, OS X, etc). It requires Bash 3.2 (or later) and Java 11 (or later) to be installed.</p>
+<p>Nextflow is distributed as a self-installing package and does not require any special installation procedure.</p>
+<div class="admonition info">
+<p class="admonition-title">How to install Nextflow locally</p>
+<ol>
+<li>Download the executable package using either <code>wget -qO- https://get.nextflow.io | bash</code> or <code>curl -s https://get.nextflow.io | bash</code></li>
+<li>Make the binary executable on your system by running <code>chmod +x nextflow</code></li>
+<li>Move the nextflow file to a directory accessible by your <code>$PATH</code> variable, e.g, <code>mv nextflow ~/bin/</code></li>
+</ol>
+</div>
+<h2 id="nextflow-options-and-commands">Nextflow options and commands<a class="headerlink" href="#nextflow-options-and-commands" title="Permanent link">&para;</a></h2>
+<p>Nextflow provides a robust command line interface for the management and execution of pipelines. The top-level interface consists of options and commands.</p>
+<p>You can list Nextflow options and commands with the <code>-h</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nextflow<span class="w"> </span>-h
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">Usage: nextflow [options] COMMAND [arg...]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">Options:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="go">  -C</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="go">     Use the specified configuration file(s) overriding any defaults</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="go">  -D</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="go">     Set JVM properties</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="go">  -bg</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="go">     Execute nextflow in background</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="go">  -c, -config</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="go">     Add the specified file to configuration set</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="go">  -config-ignore-includes</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="go">     Disable the parsing of config includes</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="go">  -d, -dockerize</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="go">     Launch nextflow via Docker (experimental)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="go">  [truncated]</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="go">Commands:</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="go">  clean         Clean up project cache and work directories</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="go">  clone         Clone a project into a folder</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="go">  config        Print a project configuration</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="go">  [truncated]</span>
+</code></pre></div>
+<p>Options for a commands can also be viewed by appending the -help option to a Nextflow command.</p>
+<p>For example, options for the the run command can be viewed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>-help
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">Execute a pipeline project</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="go">Usage: run [options] Project name or repository url</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">  Options:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">    -E</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">       Exports all current system environment</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="go">       Default: false</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    -ansi-log</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="go">       Enable/disable ANSI console logging</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">    -bucket-dir</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">       Remote bucket where intermediate result files are stored</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="go">    -cache</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="go">       Enable/disable processes caching</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="go">    -disable-jobs-cancellation</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="go">       Prevent the cancellation of child jobs on execution termination</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="go">    -dsl1</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="go">       Execute the workflow using DSL1 syntax</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="go">       Default: false</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="go">    -dsl2</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="go">       Execute the workflow using DSL2 syntax</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="go">       Default: false</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="go">    -dump-channels</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="go">       Dump channels for debugging purpose</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="go">    -dump-hashes</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="go">       Dump task hash keys for debugging purpose</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="go">       Default: false</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="go">    [truncated]</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Find out which version of Nextflow you are using.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>You can find out which version of Nextflow you are using by executing:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>-version
+</code></pre></div>
+<p>You should see the following:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">N E X T F L O W</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="go">version 23.04.4 build 5881</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">created 25-09-2023 15:34 UTC (26-09-2023 04:34 NZDT)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="go">cite doi:10.1038/nbt.3820</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">http://nextflow.io</span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="managing-your-environment">Managing your environment<a class="headerlink" href="#managing-your-environment" title="Permanent link">&para;</a></h2>
+<p>You can use <a href="https://www.nextflow.io/docs/latest/config.html#environment-variables">environment variables</a> to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a pipeline and will be interpreted by Nextflow.</p>
+<p>For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from establishing some of these.</p>
+<p>For example, for consistency, it is good practice to pin the version of Nextflow you are using with the <code>NXF_VER</code> variable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_VER</span><span class="o">=</span>&lt;version<span class="w"> </span>number&gt;
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Change the version of Nextflow you are using to <code>23.04.0</code> by exporting an environmental variable:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Export the singularity cache using the <code>NXF_VER</code> environmental variable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_VER</span><span class="o">=</span><span class="m">23</span>.04.0
+</code></pre></div>
+<p>Check that the <code>NXF_VER</code> has been applied:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nextflow<span class="w"> </span>-version
+</code></pre></div>
+<p>You should see nextflow update and print the following:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">N E X T F L O W</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="go">version 23.04.0 build 5857</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">created 01-04-2023 21:09 UTC (02-04-2023 09:09 NZDT)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">cite doi:10.1038/nbt.3820</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">http://nextflow.io</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Environmental variables on NeSI</p>
+<p>The behaviour of Nextflow environmental variables won't work as expected if using a NeSI Nextflow module.</p>
+</div>
+<p>Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the <code>NXF_SINGULARITY_CACHEDIR</code> or the <code>NXF_CONDA_CACHEDIR</code> variables:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SINGULARITY_CACHEDIR</span><span class="o">=</span>&lt;custom/path/to/conda/cache&gt;
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Export the folder <code>/nesi/nobackup/nesi02659/nextflow-workshop</code> as the folder where remote Singularity images are stored:</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Export the singularity cache using the <code>NXF_SINGULARITY_CACHEDIR</code> environmental variable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SINGULARITY_CACHEDIR</span><span class="o">=</span>/nesi/nobackup/nesi02659/nextflow-workshop
+</code></pre></div>
+<p>Check that the <code>NXF_SINGULARITY_CACHEDIR</code> has been exported:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$NXF_SINGULARITY_CACHEDIR</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">How to manage environmental variables</p>
+<p>You may want to include these, or other environmental variables, in your <code>.bashrc</code> file (or alternate) that is loaded when you log in so you don’t need to export variables every session.</p>
+</div>
+<p>A complete list of environmental variables can be found in the <a href="https://www.nextflow.io/docs/latest/config.html#environment-variables">Nextflow docs</a>.</p>
+<h2 id="executing-a-pipeline">Executing a pipeline<a class="headerlink" href="#executing-a-pipeline" title="Permanent link">&para;</a></h2>
+<p>Nextflow seamlessly integrates with code repositories such as <a href="https://github.com/">GitHub</a>. This feature allows you to manage your project code and use public Nextflow pipelines quickly, consistently, and transparently.</p>
+<p>The Nextflow <code>pull</code> command will download a pipeline from a hosting platform into your global cache <code>$HOME/.nextflow/assets</code> folder. </p>
+<p>If you are pulling a project hosted in a remote code repository, you can specify its qualified name or the repository URL.</p>
+<p>The qualified name is formed by two parts - the owner name and the repository name separated by a <code>/</code> character. For example, if a Nextflow project <code>bar</code> is hosted in a GitHub repository <code>foo</code> at the address <code>http://github.com/foo/bar</code>, it could be pulled using:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>foo/bar
+</code></pre></div>
+<p>Or by using the complete URL:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nextflow<span class="w"> </span>pull<span class="w"> </span>http://github.com/foo/bar
+</code></pre></div>
+<p>Alternatively, the Nextflow <code>clone</code> command can be used to download a pipeline into a local directory of your choice:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nextflow<span class="w"> </span>clone<span class="w"> </span>foo/bar<span class="w"> </span>&lt;your/path&gt;
+</code></pre></div>
+<p>The Nextflow <code>run</code> command is used to initiate the execution of a pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>foo/bar
+</code></pre></div>
+<p>If you <code>run</code> a pipeline, it will look for a local file with the pipeline name you’ve specified. If that file does not exist, it will look for a public repository with the same name on GitHub (unless otherwise specified). If it is found, Nextflow will automatically <code>pull</code> the pipeline to your global cache and execute it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be aware of what is already in your current working directory where you launch your pipeline. If your current working directory contains nextflow configuration files you may encounter unexpected results.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Execute the <code>hello</code> pipeline directly from <code>nextflow-io</code> <a href="https://github.com/nextflow-io/hello">GitHub</a> repository.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use the <code>run</code> command to execute the <a href="https://github.com/nextflow-io/hello">nextflow-io/hello</a> pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="go">N E X T F L O W  ~  version 23.04.0</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">Pulling nextflow-io/hello ...</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="go">downloaded from https://github.com/nextflow-io/hello.git</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [silly_sax] DSL2 - revision: 1d71f857bb [master]</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="go">[e6/2132d2] process &gt; sayHello (3) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="go">Hola world!</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="go">Hello world!</span>
+</code></pre></div>
+</details>
+</div>
+<p>More information about the Nextflow <code>run</code> command can be found in the <a href="https://www.nextflow.io/docs/latest/cli.html#run">Nextflow docs</a>.</p>
+<h2 id="executing-a-revision">Executing a revision<a class="headerlink" href="#executing-a-revision" title="Permanent link">&para;</a></h2>
+<p>When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.</p>
+<p>The Nextflow <code>info</code> command can be used to view pipeline properties, such as the project name, repository, local path, main script, and revisions. The <code>*</code> indicates which revision of the pipeline you have stickied and will be executed when using the <code>run</code> command.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nextflow<span class="w"> </span>info<span class="w"> </span>&lt;pipeline&gt;
+</code></pre></div>
+<p>It is recommended that you use the revision flag every time you execute a pipeline to ensure that the version is correct.</p>
+<p>To use a specific revision, you simply need to add it to the command line with the <code>--revision</code> or <code>-r</code> flag. For example, to run a pipeline with the <code>v1.0</code> revision, you would use the following:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>&lt;pipeline&gt;<span class="w"> </span>-r<span class="w"> </span>v1.0
+</code></pre></div>
+<p>Nextflow automatically provides built-in support for version control using Git. With this, users can easily manage and track changes made to a pipeline over time. A revision can be a git <code>branch</code>, <code>tag</code> or commit <code>SHA</code> number, and can be used interchangeably.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Execute the <code>hello</code> pipeline directly from the <code>nextflow-io</code> GitHub using the <code>v1.1</code> revision tag.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use the <code>nextflow run</code> command to execute the <code>nextflow-io/hello</code> pipeline with the <code>v1.1</code> revision tag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.1
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">N E X T F L O W  ~  version 23.04.0</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">Nextflow DSL1 is no longer supported — Update your script to DSL2, or use Nextflow 22.10.x or earlier</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The warning shown above is expected as the <code>v1.1</code> pipeline revision was written using an older version of Nextflow that uses the depreciated <code>echo</code> method.</p>
+<p>As both Nextflow and pipelines are updated independently over time, pipelines and Nextflow functions can get out of sync. While most nf-core pipelines are now <code>dsl2</code> (the current way of writing pipelines), some are still written in <code>dsl1</code> and may require older version of Nextflow.</p>
+<p>You can use an older version of nextflow on the fly by adding adding the environmental variable to the start of the run command </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">NXF_VER</span><span class="o">=</span><span class="m">22</span>.10.0<span class="w"> </span>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.1
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">N E X T F L O W  ~  version 22.10.0</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [amazing_lovelace] DSL1 - revision: baba3959d7 [v1.1]</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="go">WARN: The use of `echo` method has been deprecated</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="go">[e6/cfda06] process &gt; sayHello (4) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="go">Bojour world! (version 1.1)</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="go">Hello world! (version 1.1)</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="go">Ciao world! (version 1.1)</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="go">Hola world! (version 1.1)</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<h2 id="nextflow-log">Nextflow log<a class="headerlink" href="#nextflow-log" title="Permanent link">&para;</a></h2>
+<p>It is important to keep a record of the commands you have run to generate your results. Nextflow helps with this by creating and storing metadata and logs about the run in hidden files and folders in your current directory (unless otherwise specified). This data can be used by Nextflow to generate reports. It can also be queried using the Nextflow <code>log</code> command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nextflow<span class="w"> </span>log
+</code></pre></div>
+<p>The <code>log</code> command has multiple options to facilitate the queries and is especially useful while debugging a pipeline and inspecting execution metadata. You can view all of the possible <code>log</code> options with <code>-h</code> flag:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nextflow<span class="w"> </span>log<span class="w"> </span>-h
+</code></pre></div>
+<p>To query a specific execution you can use the <code>RUN NAME</code> or a <code>SESSION ID</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>log<span class="w"> </span>&lt;run<span class="w"> </span>name&gt;
+</code></pre></div>
+<p>To get more information, you can use the <code>-f</code> option with named fields. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>nextflow<span class="w"> </span>log<span class="w"> </span>&lt;run<span class="w"> </span>name&gt;<span class="w"> </span>-f<span class="w"> </span>process,hash,duration
+</code></pre></div>
+<p>There are many other fields you can query. You can view a full list of fields with the <code>-l</code> option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>log<span class="w"> </span>-l
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the <code>log</code> command to view with <code>process</code>, <code>hash</code>, and <code>script</code> fields for your tasks from your most recent Nextflow execution.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use the <code>log</code> command to get a list of you recent executions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>log
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND                       </span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="go">2023-08-29 07:33:48     3.6s            stupefied_bernard       OK      1d71f857bb      f9e18b71-d689-4589-be34-8cd98c1aab2e    nextflow run nextflow-io/hello</span>
+</code></pre></div>
+<p>Query the process, hash, and script using the <code>-f</code> option for the most recent run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nextflow<span class="w"> </span>log<span class="w"> </span>stupefied_bernard<span class="w"> </span>-f<span class="w"> </span>process,hash,script
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">sayHello        f3/8f827f</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">    echo &#39;Hola world!&#39;</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="go">sayHello        b8/b66545</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="go">    echo &#39;Ciao world!&#39;</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="go">sayHello        3c/498a68</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="go">    echo &#39;Bonjour world!&#39;</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="go">sayHello        6e/8d5b1a</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="go">    echo &#39;Hello world!&#39;</span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="execution-cache-and-resume">Execution cache and resume<a class="headerlink" href="#execution-cache-and-resume" title="Permanent link">&para;</a></h2>
+<p>Task execution <strong>caching</strong> is an essential feature of modern pipeline managers. Accordingly, Nextflow provides an automated caching mechanism for every execution.</p>
+<p>When using the Nextflow <code>-resume</code> option, successfully completed tasks from previous executions are skipped and the previously cached results are used in downstream tasks.</p>
+<p>Nextflow caching mechanism works by assigning a unique ID to each task. The task unique ID is generated as a 128-bit hash value composing the the complete file path, file size, and last modified timestamp. These ID's are used to create a separate execution directory where the tasks are executed and the outputs are stored. Nextflow will take care of the inputs and outputs in these folders for you.</p>
+<p>A multi-step pipeline is required to demonstrate cache and resume. The <a href="https://github.com/christopher-hakkaart/nf-core-demo/tree/master"><code>christopher-hakkaart/nf-core-demo</code></a> pipeline was created with the nf-core <code>create</code> command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:</p>
+<ol>
+<li><a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/local/samplesheet_check.nf"><code>SAMPLESHEET_CHECK</code></a><ul>
+<li>Executes a custom python script to check the input <a href="https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv">sample sheet</a> is valid.</li>
+</ul>
+</li>
+<li><a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/fastqc/main.nf"><code>FASTQC</code></a><ul>
+<li>Executes <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> using the <code>.fastq.gz</code> files from the <a href="https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv">sample sheet</a> as inputs.</li>
+</ul>
+</li>
+<li><a href="https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf"><code>MULTIQC</code></a><ul>
+<li>Executes <a href="https://multiqc.info/">MultiQC</a> using the FastQC reports generated by the <code>FASTQC</code> process.</li>
+</ul>
+</li>
+</ol>
+<p>The <a href="https://github.com/christopher-hakkaart/nf-core-demo/tree/master"><code>christopher-hakkaartnf-core-demo</code></a> is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.</p>
+<p>To run this example you will need to include two profiles in your execution command. Profiles are sets of configuration options that can be accessed by Nextflow. Profiles will be explained in greater detail during the <a href="../3_configuration/">configuring nf-core pipelines</a> section of the workshop.</p>
+<p>To run this pipeline, both the <code>test</code> profile and a software management profile (such as <code>singularity</code>) are required:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main
+</code></pre></div>
+<details class="warning">
+<summary>This run requires 6GB of memory</summary>
+<p>If your session was spawned with less than 8GB of memory, above run will fail with the following error 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Caused by:
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>Process requirement exceeds available memory -- req: 6 GB; avail: 4 GB
+</code></pre></div></p>
+</details>
+<p>The command line output will print something like this:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">N E X T F L O W  ~  version 23.04.0</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="go">Launching `https://github.com/christopher-hakkaart/nf-core-demo` [voluminous_kay] DSL2 - revision: 17521af3a8 [main]</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="go">                                        ,--./,-.</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="go">        ___     __   __   __   ___     /,-._.--~&#39;</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a><span class="go">  |\ | |__  __ /  ` /  \ |__) |__         }  {</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="go">  | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="go">                                        `._,._,&#39;</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a><span class="go">  nf-core/demo v1.0dev-g17521af</span>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="go">  revision                  : main</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a><span class="go">  runName                   : voluminous_kay</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a><span class="go">  containerEngine           : singularity</span>
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="go">  launchDir                 : /scale_wlg_persistent/filesets/home/chrishakk/session1</span>
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a><span class="go">  workDir                   : /scale_wlg_persistent/filesets/home/chrishakk/session1/work</span>
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a><span class="go">  projectDir                : /home/chrishakk/.nextflow/assets/christopher-hakkaart/nf-core-demo</span>
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a><span class="go">  userName                  : chrishakk</span>
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a><span class="go">  profile                   : test,singularity</span>
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a><span class="go">  configFiles               : /home/chrishakk/.nextflow/assets/christopher-hakkaart/nf-core-demo/nextflow.config</span>
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a><span class="go">Input/output options</span>
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a><span class="go">  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv</span>
+<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a><span class="go">  outdir                    : results</span>
+<a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a>
+<a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a><span class="go">Reference genome options</span>
+<a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a><span class="go">  genome                    : R64-1-1</span>
+<a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a><span class="go">  fasta                     : s3://ngi-igenomes/igenomes/Saccharomyces_cerevisiae/Ensembl/R64-1-1/Sequence/WholeGenomeFasta/genome.fa</span>
+<a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a>
+<a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a><span class="go">Institutional config options</span>
+<a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a><span class="go">  config_profile_name       : Test profile</span>
+<a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-36-35" name="__codelineno-36-35" href="#__codelineno-36-35"></a>
+<a id="__codelineno-36-36" name="__codelineno-36-36" href="#__codelineno-36-36"></a><span class="go">Max job request options</span>
+<a id="__codelineno-36-37" name="__codelineno-36-37" href="#__codelineno-36-37"></a><span class="go">  max_cpus                  : 2</span>
+<a id="__codelineno-36-38" name="__codelineno-36-38" href="#__codelineno-36-38"></a><span class="go">  max_memory                : 6.GB</span>
+<a id="__codelineno-36-39" name="__codelineno-36-39" href="#__codelineno-36-39"></a><span class="go">  max_time                  : 6.h</span>
+<a id="__codelineno-36-40" name="__codelineno-36-40" href="#__codelineno-36-40"></a>
+<a id="__codelineno-36-41" name="__codelineno-36-41" href="#__codelineno-36-41"></a><span class="go">Generic options</span>
+<a id="__codelineno-36-42" name="__codelineno-36-42" href="#__codelineno-36-42"></a><span class="go">  tracedir                  : null/pipeline_info</span>
+<a id="__codelineno-36-43" name="__codelineno-36-43" href="#__codelineno-36-43"></a>
+<a id="__codelineno-36-44" name="__codelineno-36-44" href="#__codelineno-36-44"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-36-45" name="__codelineno-36-45" href="#__codelineno-36-45"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-36-46" name="__codelineno-36-46" href="#__codelineno-36-46"></a><span class="go">If you use nf-core/demo for your analysis please cite:</span>
+<a id="__codelineno-36-47" name="__codelineno-36-47" href="#__codelineno-36-47"></a>
+<a id="__codelineno-36-48" name="__codelineno-36-48" href="#__codelineno-36-48"></a><span class="go">* The nf-core framework</span>
+<a id="__codelineno-36-49" name="__codelineno-36-49" href="#__codelineno-36-49"></a><span class="go">  https://doi.org/10.1038/s41587-020-0439-x</span>
+<a id="__codelineno-36-50" name="__codelineno-36-50" href="#__codelineno-36-50"></a>
+<a id="__codelineno-36-51" name="__codelineno-36-51" href="#__codelineno-36-51"></a><span class="go">* Software dependencies</span>
+<a id="__codelineno-36-52" name="__codelineno-36-52" href="#__codelineno-36-52"></a><span class="go">  https://github.com/nf-core/demo/blob/master/CITATIONS.md</span>
+<a id="__codelineno-36-53" name="__codelineno-36-53" href="#__codelineno-36-53"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-36-54" name="__codelineno-36-54" href="#__codelineno-36-54"></a><span class="go">Downloading plugin nf-amazon@1.16.1</span>
+<a id="__codelineno-36-55" name="__codelineno-36-55" href="#__codelineno-36-55"></a><span class="go">[f2/e5eb26] process &gt; NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1 ✔</span>
+<a id="__codelineno-36-56" name="__codelineno-36-56" href="#__codelineno-36-56"></a><span class="go">[bb/f98425] process &gt; NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE_T1)                                                 [100%] 4 of 4 ✔</span>
+<a id="__codelineno-36-57" name="__codelineno-36-57" href="#__codelineno-36-57"></a><span class="go">[dd/728742] process &gt; NFCORE_DEMO:DEMO:MULTIQC                                                                [100%] 1 of 1 ✔</span>
+<a id="__codelineno-36-58" name="__codelineno-36-58" href="#__codelineno-36-58"></a><span class="go">-</span>
+<a id="__codelineno-36-59" name="__codelineno-36-59" href="#__codelineno-36-59"></a><span class="go">Completed at: 29-Sep-2023 22:16:49</span>
+<a id="__codelineno-36-60" name="__codelineno-36-60" href="#__codelineno-36-60"></a><span class="go">Duration    : 2m 27s</span>
+<a id="__codelineno-36-61" name="__codelineno-36-61" href="#__codelineno-36-61"></a><span class="go">CPU hours   : (a few seconds)</span>
+<a id="__codelineno-36-62" name="__codelineno-36-62" href="#__codelineno-36-62"></a><span class="go">Succeeded   : 6</span>
+</code></pre></div>
+<p>Executing this pipeline will create a <code>work</code> directory and a <code>results</code> directory with selected results files.</p>
+<p>In the output above, the hexadecimal numbers, such as <code>bb/f98425</code>, identify the unique task execution. These numbers are also the prefix of the <code>work</code> directories where each task is executed.</p>
+<p>You can inspect the files produced by a task by looking inside the <code>work</code> directory and using these numbers to find the task-specific execution path:</p>
+<p>The files that have been selected for publication in the <code>results</code> folder can also be explored:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>ls<span class="w"> </span>results
+</code></pre></div>
+<p>If you look inside the <code>work</code> directory of a <code>FASTQC</code> task, you will find the files that were staged and created when this task was executed:</p>
+<p>The <code>FASTQC</code> process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory [bb/f98425] represents just one of the four sets of input data that was processed.</p>
+<p>To print all the relevant paths to the screen, use the <code>-ansi-log</code> option can be used when executing your pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+<p>It's very likely you will execute a pipeline multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you <strong>resume</strong> a pipeline from the last step that was completed successfully or unmodified.</p>
+<p>By adding the <code>-resume</code> option to your <code>run</code> command you can use the cache rather than re-running successful tasks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-resume
+</code></pre></div>
+<p>If you <code>run</code> the <code>christopher-hakkaart/nf-core-deme</code> pipeline again without making any changes you will see that the cache is used:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">[truncated]</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="go">[5f/07e477] process &gt; NFCORE_DEMO:DEMO:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="go">[b2/873706] process &gt; NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE_T1)                                                 [100%] 4 of 4, cached: 4 ✔</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="go">[ca/e8e0a8] process &gt; NFCORE_DEMO:DEMO:MULTIQC                                                                [100%] 1 of 1, cached: 1 ✔</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="go">[truncated]</span>
+</code></pre></div>
+<p>In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files. If this condition is satisfied, the task execution is skipped and previously computed results are used as the process results.</p>
+<p>Notably, the <code>-resume</code> functionality is very sensitive. Even touching a file in the work directory can invalidate the cache.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Invalidate the cache by touching a <code>.fastq.gz</code> file in a <code>FASTQC</code> task work directory (you can use the <code>touch</code> command). Execute the pipeline again with the <code>-resume</code> option to show that the cache has been invalidated.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Execute the pipeline for the first time (if you have not already).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main
+</code></pre></div>
+<p>Use the task ID shown for the <code>FASTQC</code> process and use it to find and <code>touch</code> the <code>sample1_R1.fastq.gz</code> file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>touch<span class="w"> </span>work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+</code></pre></div>
+<p>Execute the pipeline again with the <code>-resume</code> command option:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>christopher-hakkaart/nf-core-demo<span class="w"> </span>-profile<span class="w"> </span>test,singularity<span class="w"> </span>-r<span class="w"> </span>main<span class="w"> </span>-resume
+</code></pre></div>
+<p>You should that 2 of 4 tasks for <code>FASTQC</code> and the <code>MULTIQC</code> task were invalid and were executed again.</p>
+<p><strong>Why did this happen?</strong></p>
+<p>In this example, the cache of two <code>FASTQC</code> tasks were invalid. The <code>sample1_R1.fastq.gz</code> file is used by in the <a href="https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv">samplesheet</a> twice. Thus, touching the symlink for this file and changing the date of last modification disrupted two task executions.</p>
+</details>
+</div>
+<p>Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to <code>clean</code> your work directory regularly. Rather than removing the <code>work</code> folder with all of it's contents, the Nextflow <code>clean</code> function allows you to selectively remove data associated with specific runs.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-help
+</code></pre></div>
+<p>The <code>-after</code>, <code>-before</code>, and <code>-but</code> options are all very useful to select specific runs to <code>clean</code>. The <code>-dry-run</code> option is also very useful to see which files will be removed if you were to <code>-force</code> the <code>clean</code> command.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>You Nextflow to <code>clean</code> your work <code>work</code> directory of staged files but <strong>keep</strong> your execution logs.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use the Nextflow <code>clean</code> command with the <code>-k</code> and <code>-f</code> options:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-k<span class="w"> </span>-f
+</code></pre></div>
+</details>
+</div>
+<h2 id="listing-and-dropping-cached-pipelines">Listing and dropping cached pipelines<a class="headerlink" href="#listing-and-dropping-cached-pipelines" title="Permanent link">&para;</a></h2>
+<p>Over time, you might want to remove a stored pipelines. Nextflow also has functionality to help you to view and remove pipelines that have been pulled locally.</p>
+<p>The Nextflow <code>list</code> command prints the projects stored in your global cache folder (<code>$HOME/.nextflow/assets</code>). These are the pipelines that were pulled when you executed either of the Nextflow <code>pull</code> or <code>run</code> commands:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>nextflow<span class="w"> </span>list
+</code></pre></div>
+<p>If you want to remove a pipeline from your cache you can remove it using the Nextflow <code>drop</code> command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>nextflow<span class="w"> </span>drop<span class="w"> </span>&lt;<span class="w"> </span>pipeline&gt;
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>View your cached pipelines with the Nextflow <code>list</code> command and remove the <code>nextflow-io/hello</code> pipeline with the <code>drop</code> command.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>List your pipeline assets:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>nextflow<span class="w"> </span>list
+</code></pre></div>
+<p>Drop the <code>nextflow-io/hello</code> pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>drop<span class="w"> </span>nextflow-io/hello
+</code></pre></div>
+<p>Check it has been removed:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nextflow<span class="w"> </span>list
+</code></pre></div>
+</details>
+</div>
+<p><br></p>
+<div class="admonition circle-info"></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Key points</p>
+<ul>
+<li>Nextflow is a pipeline orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines</li>
+<li>Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine</li>
+<li>Nextflow supports version control and has automatic integrations with online code repositories.</li>
+<li>Nextflow will cache your runs and they can be resumed with the <code>-resume</code> option</li>
+<li>You can manage pipelines with Nextflow commands (e.g., <code>pull</code>, <code>clone</code>, <code>list</code>, and <code>drop</code>)</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../0_kickoff/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction to Session 1">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction to Session 1
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2_nfcore/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction to nf-core">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Introduction to nf-core
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Reproducible Bioinformatics Workflows with Nextflow and nf-core is licensed under a <a rel="noopener" target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
