@@ -15,4 +15,3 @@ It is good practice to organize projects into their own folders to make it easie
     ```bash
     mkdir ~/session1 && cd $_
     ```
-

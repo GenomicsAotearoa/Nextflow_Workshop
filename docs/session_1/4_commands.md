@@ -63,11 +63,11 @@ The command line wizard will finish by asking if you want to launch the pipeline
 
 !!! question "Exercise"
 
-    Use `nf-core launch` to launch the the `christopher-hakkaart/nf-core-demo` pipeline. Use the `test` and `singularity` profiles and name your output folder `my_test_output`.
+    Use `nf-core launch` to launch the the `nf-core/demo` pipeline. Use the `test` and `singularity` profiles and name your output folder `my_test_output`.
 
     ??? success "Solution"
 
-        Use the nf-core `launch` command for the `christopher-hakkaart/nf-core-demo` pipeline. Your `nf-params.json` file should look like this:
+        Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look like this:
 
         ```json
         {
@@ -78,7 +78,7 @@ The command line wizard will finish by asking if you want to launch the pipeline
         Your final `run` command should look like this:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -params-file nf-params.json
+        nextflow run nf-core/demo -r 1.0.0 -profile test,singularity -params-file nf-params.json
         ```
 
 !!! tip "The launch website"
@@ -115,22 +115,22 @@ Alternatively, you could build your own execution command with the command line 
 
 !!! question "Exercise"
 
-    Use the nf-core `download` command to download the `christopher-hakkaart/nf-core-demo` pipeline **with** it's **uncompressed** Singularity images.
+    Use the nf-core `download` command to download the `nf-core/demo` pipeline **with** it's **uncompressed** Singularity images.
 
     ??? success "Solution"
 
-        Use the nf-core `download` command for the `christopher-hakkaart/nf-core-demo` pipeline and follow the prompts.
+        Use the nf-core `download` command for the `nf-core/demo` pipeline and follow the prompts.
 
         Your output should look like this:
 
         ```console
-        INFO Saving 'christopher-hakkaart/nf-core-demo'                                                                                                                               
-          Pipeline revision: 'main'                                                                                                                                               
-          Use containers: 'singularity'                                                                                                                                           
-          Container library: 'quay.io'                                                                                                                                            
-          Using $NXF_SINGULARITY_CACHEDIR': /Users/chrishakkaart/tools/singularity'                                                                                               
-          Output directory: 'christopher-hakkaart-nf-core-demo_main'                                                                                                              
-          Include default institutional configuration: 'False'    
+        INFO Saving 'nf-core/demo'
+          Pipeline revision: '1.0.0'
+          Use containers: 'singularity'
+          Container library: 'quay.io'
+          Using $NXF_SINGULARITY_CACHEDIR': /home/user/singularity'
+          Output directory: 'nf-core-demo_1.0.0'
+          Include default institutional configuration: 'False'
         ```
 <br>
 !!! circle-info ""

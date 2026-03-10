@@ -68,15 +68,19 @@ nextflow run nf-core/<workflow> --help
 
 !!! question "Exercise" 
 
-    View the parameters for the `christopher-hakkaart/nf-core-demo` pipeline using the command line:
+    View the parameters for the `nf-core/demo` pipeline using the command line:
 
     ??? success "Solution"
 
-        The `christopher-hakkaart/nf-core-demo` pipeline parameters can be printed using the `run` command and the `--help` option:
+        The `nf-core/demo` pipeline parameters can be printed using the `run` command and the `--help` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main --help
+        nextflow run nf-core/demo -r 1.0.0 --help
         ```
+
+        !!! tip "Revision flag"
+
+            Including the `-r` flag with a specific revision ensures that you are always running the same version of the pipeline, which is important for reproducibility.
 
 ### Parameters in the command line
 
@@ -98,14 +102,14 @@ nextflow nf-core/<workflow> --<parameter> string
 
 !!! question "Exercise" 
 
-    Give the MultiQC report for the `christopher-hakkaart/nf-core-demo` pipeline the name of your **favorite animal** using the [`multiqc_title`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27) parameter using a command line flag:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favorite animal** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter using a command line flag:
 
     ??? success "Solution"
 
         Add the `--multiqc_title` flag to your command and execute it. Use the `-resume` option to save time:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main --multiqc_title kiwi -resume
+        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results --multiqc_title kiwi -resume
         ```
 
         In this example, you can check your parameter has been applied by listing the files created in the results folder (`results`):
@@ -201,15 +205,15 @@ Parameter files are `.json` files that can contain an unlimited number of parame
 }
 ```
 
-You can override default parameters by creating a custom `.json` file and passing it as a command-line argument using the `-param-file` option.
+You can override default parameters by creating a custom `.json` file and passing it as a command-line argument using the `-params-file` option.
 
 ```bash
-nextflow run nf-core/<workflow> -profile test,singularity -r main -param-file <path/to/params.json>
+nextflow run nf-core/<workflow> -profile test,singularity -r 1.0.0 --outdir results -params-file <path/to/params.json>
 ```
 
 !!! question "Exercise"
 
-    Give the MultiQC report for the `christopher-hakkaart/nf-core-demo` pipeline the name of your **favorite food** using the [`multiqc_title`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27) parameter in a parameters file:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favorite food** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a parameters file:
 
     ??? success "Solution"
 
@@ -224,7 +228,7 @@ nextflow run nf-core/<workflow> -profile test,singularity -r main -param-file <p
         Include the custom `.json` file in your execution command with the `-params-file` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -params-file my_custom_params.json 
+        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results -params-file my_custom_params.json
         ```
 
         Check that it has been applied:
@@ -267,7 +271,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
 
 !!! question "Exercise"
 
-    Give the MultiQC report for the `christopher-hakkaart/nf-core-demo` pipeline the name of your favorite color using the [`multiqc_title`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/nextflow.config#L27) parameter in a custom `.config` file:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your favorite color using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a custom `.config` file:
 
     ??? success "Solution"
 
@@ -280,7 +284,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
         Include the custom `.config` file in your execution command with the `-c` option:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -profile test,singularity -r main -resume -c custom.config 
+        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -322,7 +326,7 @@ process {
 }
 ```
 
-While some tool arguments are included as a part of a module. To make modules sharable across pipelines, most tool arguments are defined in the `conf/modules.conf` file in the pipeline code under the `ext.args` entry.
+While some tool arguments are included as a part of a module. To make modules sharable across pipelines, most tool arguments are defined in the `conf/modules.config` file in the pipeline code under the `ext.args` entry.
 
 Importantly, having these arguments outside of the module also allows them to be customised at runtime.
 
@@ -330,7 +334,7 @@ Importantly, having these arguments outside of the module also allows them to be
 <p align="left"><img src="../../images/1_3_args.excalidraw.png" alt="drawing" width="900"/></p> 
 <br>
 
-For example, if you were trying to add arguments in the `MULTIQC` process in the `christopher-hakkaart/nf-core-demo` pipeline, you could use the process scope:
+For example, if you were trying to add arguments in the `MULTIQC` process in the `nf-core/demo` pipeline, you could use the process scope:
 
 ```console title="custom.config"
 process {
@@ -352,11 +356,11 @@ process {
 
 The extended execution path is built from the pipelines, subworkflows, and module used to execute the process.
 
-In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/modules/nf-core/multiqc/main.nf) module, was called by the [`DEMO`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/workflows/demo.nf) pipeline, which was called by the [`NFCORE_DEMO`](https://github.com/christopher-hakkaart/nf-core-demo/blob/master/main.nf) pipeline in the `main.nf` file.
+In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/blob/main/modules/nf-core/multiqc/main.nf) module, was called by the [`DEMO`](https://github.com/nf-core/demo/blob/main/workflows/demo.nf) pipeline, which was called by the [`NFCORE_DEMO`](https://github.com/nf-core/demo/blob/main/main.nf) pipeline in the `main.nf` file.
 
 !!! tip "How to build an extended execution path"
 
-    It can be tricky to evaluate the path used to execute a module. If you are unsure of how to build the path you can copy it from the `conf/modules.conf` file. How arguments are added to a process can also vary. Be vigilant.
+    It can be tricky to evaluate the path used to execute a module. If you are unsure of how to build the path you can copy it from the `conf/modules.config` file. How arguments are added to a process can also vary. Be vigilant.
 
 !!! question "Exercise" 
 
@@ -379,7 +383,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your run command again with the custom configuration file:
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -resume -c custom.config
+        nextflow run nf-core/demo -r 1.0.0 -profile test,singularity --outdir results -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -390,7 +394,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
 
 !!! question "Exercise" 
 
-    Demonstrate the configuration hierarchy using the `christopher-hakkaart/nf-core-demo` pipeline by adding a params file (`-params-file`), and a command line flag (`--multiqc_title`) to your execution. You can use the files you have already created. Make sure that the `--multiqc_title` is different to the `multiqc_title` in your params file and different to the title you have used in the past.
+    Demonstrate the configuration hierarchy using the `nf-core/demo` pipeline by adding a params file (`-params-file`), and a command line flag (`--multiqc_title`) to your execution. You can use the files you have already created. Make sure that the `--multiqc_title` is different to the `multiqc_title` in your params file and different to the title you have used in the past.
 
     ??? success "Solution"
 
@@ -405,7 +409,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/christopher-hak
         Execute your command with your params file (`-params-file`) and a command line flag (`--multiqc_title`):
 
         ```bash
-        nextflow run christopher-hakkaart/nf-core-demo -r main -profile test,singularity -resume -params-file my_custom_params.json --multiqc_title "cake"
+        nextflow run nf-core/demo -r 1.0.0 -profile test,singularity --outdir results -resume -params-file my_custom_params.json --multiqc_title "cake"
         ```
 
         In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "cake".
