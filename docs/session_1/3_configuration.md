@@ -75,7 +75,7 @@ nextflow run nf-core/<workflow> --help
         The `nf-core/demo` pipeline parameters can be printed using the `run` command and the `--help` option:
 
         ```bash
-        nextflow run nf-core/demo -r 1.0.0 --help
+        nextflow run nf-core/demo -r 1.1.0 --help
         ```
 
         !!! tip "Revision flag"
@@ -109,7 +109,7 @@ nextflow nf-core/<workflow> --<parameter> string
         Add the `--multiqc_title` flag to your command and execute it. Use the `-resume` option to save time:
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results --multiqc_title kiwi -resume
+        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results --multiqc_title kiwi -resume
         ```
 
         In this example, you can check your parameter has been applied by listing the files created in the results folder (`results`):
@@ -208,7 +208,7 @@ Parameter files are `.json` files that can contain an unlimited number of parame
 You can override default parameters by creating a custom `.json` file and passing it as a command-line argument using the `-params-file` option.
 
 ```bash
-nextflow run nf-core/<workflow> -profile test,singularity -r 1.0.0 --outdir results -params-file <path/to/params.json>
+nextflow run nf-core/<workflow> -profile test,singularity -r 1.1.0 --outdir results -params-file <path/to/params.json>
 ```
 
 !!! question "Exercise"
@@ -228,7 +228,7 @@ nextflow run nf-core/<workflow> -profile test,singularity -r 1.0.0 --outdir resu
         Include the custom `.json` file in your execution command with the `-params-file` option:
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results -params-file my_custom_params.json
+        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results -params-file my_custom_params.json
         ```
 
         Check that it has been applied:
@@ -284,7 +284,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
         Include the custom `.config` file in your execution command with the `-c` option:
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.0.0 --outdir results -resume -c custom.config
+        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -383,7 +383,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
         Execute your run command again with the custom configuration file:
 
         ```bash
-        nextflow run nf-core/demo -r 1.0.0 -profile test,singularity --outdir results -resume -c custom.config
+        nextflow run nf-core/demo -r 1.1.0 -profile test,singularity --outdir results -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -409,7 +409,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
         Execute your command with your params file (`-params-file`) and a command line flag (`--multiqc_title`):
 
         ```bash
-        nextflow run nf-core/demo -r 1.0.0 -profile test,singularity --outdir results -resume -params-file my_custom_params.json --multiqc_title "cake"
+        nextflow run nf-core/demo -r 1.1.0 -profile test,singularity --outdir results -resume -params-file my_custom_params.json --multiqc_title "cake"
         ```
 
         In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "cake".
