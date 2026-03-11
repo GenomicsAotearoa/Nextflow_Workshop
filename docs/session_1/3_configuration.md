@@ -6,6 +6,7 @@
     - Learn how to customize the execution of an nf-core pipeline.
     - Customize a toy example of an nf-core pipeline.
 
+<!-- TODO: Consider this content could be own page or larger section, find balance between running and developing -->
 ## Pipeline structure
 
 nf-core pipelines follow a set of best practices and standardised conventions. nf-core pipelines start from a **common template** and follow the same structure. Although you won’t need to edit code in the pipeline project directory, having a basic understanding of the project structure and some core terminology will help you understand how to configure its execution.

@@ -17,6 +17,7 @@ nav:
     - session_1/1_introduction.md
     - session_1/2_nfcore.md
     - session_1/3_configuration.md
+    - session_1/4_best_practices.md
 
 theme:
   name: material

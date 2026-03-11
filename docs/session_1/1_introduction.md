@@ -8,7 +8,6 @@
 
 ## What is Nextflow?
 
-<!-- TODO: Update logo -->
 <p align="center"><img src="../../images/1_1_nextflow.png" alt="drawing" width="900"/></p>
 
 Nextflow is a **workflow orchestration engine** that makes it easy to write data-intensive computational pipelines.
@@ -25,7 +24,7 @@ Nextflow extends this approach, adding the ability to define complex program int
 
 Whether you are working with genomics data or other large and complex data sets, Nextflow can help you to streamline your pipeline and improve your productivity.
 
-## Processes and Dataflow
+## Processes and dataflow
 
 In Nextflow, **workflows**, **processes**, and **dataflow logic** are the fundamental building blocks of a pipeline.
 
@@ -39,6 +38,7 @@ Processes can be **parameterised** to allow for flexibility and reuse within and
 
 Dataflow logic defines how data flows between processes through two types of asynchronous dataflow structures:
 
+<!-- TODO: Add links to relevant docs -->
 - A **dataflow channel** (or simply _channel_) is an asynchronous sequence of values used to pass data between processes.
 - A **dataflow value** is a single asynchronous value, typically used for inputs shared across all tasks (e.g., a reference genome).
 
@@ -58,10 +58,15 @@ See [Executors](https://www.nextflow.io/docs/latest/executor.html) for a full li
 
 Nextflow is a workflow language based on **Groovy** (a superset of Java) that simplifies the writing of complex, scalable, and reproducible pipelines. Users can leverage existing programming knowledge without a steep learning curve, as process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, etc.).
 
-Nextflow provides a robust **command line interface (CLI)** for managing and executing pipelines. It runs on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL. It requires Bash 3.2 (or later) and Java 17 (or later).
+Nextflow provides a robust **command line interface (CLI)** for managing and executing pipelines. It runs on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.
+
+It requires Bash 3.2 (or later) and Java 17 (or later).
+
+<!-- TODO: Add link to local environment setup -->
 
 Nextflow is distributed as a self-installing package and does not require any special installation procedure.
 
+<!-- TODO: How to load on local infra -->
 !!! info "How to install Nextflow locally"
 
     1. Download the executable package using either `wget -qO- https://get.nextflow.io | bash` or `curl -s https://get.nextflow.io | bash`
@@ -78,6 +83,8 @@ You can list Nextflow options and commands with the `-h` option:
 nextflow -h
 ```
 
+<!-- TODO: Show current output (expected results) -->
+
 Options for a command can also be viewed by appending the `-help` option to a Nextflow command.
 
 For example, you can view options for the `run` command:
@@ -85,6 +92,8 @@ For example, you can view options for the `run` command:
 ```bash
 nextflow run -help
 ```
+
+<!-- TODO: Show current output (expected results) -->
 
 !!! question "Exercise"
 
@@ -107,6 +116,9 @@ nextflow run -help
         cite doi:10.1038/nbt.3820
         http://nextflow.io
         ```
+
+        <!-- TODO: Check this is true -->
+
 
 ## Managing your environment
 
@@ -148,11 +160,13 @@ export NXF_VER=<version number>
         http://nextflow.io
         ```
 
+        <!-- TODO: Show how to append at the start of a command NXF_VER=25.04.4 nextflow --version -->
 
 !!! warning "Environment variables on NeSI"
 
     The behaviour of Nextflow environment variables won't work as expected if using a NeSI Nextflow module.
 
+<!-- TODO: Update to apptainer or alternate -->
 Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the `NXF_SINGULARITY_CACHEDIR` or the `NXF_CONDA_CACHEDIR` variables:
 
 ```bash
@@ -252,6 +266,10 @@ If you `run` a pipeline, it will look for a local file with the pipeline name yo
 
 See [`run`](https://www.nextflow.io/docs/latest/cli.html#run) for more information about the Nextflow `run` command.
 
+### Understanding console outputs
+
+<!-- TODO: High level processes as tasks. More to come later about task directory -->
+
 ## Executing a revision
 
 When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.
@@ -276,6 +294,7 @@ Nextflow automatically provides built-in support for version control using Git. 
 
     Execute the `hello` pipeline directly from the `nextflow-io` GitHub using the `v1.1` revision tag.
 
+    <!-- TODO: Expected fail, use NXF_VER=22.10.0 nextflow run nextflow-io/hello -r v1.1 -->
     ??? success "Solution"
 
         Use the `nextflow run` command to execute the `nextflow-io/hello` pipeline with the `v1.1` revision tag:
@@ -316,13 +335,13 @@ nextflow log -h
 To query a specific execution you can use the `RUN NAME` or a `SESSION ID`:
 
 ```bash
-nextflow log <run name>
+nextflow log <run_name>
 ```
 
 To get more information, you can use the `-f` option with named fields. For example:
 
 ```bash
-nextflow log <run name> -f process,hash,duration
+nextflow log <run_name> -f process,hash,duration
 ```
 
 There are many other fields you can query. You can view a full list of fields with the `-l` option:
@@ -378,7 +397,7 @@ Nextflow's caching mechanism works by assigning a unique ID to each task. The ta
 
 A multi-step pipeline is required to demonstrate cache and resume.
 
-These concepts will be demonstrated using the nf-core demo pipeline as a part of the [Introduction to nf-core](2_nfcore.md) section.
+These concepts will be demonstrated using the nf-core demo pipeline as a part of the [Getting started with nf-core](2_nfcore.md) section.
 
 ## Listing and dropping cached pipelines
 

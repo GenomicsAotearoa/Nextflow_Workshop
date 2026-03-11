@@ -59,10 +59,6 @@ The nf-core Slack is one of the primary resources for nf-core users. There are d
 
 If you are unsure of where to ask you questions - the `#help` and `#nostupidquestions` channels are a great place to start.
 
-!!! tip "Questions about Nextflow"
-
-    If you have questions about Nextflow and deployments that are not related to nf-core you can ask them on the [Nextflow Slack](https://www.nextflow.io/blog/2022/nextflow-is-moving-to-slack.html). It's worthwhile joining both Slack groups and browsing the channels to get an idea of what types of questions are being asked on each channel. Searching channels can also be a great source of information as your question may have been asked before.
-
 Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) accounts on X (formerly Twitter) will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practises, workflows, and community developments.
 
 !!! question "Exercise"
@@ -73,6 +69,7 @@ Joining multiple nf-core and Nextflow channels is important to keep up to date w
 
         Follow [this link](https://nf-co.re/join/slack) to join the nf-core Slack. Follow the instructions to enter your credentials and update your profile. Even if you are already a member of the nf-core Slack, it's a great time to check your profile is up-to-date.
 
+<!-- TODO: Shrink this down, only mention that there is a toolkit and it's MOST useful for developers -->
 ## nf-core tools
 
 This workshop will make use of nf-core tools, a set of helper tools for use with Nextflow workflows. These tools have been developed to provide a range of additional functionality for **using**, **developing**, and **testing** workflows.
@@ -172,10 +169,11 @@ nextflow run nf-core/<pipeline>
 
 Nextflow will `pull` the default git branch if a workflow version is not specified. This will be the master branch for nf-core workflows with a stable release. nf-core workflows use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a workflow once it is released using the `-revision` or `-r` flag.
 
-
 ## nf-core demo
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.
+
+<!-- TODO: Add screenshot or diagram -->
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) pipeline was created with the nf-core `create` command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:
 
@@ -194,6 +192,7 @@ nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results
 
 The command line output will print something like this:
 
+<!-- TODO: Run and replace to make sure this is accurate -->
 ```console title="Output"
 N E X T F L O W  ~  version 25.10.4
 Launching `https://github.com/nf-core/demo` [voluminous_kay] DSL2 - revision: 8f8c2b63c0 [1.1.0]
@@ -325,8 +324,10 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
 
         In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was modified. Touching the symlink and changing the date of last modification caused Nextflow to re-run the affected task and all downstream tasks that depended on its output.
 
+<!-- TODO: Add back text from introduction about the clean command -->
 Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of it's contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
+<!-- TODO: Update -->
 !!! cboard-list-2 "Key points"
 
     - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow.

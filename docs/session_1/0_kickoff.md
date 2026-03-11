@@ -1,8 +1,8 @@
 # Introduction
 
-During this training will establish fundamental ideas and skills that are essential for using Nextflow and customizing the execution of a nf-core pipeline.
+During this training will establish fundamental ideas and skills that are essential for using Nextflow and customizing the execution of an nf-core pipeline.
 
-We will start the session discussing the core features of Nextflow and learning the fundamental commands and options for executing pipelines. Next, we will learn the core features of nf-core and its tooling. This knowledge will be applied as we learn the structure of an nf-core pipeline and how customize its execution.
+We will start the session discussing the core features of Nextflow and learning the fundamental commands and options for executing pipelines. Next, we will learn the core features of nf-core and its tooling. This knowledge will be applied as we learn the structure of the nf-core demo pipeline and how customize its execution.
 
 ## Create a new working directory
 
