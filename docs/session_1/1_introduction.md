@@ -178,11 +178,11 @@ export NXF_SINGULARITY_CACHEDIR=<custom/path/to/singularity/cache>
         echo $NXF_SINGULARITY_CACHEDIR
         ```
 
+See [Environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) for a complete list of environment variables.
+
 !!! tip "How to manage environment variables"
 
     You may want to include these, or other environment variables, in your `.bashrc` file (or alternate) that is loaded when you log in so you don’t need to export variables every session.
-
-See [Environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) for a complete list of environment variables.
 
 ## Executing a pipeline
 
