@@ -1,4 +1,4 @@
-# Configuring nf-core pipelines
+# Configure nf-core pipelines
 
 !!! clipboard-list "Objectives"
 

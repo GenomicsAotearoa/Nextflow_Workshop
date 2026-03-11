@@ -1,4 +1,4 @@
-# Introduction to Nextflow
+# Get started with Nextflow
 
 !!! clipboard-list "Objectives"
 

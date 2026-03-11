@@ -1,4 +1,4 @@
-# Introduction to nf-core
+# Get started with nf-core
 
 !!! clipboard-list "Objectives"
 
