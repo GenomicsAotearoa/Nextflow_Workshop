@@ -28,50 +28,54 @@ Whether you are working with genomics data or other large and complex data sets,
 
 In Nextflow, **workflows**, **processes**, and **dataflow logic** are the fundamental building blocks of a pipeline.
 
-A **workflow** is a specialized function for composing processes and dataflow logic. Workflows connect process inputs and outputs through dataflow logic, defining how data moves through the pipeline. An entry workflow serves as the pipeline’s entry point, while named workflows can be reused and called by other workflows, enabling modular pipeline design.
+A [**workflow**](https://docs.seqera.io/nextflow/workflow) is a specialized function for composing processes and dataflow logic. Workflows connect process inputs and outputs through dataflow logic, defining how data moves through the pipeline. An entry workflow serves as the pipeline’s entry point, while named workflows can be reused and called by other workflows, enabling modular pipeline design.
 
-A **process** is a unit of execution that represents a single computational step in a pipeline. Each process specifies its inputs and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any scripting language that can be executed by the Linux platform, such as Bash, Python, Perl, Ruby, or R.
+A [**process**](https://docs.seqera.io/nextflow/process) is a unit of execution that represents a single computational step in a pipeline. Each process specifies its inputs and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any scripting language that can be executed by the Linux platform, such as Bash, Python, Perl, Ruby, or R.
 
 Processes are executed independently (i.e., they do not share a common writable state) as **tasks**. Each process executes a task and emits a value for each input it receives, enabling downstream processes to automatically receive and process those values. Multiple tasks can run in parallel, allowing for efficient utilisation of computing resources.
 
 Processes can be **parameterised** to allow for flexibility and reuse within and across pipelines. Pipeline-level parameters (`params`) can be passed into processes at runtime to control behaviour, such as specifying input files, output paths, or tool-specific settings.
 
-Dataflow logic defines how data flows between processes through two types of asynchronous dataflow structures:
+[Dataflow logic](https://docs.seqera.io/nextflow/channel) defines how data flows between processes through two types of asynchronous dataflow structures:
 
 <!-- TODO: Add links to relevant docs -->
-- A **dataflow channel** (or simply _channel_) is an asynchronous sequence of values used to pass data between processes.
-- A **dataflow value** is a single asynchronous value, typically used for inputs shared across all tasks (e.g., a reference genome).
+- A [**dataflow channel**](https://docs.seqera.io/nextflow/channel#channels) (or simply _channel_) is an asynchronous sequence of values used to pass data between processes.
+- A [**dataflow value**](https://docs.seqera.io/nextflow/channel#values) is a single asynchronous value, typically used for inputs shared across all tasks (e.g., a reference genome).
 
 The data dependencies between processes implicitly determine the order of execution, meaning processes run based on their input-output relationships rather than the order they appear in the pipeline script.
 
 ## Execution abstraction
 
-While a process defines what command or script is executed, the **executor** determines how and where the script is executed.
+While a process defines what command or script is executed, the [**executor**](https://docs.seqera.io/nextflow/executor) determines how and where the script is executed.
 
 Nextflow provides an **abstraction** between the pipeline’s functional logic and the underlying execution system. This means a pipeline can be written once and run on your local machine, an HPC cluster, or a cloud platform without any modification. Only the target executor needs to be defined in the configuration file.
 
 By default, Nextflow executes processes on the local machine, which is useful for development and testing. For production workloads, Nextflow supports major HPC batch schedulers (e.g., SLURM, PBS, Open Grid Engine) and cloud platforms (e.g., AWS, Google Cloud, Azure, Kubernetes).
 
-See [Executors](https://www.nextflow.io/docs/latest/executor.html) for a full list of Nextflow executors.
+See [Executors](https://docs.seqera.io/nextflow/executor) for a full list of Nextflow executors.
 
 ## Nextflow CLI
 
-Nextflow is a workflow language based on **Groovy** (a superset of Java) that simplifies the writing of complex, scalable, and reproducible pipelines. Users can leverage existing programming knowledge without a steep learning curve, as process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, etc.).
+Nextflow is a workflow language based on [**Groovy**](https://groovy-lang.org/) (a superset of Java) that simplifies the writing of complex, scalable, and reproducible pipelines. Users can leverage existing programming knowledge without a steep learning curve, as process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, etc.).
 
 Nextflow provides a robust **command line interface (CLI)** for managing and executing pipelines. It runs on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.
 
 It requires Bash 3.2 (or later) and Java 17 (or later).
 
-<!-- TODO: Add link to local environment setup -->
+Nextflow is distributed as a [self-installing package](https://docs.seqera.io/nextflow/install) and does not require any special installation procedure.
 
-Nextflow is distributed as a self-installing package and does not require any special installation procedure.
+For today's workshop Nextflow is already installed on the system we will be using, so there should be no additional steps needed.
 
-<!-- TODO: How to load on local infra -->
 !!! info "How to install Nextflow locally"
 
     1. Download the executable package using either `wget -qO- https://get.nextflow.io | bash` or `curl -s https://get.nextflow.io | bash`
     2. Make the binary executable on your system by running `chmod +x nextflow`
     3. Move the nextflow file to a directory accessible by your `$PATH` variable, e.g, `mv nextflow ~/bin/`
+
+!!! info "How to load Nextflow on Mahuika"
+
+    1. Check available Nextflow versions: `module avail Nextflow`
+    2. Load Nextflow version of your choice: `module load Nextflow/<version>`
 
 ## Nextflow options and commands
 
@@ -83,7 +87,59 @@ You can list Nextflow options and commands with the `-h` option:
 nextflow -h
 ```
 
-<!-- TODO: Show current output (expected results) -->
+```console title="Output"
+Usage: nextflow [options] COMMAND [arg...]
+
+Options:
+  -C
+     Use the specified configuration file(s) overriding any defaults
+  -D
+     Set JVM properties
+  -bg
+     Execute nextflow in background
+  -c, -config
+     Add the specified file to configuration set
+  -config-ignore-includes
+     Disable the parsing of config includes
+  -h
+     Print this help
+  -log
+     Set nextflow log file path
+  -q, -quiet
+     Do not print information messages
+  -remote-debug
+     Enable JVM interactive remote debugging (experimental)
+  -syslog
+     Send logs to syslog server (eg. localhost:514)
+  -trace
+     Enable trace level logging for the specified package name - multiple packages can be provided separating them with a comma e.g. '-trace nextflow,io.seqera'
+  -v, -version
+     Print the program version
+
+Commands:
+  auth          Manage Seqera Platform authentication
+  clean         Clean up project cache and work directories
+  clone         Clone a project into a folder
+  config        Print a project configuration
+  console       Launch Nextflow interactive console
+  drop          Delete the local copy of a project
+  fs            Perform filesystem operations
+  help          Print the usage help for a command
+  info          Print project and system runtime information
+  inspect       Inspect process settings in a pipeline project
+  kuberun       Execute a workflow in a Kubernetes cluster (experimental)
+  launch        Launch a workflow in Seqera Platform
+  lineage       Explore workflows lineage metadata
+  lint          Lint Nextflow scripts and config files
+  list          List all downloaded projects
+  log           Print executions log and runtime info
+  plugin        Execute plugin-specific commands
+  pull          Download or update a project
+  run           Execute a pipeline project
+  secrets       Manage pipeline secrets
+  self-update   Update nextflow runtime to the latest available version
+  view          View project script file(s)
+```
 
 Options for a command can also be viewed by appending the `-help` option to a Nextflow command.
 
@@ -93,7 +149,126 @@ For example, you can view options for the `run` command:
 nextflow run -help
 ```
 
-<!-- TODO: Show current output (expected results) -->
+```console title="Output"
+Execute a pipeline project
+Usage: run [options] Project name or repository url
+  Options:
+    -E
+       Exports all current system environment
+       Default: false
+    -ansi-log
+       Enable/disable ANSI console logging
+    -bucket-dir
+       Remote bucket where intermediate result files are stored
+    -cache
+       Enable/disable processes caching
+    -d, -deep
+       Create a shallow clone of the specified depth
+    -disable-jobs-cancellation
+       Prevent the cancellation of child jobs on execution termination
+    -dump-channels
+       Dump channels for debugging purpose
+    -dump-hashes
+       Dump task hash keys for debugging purpose
+    -e.
+       Add the specified variable to execution environment
+       Syntax: -e.key=value
+       Default: {}
+    -entry
+       Entry workflow name to be executed
+    -h, -help
+       Print the command usage
+       Default: false
+    -hub
+       Service hub where the project is hosted
+    -latest
+       Pull latest changes before run
+       Default: false
+    -lib
+       Library extension path
+    -main-script
+       The script file to be executed when launching a project directory or
+       repository
+    -name
+       Assign a mnemonic name to the a pipeline run
+    -offline
+       Do not check for remote project updates
+       Default: false
+    -o, -output-dir
+       Directory where workflow outputs are stored
+    -params-file
+       Load script parameters from a JSON/YAML file
+    -plugins
+       Specify the plugins to be applied for this run e.g. nf-amazon,nf-tower
+    -preview
+       Run the workflow script skipping the execution of all processes
+       Default: false
+    -process.
+       Set process options
+       Syntax: -process.key=value
+       Default: {}
+    -profile
+       Choose a configuration profile
+    -qs, -queue-size
+       Max number of processes that can be executed in parallel by each executor
+    -resume
+       Execute the script using the cached results, useful to continue
+       executions that was stopped by an error
+    -r, -revision
+       Revision of the project to run (either a git branch, tag or commit SHA
+       number)
+    -stub-run, -stub
+       Execute the workflow replacing process scripts with command stubs
+       Default: false
+    -test
+       Test a script function with the name specified
+    -user
+       Private repository user name
+    -with-apptainer
+       Enable process execution in a Apptainer container
+    -with-charliecloud
+       Enable process execution in a Charliecloud container runtime
+    -with-cloudcache
+       Enable the use of object storage bucket as storage for cache meta-data
+    -with-conda
+       Use the specified Conda environment package or file (must end with
+       .yml|.yaml suffix)
+    -with-dag
+       Create pipeline DAG file
+    -with-docker
+       Enable process execution in a Docker container
+    -N, -with-notification
+       Send a notification email on workflow completion to the specified
+       recipients
+    -with-podman
+       Enable process execution in a Podman container
+    -with-report
+       Create processes execution html report
+    -with-singularity
+       Enable process execution in a Singularity container
+    -with-spack
+       Use the specified Spack environment package or file (must end with .yaml
+       suffix)
+    -with-timeline
+       Create processes execution timeline file
+    -with-tower
+       Monitor workflow execution with Seqera Platform (formerly Tower Cloud)
+    -with-trace
+       Create processes execution tracing file
+    -with-weblog
+       Send workflow status messages via HTTP to target URL
+    -without-conda
+       Disable the use of Conda environments
+    -without-docker
+       Disable process execution with Docker
+       Default: false
+    -without-podman
+       Disable process execution in a Podman container
+    -without-spack
+       Disable the use of Spack environments
+    -w, -work-dir
+       Directory where intermediate result files are stored
+```
 
 !!! question "Exercise"
 
@@ -111,18 +286,15 @@ nextflow run -help
 
         ```console title="Output"
         N E X T F L O W
-        version 25.10.4 build 5982
-        created 28-10-2025 15:34 UTC (29-10-2025 04:34 NZDT)
+        version 25.10.4 build 11173
+        created 10-02-2026 15:17 UTC (11-02-2026 04:17 NZDT)
         cite doi:10.1038/nbt.3820
         http://nextflow.io
         ```
 
-        <!-- TODO: Check this is true -->
-
-
 ## Managing your environment
 
-You can use [environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a pipeline and will be interpreted by Nextflow.
+You can use [environment variables](https://docs.seqera.io/nextflow/reference/env-vars) to control the Nextflow runtime and the underlying Java virtual machine. These variables can be exported before running a pipeline and will be interpreted by Nextflow.
 
 For most users, Nextflow will work without setting any environment variables. However, to improve reproducibility and to optimise your resources, you will benefit from setting some of these variables.
 
@@ -160,21 +332,40 @@ export NXF_VER=<version number>
         http://nextflow.io
         ```
 
-        <!-- TODO: Show how to append at the start of a command NXF_VER=25.04.4 nextflow --version -->
-
-!!! warning "Environment variables on NeSI"
-
-    The behaviour of Nextflow environment variables won't work as expected if using a NeSI Nextflow module.
-
-<!-- TODO: Update to apptainer or alternate -->
-Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the `NXF_SINGULARITY_CACHEDIR` or the `NXF_CONDA_CACHEDIR` variables:
+In addition to changing the version at the system level, you can set the Nextflow version for a single command:
 
 ```bash
-export NXF_SINGULARITY_CACHEDIR=<custom/path/to/singularity/cache>
+NXF_VER=24.10.5 nextflow -version
+```
+
+```console title="Output"
+N E X T F L O W
+version 24.10.5 build 5935
+created 04-03-2025 17:55 UTC (05-03-2025 06:55 NZDT)
+cite doi:10.1038/nbt.3820
+http://nextflow.io
+```
+
+!!! warning "Environment variables on Mahuika"
+
+    The behaviour of Nextflow environment variables won't work as expected if using a Mahuika Nextflow module.
+    If you want to use a different Nextflow version on Mahuika you will need to reload the Nextflow module.
+    To change to version 25.10.0 you could run:
+
+    ```bash
+    module purge
+    module load Nextflow/25.10.0
+    ```
+
+<!-- TODO: Update to apptainer or alternate -->
+Similarly, if you are using a shared resource, you may also consider including paths to where software is stored and can be accessed using the `NXF_APPTAINER_CACHEDIR` or the `NXF_CONDA_CACHEDIR` variables:
+
+```bash
+export NXF_APPTAINER_CACHEDIR=<custom/path/to/apptainer/cache>
 ```
 
 !!! question "Exercise"
-
+ 
     <!-- TODO: Check this link is correct -->
     Export the folder `/nesi/nobackup/nesi02659/nextflow-workshop` as the folder where remote Singularity images are stored:
 
@@ -192,7 +383,7 @@ export NXF_SINGULARITY_CACHEDIR=<custom/path/to/singularity/cache>
         echo $NXF_SINGULARITY_CACHEDIR
         ```
 
-See [Environment variables](https://www.nextflow.io/docs/latest/config.html#environment-variables) for a complete list of environment variables.
+See [Environment variables](https://docs.seqera.io/nextflow/reference/env-vars) for a complete list of environment variables.
 
 !!! tip "How to manage environment variables"
 
@@ -202,7 +393,7 @@ See [Environment variables](https://www.nextflow.io/docs/latest/config.html#envi
 
 Nextflow seamlessly integrates with code repositories such as [GitHub](https://github.com/). This feature allows you to manage your project code and use public Nextflow pipelines quickly, consistently, and transparently.
 
-The Nextflow `pull` command will download a pipeline from a hosting platform into your global cache `$HOME/.nextflow/assets` folder. 
+The Nextflow `pull` command will download a pipeline from a hosting platform into your global cache `$HOME/.nextflow/assets` folder.
 
 If you are pulling a project hosted in a remote code repository, you can specify its qualified name or the repository URL.
 
@@ -233,7 +424,7 @@ nextflow run foo/bar
 If you `run` a pipeline, it will look for a local file with the pipeline name you’ve specified. If that file does not exist, it will look for a public repository with the same name on GitHub (unless otherwise specified). If found, Nextflow will automatically `pull` the pipeline to your global cache and execute it.
 
 !!! warning
-    
+
     Be aware of what is already in your current working directory where you launch your pipeline. If your current working directory contains nextflow configuration files you may encounter unexpected results.
 
 !!! question "Exercise"
