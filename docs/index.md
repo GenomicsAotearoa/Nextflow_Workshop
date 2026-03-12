@@ -13,6 +13,7 @@ This lesson also introduces [nf-core](https://nf-co.re/), a community-driven pla
 !!! tutor "Trainers"
 
     - [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/))
+    - [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz))
 
 !!! calendar-days "Schedule"
 
@@ -31,8 +32,11 @@ This lesson also introduces [nf-core](https://nf-co.re/), a community-driven pla
     - Configuring your run
     - Configuring your deployment
 
-### Acknowledgements
+# Setup
 
-This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/)) with a huge amount of support from [George Wiggins](https://github.com/wigge206) ([University of Otago](https://www.otago.ac.nz/); [Genetics Otago](https://blogs.otago.ac.nz/go/)), [Ben Halliday](https://github.com/BenjHalliday) ([University of Otago](https://www.otago.ac.nz/); [Genetics Otago](https://blogs.otago.ac.nz/go/)), and [Dinindu Senanayake](https://github.com/DininduSenanayake) ([NeSI](https://www.nesi.org.nz/); [Genomics Aotearoa](https://www.genomics-aotearoa.org.nz/)).
+During this workshop, code will be run in real-time to demonstrate how Nextflow works.
+This will be run on the REANNZ OpenOnDemand platform which already has all the required software installed.
 
-The workshop content was inspired by material written for [Foundational Nextflow Training](https://training.nextflow.io/) and the [Reproducible workflows with nf-core](https://sydney-informatics-hub.github.io/customising-nfcore-workshop/) run by Sydney Informatics Hub, University of Sydney.
+# Acknowledgements
+
+This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/)) and [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz)).
