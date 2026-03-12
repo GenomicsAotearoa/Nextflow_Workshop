@@ -1,3 +1,7 @@
+---
+title: Reproducible Bioinformatics Workflows with Nextflow and nf-core
+---
+
 <center>
 # Reproducible Bioinformatics Workflows with Nextflow and nf-core
 </center>
@@ -32,11 +36,11 @@ This lesson also introduces [nf-core](https://nf-co.re/), a community-driven pla
     - Configuring your run
     - Configuring your deployment
 
-# Setup
+## Setup
 
 During this workshop, code will be run in real-time to demonstrate how Nextflow works.
 This will be run on the REANNZ OpenOnDemand platform which already has all the required software installed.
 
-# Acknowledgements
+## Acknowledgements
 
 This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/)) and [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz)).
