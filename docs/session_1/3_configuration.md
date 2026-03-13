@@ -14,13 +14,13 @@ nf-core pipelines follow a set of best practices and standardised conventions. n
 Nextflow DSL2 <span style="color:#087f5b;">**workflow**</span> are built up of <span style="color:#c92a2a;">**subworkflows**</span> and <span style="color:#364fc7;">**modules**</span> that are stored as separate `.nf` files.
 
 <br>
-<p align="left"><img src="../../images/1_3_structure.excalidraw.png" alt="drawing" width="400"/></p> 
+<p align="left"><img src="../../images/1_3_structure.excalidraw.png" alt="nf-core pipeline file structure" width="400"/></p> 
 <br>
 
 Most nf-core pipelines consist of a single <span style="color:#087f5b;">**workflow**</span> file (there are a few exceptions). This is the main `<workflow>.nf` file that is used to bring everything else together. Instead of having one large monolithic script, it is broken up into a combination of <span style="color:#c92a2a;">**subworkflows**</span> and <span style="color:#364fc7;">**modules**</span>.
 
 <br>
-<p align="center"><img src="../../images/1_3_worksubmod.excalidraw.png" alt="drawing" width="900"/></p> 
+<p align="center"><img src="../../images/1_3_worksubmod.excalidraw.png" alt="scaffolding of nf-core pipeline" width="900"/></p> 
 <br>
 
 A <span style="color:#c92a2a;">**subworkflows**</span> is a groups of modules that are used in combination with each other and have a common purpose. For example, the [`SAMTOOLS_STATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/stats/main.nf), [`SAMTOOLS_IDXSTATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/faidx/main.nf), and [`SAMTOOLS_FLAGSTAT`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/flagstat/main.nf) modules are all included in the [`BAM_STATS_SAMTOOLS`](https://github.com/nf-core/modules/blob/master/subworkflows/nf-core/bam_stats_samtools/main.nf) subworkflow.
