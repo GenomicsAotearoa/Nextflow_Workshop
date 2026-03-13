@@ -10,8 +10,6 @@ repo_url: https://github.com/GenomicsAotearoa/Nextflow_Workshop
 
 nav:
   - Home: index.md
-  - Setup:
-    - setup/setup.md
   - Session 1:
     - session_1/0_kickoff.md
     - session_1/1_introduction.md
@@ -32,15 +30,18 @@ theme:
 
   # Palette toggle for automatic mode
   - media: "(prefers-color-scheme)"
+    scheme: default
     toggle:
       icon: material/brightness-auto
       name: Switch to light mode
     primary: custom
+    accent: custom
 
   # Palette toggle for light mode
   - media: "(prefers-color-scheme: light)"
     scheme: default
     primary: custom
+    accent: custom
 
 
     toggle:
@@ -53,7 +54,6 @@ theme:
     toggle:
       icon: material/brightness-4
       name: Switch to system preference
-    primary: custom
   
   features:
     - navigation.tracking
