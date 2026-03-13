@@ -1,7 +1,4 @@
----
-title: Reproducible Bioinformatics Workflows with Nextflow and nf-core
----
-
+# Reproducible Bioinformatics Workflows with Nextflow and nf-core
 
 <br>
 <p align="center">

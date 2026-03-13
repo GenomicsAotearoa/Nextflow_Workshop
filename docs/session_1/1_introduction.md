@@ -9,8 +9,8 @@
 ## What is Nextflow?
 
 <p align="center">
-  <img class="logo-light" src="./images/nextflow-logo-bg-light.png" alt="Nextflow logo" width="500"/>
-  <img class="logo-dark" src="./images/nextflow-logo-bg-dark.png" alt="Nextflow logo" width="500"/>
+  <img class="logo-light" src="../../images/nextflow-logo-bg-light.png" alt="Nextflow logo" width="500"/>
+  <img class="logo-dark" src="../../images/nextflow-logo-bg-dark.png" alt="Nextflow logo" width="500"/>
 </p>
 
 Nextflow is a **workflow orchestration engine** that makes it easy to write data-intensive computational pipelines.

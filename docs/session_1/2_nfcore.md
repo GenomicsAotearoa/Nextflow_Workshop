@@ -8,9 +8,12 @@
 
 ## What is nf-core?
 
-<p align="center"><img src="../../images/1_2_nf-core.png" alt="drawing" width="900"/></p> 
+<p align="center">
+  <img class="logo-light" src="../../images/1_2_nf-core.png" alt="nf-core logo" width="900"/>
+  <img class="logo-dark" src="../../images/1_2_nf-core-darkbg.png" alt="nf-core logo" width="900"/>
+</p>
 
-nf-core is a **community** effort to collect a curated set of **analysis workflows** built using Nextflow.
+[nf-core](https://nf-co.re/) is a **community** effort to collect a curated set of **analysis workflows** built using Nextflow.
 
 nf-core provides a standardised set of **best practices**, **guidelines**, and **templates** for building and sharing bioinformatics workflows. These workflows are designed to be **modular**, **scalable**, and **portable**, allowing researchers to easily adapt and execute them using their own data and compute resources.
 
@@ -29,7 +32,7 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 - **Stable Releases**
     - nf-core workflows use GitHub releases to tag stable versions of the code and software, making workflow runs totally reproducible.
 - **Packaged software**
-    - Pipeline dependencies are automatically downloaded and handled using Docker, Singularity, Conda, or other software management tools. There is no need for any software installations.
+    - Pipeline dependencies are automatically downloaded and handled using Docker, apptainer, Conda, or other software management tools. There is no need for any software installations.
 - **Portable and reproducible**
     - nf-core workflows follow best practices to ensure maximum portability and reproducibility. The large community makes the workflows exceptionally well-tested and easy to execute.
 - **Cloud-ready**
@@ -47,13 +50,13 @@ Upcoming events are listed on the [nf-core event page](https://nf-co.re/events) 
 
 There are several ways you can join the nf-core community. You are welcome to join any or all of these at any time!
 
-<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" width="90"/>
-<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" width="90"/>
-<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" width="100"/> 
-<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" width="80"/> 
-<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" width="120"/>
-<a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" width="90"/>
-<a href="https://www.linkedin.com/company/nf-core"><img src="../../images/1_2_linkedin.png" width="90"/>
+<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" alt="Slack logo" width="90"/>
+<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" alt="GitHub logo" width="90"/>
+<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" alt="Twitter logo" width="100"/> 
+<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" alt="Mastodon logo" width="80"/> 
+<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" alt="Youtube logo" width="120"/>
+<a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" alt="Bluesky logo" width="90"/>
+<a href="https://www.linkedin.com/company/nf-core"><img src="../../images/1_2_linkedin.png" alt="LinkedIn logo" width="90"/>
 
 The nf-core Slack is one of the primary resources for nf-core users. There are dedicated channels for all workflows as well as channels for common topics.
 
@@ -61,7 +64,7 @@ If you are unsure of where to ask you questions - the `#help` and `#nostupidques
 
 Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) accounts on X (formerly Twitter) will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practises, workflows, and community developments.
 
-!!! question "Exercise"
+!!! question "Optional exercise"
 
     Join the [nf-core Slack](https://nf-co.re/join/slack) and fill in your profile information. If you're joining the nf-core Slack for the first time make sure you drop a message in `#say-hello` to introduce yourself! 👋
 
@@ -173,7 +176,7 @@ Nextflow will `pull` the default git branch if a workflow version is not specifi
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.
 
-<!-- TODO: Add screenshot or diagram -->
+![nf-core demo diagrom](../images/1_2_nf-core-demo-subway.png)
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) pipeline was created with the nf-core `create` command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:
 
@@ -184,18 +187,19 @@ The [`nf-core/demo`](https://github.com/nf-core/demo) pipeline was created with 
 3. [`MULTIQC`](https://github.com/nf-core/demo/blob/main/modules/nf-core/multiqc/main.nf)
     - Executes [MultiQC](https://multiqc.info/) using the FastQC reports generated by the `FASTQC` process.
 
-To run this pipeline, both the `test` profile and a software management profile (such as `singularity`) are required:
+To run this pipeline, both the `test` profile and a software management profile (such as `apptainer`) are required:
 
 ```bash
-nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results
+nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results
 ```
 
 The command line output will print something like this:
 
 <!-- TODO: Run and replace to make sure this is accurate -->
 ```console title="Output"
-N E X T F L O W  ~  version 25.10.4
-Launching `https://github.com/nf-core/demo` [voluminous_kay] DSL2 - revision: 8f8c2b63c0 [1.1.0]
+ N E X T F L O W   ~  version 25.10.4
+
+Launching `https://github.com/nf-core/demo` [evil_torricelli] DSL2 - revision: 45904cb9d1 [1.1.0]
 
 
 ------------------------------------------------------
@@ -204,55 +208,58 @@ Launching `https://github.com/nf-core/demo` [voluminous_kay] DSL2 - revision: 8f
   |\ | |__  __ /  ` /  \ |__) |__         }  {
   | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                         `._,._,'
-  nf-core/demo v1.1.0
+  nf-core/demo 1.1.0
 ------------------------------------------------------
-Core Nextflow options
-  revision                  : 1.1.0
-  runName                   : voluminous_kay
-  containerEngine           : singularity
-  launchDir                 : /home/user/session1
-  workDir                   : /home/user/session1/work
-  projectDir                : /home/user/.nextflow/assets/nf-core/demo
-  userName                  : user
-  profile                   : test,singularity
-  configFiles               : /home/user/.nextflow/assets/nf-core/demo/nextflow.config
 
 Input/output options
-  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/fastq/samplesheet.csv
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
   outdir                    : results
 
 Institutional config options
   config_profile_name       : Test profile
   config_profile_description: Minimal test dataset to check pipeline function
 
-Max job request options
-  max_cpus                  : 2
-  max_memory                : 6.GB
-  max_time                  : 6.h
+Generic options
+  trace_report_suffix       : 2026-03-13_15-12-38
+
+Core Nextflow options
+  revision                  : 1.1.0
+  runName                   : evil_torricelli
+  containerEngine           : apptainer
+  launchDir                 : /home/shared/trainer1
+  workDir                   : /home/shared/trainer1/work
+  projectDir                : /home/shared/trainer1/.nextflow/assets/nf-core/demo
+  userName                  : trainer1
+  profile                   : test,apptainer
+  configFiles               : /home/shared/trainer1/.nextflow/assets/nf-core/demo/nextflow.config
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
-If you use nf-core/demo for your analysis please cite:
+
+* The pipeline
+    https://doi.org/10.5281/zenodo.12192442
 
 * The nf-core framework
-  https://doi.org/10.1038/s41587-020-0439-x
+    https://doi.org/10.1038/s41587-020-0439-x
 
 * Software dependencies
-  https://github.com/nf-core/demo/blob/main/CITATIONS.md
-------------------------------------------------------
-[bb/f98425] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE1_PE_T1)    [100%] 4 of 4 ✔
-[cc/123456] process > NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE_T1)[100%] 4 of 4 ✔
-[dd/728742] process > NFCORE_DEMO:DEMO:MULTIQC                    [100%] 1 of 1 ✔
--
-Completed at: 29-Aug-2025 22:16:49
-Duration    : 2m 27s
+    https://github.com/nf-core/demo/blob/master/CITATIONS.md
+
+executor >  local (7)
+[27/5fa7c0] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
+[ce/582855] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[73/3bb38e] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
+-[nf-core/demo] Pipeline completed successfully-
+
+Completed at: 13-Mar-2026 15:13:43
+Duration    : 1m 2s
 CPU hours   : (a few seconds)
-Succeeded   : 9
+Succeeded   : 7
 ```
 
 Executing this pipeline will create a `work` directory and a `results` directory with selected results files.
 
-In the output above, the hexadecimal numbers, such as `bb/f98425`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
+In the output above, the hexadecimal numbers, such as `27/5fa7c0`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
 
 You can inspect the files produced by a task by looking inside the `work` directory and using these numbers to find the task-specific execution path:
 
@@ -264,12 +271,12 @@ ls results
 
 If you look inside the `work` directory of a `FASTQC` task, you will find the files that were staged and created when this task was executed:
 
-The `FASTQC` process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory [bb/f98425] represents just one of the four sets of input data that was processed.
+The `FASTQC` process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory `[27/5fa7c0]` represents just one of the four sets of input data that was processed.
 
 To print all the relevant paths to the screen, use the `-ansi-log` option can be used when executing your pipeline:
 
 ```bash
-nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results -ansi-log false
+nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -ansi-log false
 ```
 
 It's very likely you will execute a pipeline multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you **resume** a pipeline from the last step that was completed successfully or unmodified.
@@ -277,7 +284,7 @@ It's very likely you will execute a pipeline multiple times as you find the para
 By adding the `-resume` option to your `run` command you can use the cache rather than re-running successful tasks:
 
 ```bash
-nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results -resume
+nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -resume
 ```
 
 If you `run` the `nf-core/demo` pipeline again without making any changes you will see that the cache is used:
@@ -303,7 +310,7 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
         Execute the pipeline for the first time (if you have not already).
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results
+        nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results
         ```
 
         Use the task ID shown for the `FASTQC` process and use it to find and `touch` a `.fastq.gz` file in that task's work directory:
@@ -315,7 +322,7 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
         Execute the pipeline again with the `-resume` command option:
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results -resume
+        nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -resume
         ```
 
         You should see that the affected `FASTQC` task, the corresponding `SEQTK_TRIM` task, and the `MULTIQC` task were invalidated and executed again.
@@ -324,13 +331,31 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
 
         In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was modified. Touching the symlink and changing the date of last modification caused Nextflow to re-run the affected task and all downstream tasks that depended on its output.
 
-<!-- TODO: Add back text from introduction about the clean command -->
 Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of it's contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
-<!-- TODO: Update -->
+
+```bash
+nextflow clean -help
+```
+
+The `-after`, `-before`, and `-but` options are all very useful to select specific runs to `clean`. The `-dry-run` option is also very useful to see which files will be removed if you were to `-force` the `clean` command.
+
+
+!!! question "Exercise"
+
+    You Nextflow to `clean` your work `work` directory of staged files but **keep** your execution logs.
+
+    ??? success "Solution"
+
+        Use the Nextflow `clean` command with the `-k` and `-f` options:
+
+        ```bash
+        nextflow clean -k -f
+        ```
+
+<!-- TODO: Update, more? -->
 !!! cboard-list-2 "Key points"
 
     - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow.
-    - You can join/follow nf-core on multiple different social channels (Slack, YouTube, Twitter...)
     - nf-core has its own tooling that can be used by users and developers.
     - nf-core pipelines come wth test data and configuration profiles that help them run out of the box
