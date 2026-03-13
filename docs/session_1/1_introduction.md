@@ -8,7 +8,10 @@
 
 ## What is Nextflow?
 
-<p align="center"><img src="../../images/1_1_nextflow.png" alt="drawing" width="900"/></p>
+<p align="center">
+  <img class="logo-light" src="./images/nextflow-logo-bg-light.png" alt="Nextflow logo" width="500"/>
+  <img class="logo-dark" src="./images/nextflow-logo-bg-dark.png" alt="Nextflow logo" width="500"/>
+</p>
 
 Nextflow is a **workflow orchestration engine** that makes it easy to write data-intensive computational pipelines.
 
@@ -244,8 +247,8 @@ Usage: run [options] Project name or repository url
        Enable process execution in a Podman container
     -with-report
        Create processes execution html report
-    -with-singularity
-       Enable process execution in a Singularity container
+    -with-APPTAINER
+       Enable process execution in a APPTAINER container
     -with-spack
        Use the specified Spack environment package or file (must end with .yaml
        suffix)
@@ -367,20 +370,20 @@ export NXF_APPTAINER_CACHEDIR=<custom/path/to/apptainer/cache>
 !!! question "Exercise"
  
     <!-- TODO: Check this link is correct -->
-    Export the folder `/nesi/nobackup/nesi02659/nextflow-workshop` as the folder where remote Singularity images are stored:
+    Export the folder `~/.apptainer_cache` as the folder where remote Apptainer images are stored:
 
     ??? success "Solution"
 
-        Export the singularity cache using the `NXF_SINGULARITY_CACHEDIR` environment variable:
+        Export the Apptainer cache using the `NXF_APPTAINER_CACHEDIR` environment variable:
 
         ```bash
-        export NXF_SINGULARITY_CACHEDIR=/nesi/nobackup/nesi02659/nextflow-workshop
+        export NXF_APPTAINER_CACHEDIR=~/.apptainer_cache
         ```
 
-        Check that the `NXF_SINGULARITY_CACHEDIR` has been exported:
+        Check that the `NXF_APPTAINER_CACHEDIR` has been exported:
 
         ```bash
-        echo $NXF_SINGULARITY_CACHEDIR
+        echo $NXF_APPTAINER_CACHEDIR
         ```
 
 See [Environment variables](https://docs.seqera.io/nextflow/reference/env-vars) for a complete list of environment variables.
@@ -455,11 +458,23 @@ If you `run` a pipeline, it will look for a local file with the pipeline name yo
         Hello world!
         ```
 
-See [`run`](https://www.nextflow.io/docs/latest/cli.html#run) for more information about the Nextflow `run` command.
+See [`run`](https://docs.seqera.io/nextflow/cli#launching-a-project) for more information about the Nextflow `run` command.
 
 ### Understanding console outputs
 
-<!-- TODO: High level processes as tasks. More to come later about task directory -->
+When you run a Nextflow pipeline, a series of messages are printed to the terminal.
+The typical Nextflow output structure is:
+
+- Runtime header: `N E X T F L O W  ~  version 25.10.4`
+- Pipeline retrieval if the pipeline was fetched from a remote repository: `Pulling nextflow-io/hello ...`
+- Launch summary: `Launching `https://github.com/nextflow-io/hello` [silly_sax] DSL2 - revision: 1d71f857bb [master]`
+- Executor summary: `executor >  local (4)`
+- Process execution table: `[e6/2132d2] process > sayHello (3) [100%] 4 of 4 ✔`
+- Process outputs: `Hola world!`
+
+This output summarises a lot of key information about a Nextflow run, including what and how many processes were run.
+
+<!-- TODO: I don't love this, but it's a start -->
 
 ## Executing a revision
 
@@ -495,18 +510,35 @@ Nextflow automatically provides built-in support for version control using Git. 
         ```
 
         ```console title="Output"
-        N E X T F L O W  ~  version 25.10.4
+        N E X T F L O W   ~  version 25.10.4
+
         NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]
-        Launching `https://github.com/nextflow-io/hello` [amazing_lovelace] DSL2 - revision: baba3959d7 [v1.1]
+        Nextflow DSL1 is no longer supported — Update your script to DSL2, or use Nextflow 22.10.x or earlier
+        ```
+
+        This failure was expected!
+        As the error message reads, v1.1 of the `hello` pipeline was built on an older version of Nextflow.
+        But we can still run it by telling Nextflow what version to use.
+
+        ```bash
+        NXF_VER=22.10.0 nextflow run nextflow-io/hello -r v1.1
+        ```
+
+        ```console title="Output"
+        Nextflow 25.10.4 is available - Please consider updating your version to it
+        N E X T F L O W  ~  version 22.10.0
+        NOTE: Your local project version looks outdated - a different revision is available in the remote repository [3b355db864]
+        Launching `https://github.com/nextflow-io/hello` [nice_poitras] DSL1 - revision: baba3959d7 [v1.1]
+        WARN: The use of `echo` method has been deprecated
         executor >  local (4)
-        [e6/cfda06] process > sayHello (4) [100%] 4 of 4 ✔
-        Bonjour world! (version 1.1)
-
-        Hello world! (version 1.1)
-
+        [16/d99458] process > sayHello (3) [100%] 4 of 4 ✔
         Ciao world! (version 1.1)
 
+        Bojour world! (version 1.1)
+
         Hola world! (version 1.1)
+
+        Hello world! (version 1.1)
         ```
 
 ## Nextflow log
@@ -555,27 +587,27 @@ nextflow log -l
 
         ```console title="Output"
         TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
-        2025-08-29 07:33:48     3.6s            stupefied_bernard       OK      1d71f857bb      f9e18b71-d689-4589-be34-8cd98c1aab2e    nextflow run nextflow-io/hello
+        2026-03-13 14:50:00     2.8s            nice_poitras            OK      baba3959d7      cc3baf9c-4f20-4edf-bcd4-8b9704a39878    nextflow run nextflow-io/hello -r v1.1
         ```
 
         Query the process, hash, and script using the `-f` option for the most recent run:
 
         ```bash
-        nextflow log stupefied_bernard -f process,hash,script
+        nextflow log nice_poitras -f process,hash,script
         ```
 
         ```console title="Output"
-        sayHello        f3/8f827f
-            echo 'Hola world!'
-            
-        sayHello        b8/b66545
-            echo 'Ciao world!'
-            
-        sayHello        3c/498a68
-            echo 'Bonjour world!'
-            
-        sayHello        6e/8d5b1a
-            echo 'Hello world!'
+        sayHello        e6/54b10e
+            echo 'Ciao world! (version 1.1)'
+        
+        sayHello        28/384df3
+            echo 'Bojour world! (version 1.1)'
+        
+        sayHello        6a/47b87f
+            echo 'Hola world! (version 1.1)'
+        
+        sayHello        16/d99458
+            echo 'Hello world! (version 1.1)'
         ```
 
 ## Execution cache and resume
