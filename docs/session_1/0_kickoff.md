@@ -8,8 +8,8 @@ We will start the session discussing the core features of Nextflow and learning 
 
 It is good practice to organize projects into their own folders to make it easier to track and replicate experiments over time.
 
-!!! terminal-2 "Start by creating a new directory for all of today’s activities and move into it:"
+Start by creating a new directory for all of today’s activities and move into it:
 
-    ```bash
-    mkdir ~/training && cd $_
-    ```
+```bash
+mkdir ~/training && cd $_
+```
