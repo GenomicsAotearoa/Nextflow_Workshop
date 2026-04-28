@@ -1,4 +1,4 @@
-# Reproducible Bioinformatics Workflows with Nextflow and nf-core
+# Reproducible bioinformatics workflows with Nextflow and nf-core
 
 <br>
 <p align="center">
@@ -7,17 +7,34 @@
 </p>
 <br>
 
-[Nextflow](https://www.nextflow.io/) is workflow management software that enables the writing of scalable and reproducible scientific workflows. It can integrate various software packages and environment management systems from environment modules to Docker, Singularity, and Conda. It allows for existing pipelines written in common scripting languages, such as R and Python, to be seamlessly coupled together. It implements a Domain Specific Language (DSL) that simplifies the implementation and running of workflows on cloud or high-performance computing (HPC) infrastructures.
+[Nextflow](https://www.nextflow.io/) is workflow management software that lets you write scalable, reproducible scientific workflows. It is widely used in bioinformatics for pipelines such as variant calling, RNA-seq, and metagenomics, and lets existing scripts in languages like R and Python be coupled together into a single workflow.
 
-This lesson also introduces [nf-core](https://nf-co.re/), a community-driven platform, which provides peer-reviewed best practice analysis pipelines written in Nextflow.
+Nextflow integrates with common software packaging and environment management systems, including Docker, Singularity, Conda, and environment modules. It simplifies running workflows on cloud and high-performance computing (HPC) infrastructures.
+
+The workshop also covers [nf-core](https://nf-co.re/), a community-driven project providing peer-reviewed, best-practice analysis pipelines built with Nextflow.
 
 !!! tutor "Trainers"
 
-    - [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/))
+    - [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera](https://seqera.io/))
     - [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz))
 
-!!! calendar-days "Schedule"
-    #### Session 1
+!!! check "Learning outcomes"
+
+    By the end of this workshop you will be able to:
+
+    - Describe what Nextflow is and the problems it solves for bioinformatics workflows
+    - Run and inspect a Nextflow pipeline from the command line
+    - Explain what nf-core is and how its pipelines are structured
+    - Configure an nf-core pipeline for your own data and compute environment
+    - Apply best practices when running and sharing Nextflow pipelines
+
+!!! info "Prerequisites"
+
+    - Familiarity with the Linux command line (navigating directories, running commands, editing files)
+    - No prior experience with Nextflow or nf-core is required
+
+!!! calendar-days "Sessions"
+
     - [Introduction to Session 1](./session_1/0_kickoff.md)
     - [Introduction to Nextflow](./session_1/1_introduction.md)
     - [Introduction to nf-core](./session_1/2_nfcore.md)
@@ -31,4 +48,4 @@ This will be run on the REANNZ OpenOnDemand platform which already has all the r
 
 ## Acknowledgements
 
-This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera Labs](https://seqera.io/)) and [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz)).
+This workshop material was developed by [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera](https://seqera.io/)) and [Jen Reeve](https://github.com/jen-reeve) ([REANNZ](https://reannz.co.nz)).

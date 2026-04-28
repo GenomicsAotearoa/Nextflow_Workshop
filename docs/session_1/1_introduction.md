@@ -35,15 +35,14 @@ A [**workflow**](https://docs.seqera.io/nextflow/workflow) is a specialized func
 
 A [**process**](https://docs.seqera.io/nextflow/process) is a unit of execution that represents a single computational step in a pipeline. Each process specifies its inputs and outputs, as well as any directives and conditional statements required for its execution. Processes can be written in any scripting language that can be executed by the Linux platform, such as Bash, Python, Perl, Ruby, or R.
 
-Processes are executed independently (i.e., they do not share a common writable state) as **tasks**. Each process executes a task and emits a value for each input it receives, enabling downstream processes to automatically receive and process those values. Multiple tasks can run in parallel, allowing for efficient utilisation of computing resources.
+At runtime, each process is invoked as one or more **tasks** that execute independently. They do not share writable state. Each task consumes an input value, runs the process script, and emits an output value that downstream processes can use. Tasks can run in parallel, making efficient use of available compute resources.
 
 Processes can be **parameterised** to allow for flexibility and reuse within and across pipelines. Pipeline-level parameters (`params`) can be passed into processes at runtime to control behaviour, such as specifying input files, output paths, or tool-specific settings.
 
 [Dataflow logic](https://docs.seqera.io/nextflow/channel) defines how data flows between processes through two types of asynchronous dataflow structures:
 
-<!-- TODO: Add links to relevant docs -->
-- A [**dataflow channel**](https://docs.seqera.io/nextflow/channel#channels) (or simply _channel_) is an asynchronous sequence of values used to pass data between processes.
-- A [**dataflow value**](https://docs.seqera.io/nextflow/channel#values) is a single asynchronous value, typically used for inputs shared across all tasks (e.g., a reference genome).
+- A **dataflow channel** (or simply _channel_) is an asynchronous sequence of values used to pass data between processes.
+- A **dataflow value** is a single asynchronous value, typically used for inputs shared across all tasks (e.g., a reference genome).
 
 The data dependencies between processes implicitly determine the order of execution, meaning processes run based on their input-output relationships rather than the order they appear in the pipeline script.
 
@@ -57,17 +56,13 @@ By default, Nextflow executes processes on the local machine, which is useful fo
 
 See [Executors](https://docs.seqera.io/nextflow/executor) for a full list of Nextflow executors.
 
-## Nextflow CLI
+## Installing Nextflow
 
-Nextflow is a workflow language based on [**Groovy**](https://groovy-lang.org/) (a superset of Java) that simplifies the writing of complex, scalable, and reproducible pipelines. Users can leverage existing programming knowledge without a steep learning curve, as process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, etc.).
+Nextflow is a [**Groovy**](https://groovy-lang.org/)-based workflow language (Groovy is a superset of Java) that runs on any POSIX-compatible system (Linux, macOS, WSL on Windows). It requires Bash 3.2 or later and Java 17 or later, and is distributed as a [self-installing package](https://docs.seqera.io/nextflow/install). No special installation procedure is required.
 
-Nextflow provides a robust **command line interface (CLI)** for managing and executing pipelines. It runs on any POSIX-compatible system (Linux, macOS, etc.) and on Windows through WSL.
+Process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, R, etc.), so you can reuse existing programming knowledge without a steep learning curve.
 
-It requires Bash 3.2 (or later) and Java 17 (or later).
-
-Nextflow is distributed as a [self-installing package](https://docs.seqera.io/nextflow/install) and does not require any special installation procedure.
-
-For today's workshop Nextflow is already installed on the system we will be using, so there should be no additional steps needed.
+For today's workshop Nextflow is already installed on the system we will be using, so no additional steps are needed.
 
 !!! info "How to install Nextflow locally"
 
@@ -82,9 +77,9 @@ For today's workshop Nextflow is already installed on the system we will be usin
 
 ## Nextflow options and commands
 
-Nextflow provides a robust command line interface for the management and execution of pipelines. The top-level interface consists of options and commands.
+The Nextflow CLI is structured as a set of top-level options and commands.
 
-You can list Nextflow options and commands with the `-h` option:
+List them with the `-h` flag:
 
 ```bash
 nextflow -h
@@ -474,8 +469,6 @@ The typical Nextflow output structure is:
 
 This output summarises a lot of key information about a Nextflow run, including what and how many processes were run.
 
-<!-- TODO: I don't love this, but it's a start -->
-
 ## Executing a revision
 
 When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.
@@ -661,8 +654,6 @@ nextflow drop <pipeline>
         ```bash
         nextflow list
         ```
-<br>
-!!! circle-info ""
 
 !!! cboard-list-2 "Key points"
 

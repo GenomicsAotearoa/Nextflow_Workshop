@@ -52,7 +52,7 @@ There are several ways you can join the nf-core community. You are welcome to jo
 
 <a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" alt="Slack logo" width="90"/>
 <a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" alt="GitHub logo" width="90"/>
-<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" alt="Twitter logo" width="100"/> 
+<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" alt="X logo" width="100"/> 
 <a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" alt="Mastodon logo" width="80"/> 
 <a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" alt="Youtube logo" width="120"/>
 <a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" alt="Bluesky logo" width="90"/>
@@ -60,7 +60,7 @@ There are several ways you can join the nf-core community. You are welcome to jo
 
 The nf-core Slack is one of the primary resources for nf-core users. There are dedicated channels for all workflows as well as channels for common topics.
 
-If you are unsure of where to ask you questions - the `#help` and `#nostupidquestions` channels are a great place to start.
+If you are unsure of where to ask your questions - the `#help` and `#nostupidquestions` channels are a great place to start.
 
 Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) accounts on X (formerly Twitter) will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practises, workflows, and community developments.
 
@@ -72,76 +72,24 @@ Joining multiple nf-core and Nextflow channels is important to keep up to date w
 
         Follow [this link](https://nf-co.re/join/slack) to join the nf-core Slack. Follow the instructions to enter your credentials and update your profile. Even if you are already a member of the nf-core Slack, it's a great time to check your profile is up-to-date.
 
-<!-- TODO: Shrink this down, only mention that there is a toolkit and it's MOST useful for developers -->
 ## nf-core tools
 
-This workshop will make use of nf-core tools, a set of helper tools for use with Nextflow workflows. These tools have been developed to provide a range of additional functionality for **using**, **developing**, and **testing** workflows.
+nf-core publishes a Python toolkit ([`nf-core/tools`](https://nf-co.re/tools/)) with helper commands for **using**, **developing**, and **testing** workflows. Most commands are aimed at **developers** building or maintaining pipelines, but a handful are useful to anyone running them. It is already installed in your workshop environment.
 
-??? tip "How to download nf-core tools - *Don't have to do this install today as it is already installed to your workshop environment.*"
-
-    nf-core tools is written in Python and is available from the [Python Package Index (PyPI)](https://pypi.org/project/nf-core/):
-
-    ```bash
-    pip install nf-core
-    ```
-
-    Alternatively, nf-core tools can be installed from [Bioconda](https://anaconda.org/bioconda/nf-core):
-
-    ```bash
-    conda install -c bioconda nf-core
-    ```
-
-The nf-core `--version` option can be used to print your version of nf-core tools:
-
-```bash
-nf-core --version
-```
+Outside the workshop you can install it from [PyPI](https://pypi.org/project/nf-core/) (`pip install nf-core`) or [Bioconda](https://anaconda.org/bioconda/nf-core) (`conda install -c bioconda nf-core`).
 
 !!! question "Exercise"
 
-    Find out what version of nf-core tools you have available using the nf-core `--version` option. If nf-core tools is not installed then install it using the commands above:
+    Check your installed version and browse the available commands:
+
+    ```bash
+    nf-core --version
+    nf-core --help
+    ```
 
     ??? success "Solution"
 
-        Use the nf-core `--version` option to print your nf-core tools version:
-
-        ```bash
-        nf-core --version
-        ```
-
-        If you get the message "`nf-core: command not found`" - install nf-core using the commands above:
-
-        Download `nf-core` from the Python Package Index (PyPI):
-
-        ```bash
-        pip install nf-core
-        ```
-
-        Use the nf-core `--version` option to print your nf-core tools version:
-
-        ```bash
-        nf-core --version
-        ```
-
-nf-core tools are for everyone and has commands to help both **users** and **developers**.
-
-For users, the tools make it easier to execute workflows.
-
-For developers, the tools make it easier to develop and test your workflows using best practices. You can read about the nf-core commands on the [tools page](https://nf-co.re/tools/) of the nf-core website or using the command line.
-
-!!! question "Exercise"
-
-    Find out what nf-core tools commands and options are available using the `--help` option:
-
-    ??? success "Solution"
-
-        Execute the `--help` option to list the options, commands for users, and commands for developers:
-
-        ```bash
-        nf-core --help
-        ```
-
-nf-core tools is updated with new features and fixes regularly so it's best to keep your version of nf-core tools up-to-date.
+        `--version` prints the installed version. `--help` lists every command, grouped into options, user commands, and developer commands.
 
 ## Executing an nf-core workflow
 
@@ -158,7 +106,7 @@ Each workflow has a dedicated page that includes expansive documentation that is
 - **Results:** Example output files generated from the full test dataset
 - **Releases & Statistics:** Workflow version history and statistics
 
-Unless you are actively developing workflow code, you don't need to clone the workflow code from GitHub and can use Nextflow’s built-in functionality to `pull` and a workflow. As shown in the previous lesson, the Nextflow `pull` command can download and cache workflows from [GitHub](https://github.com/nf-core/) repositories:
+Unless you are actively developing workflow code, you don't need to clone the workflow code from GitHub and can use Nextflow's built-in functionality to `pull` a workflow. As shown in the previous lesson, the Nextflow `pull` command can download and cache workflows from [GitHub](https://github.com/nf-core/) repositories:
 
 ```bash
 nextflow pull nf-core/<pipeline>
@@ -170,13 +118,13 @@ Nextflow `run` will also automatically `pull` the workflow if it was not already
 nextflow run nf-core/<pipeline>
 ```
 
-Nextflow will `pull` the default git branch if a workflow version is not specified. This will be the master branch for nf-core workflows with a stable release. nf-core workflows use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a workflow once it is released using the `-revision` or `-r` flag.
+Nextflow will `pull` the default git branch if a workflow version is not specified. This will be the default branch (typically `master`, or `main` on newer pipelines) for nf-core workflows with a stable release. nf-core workflows use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a workflow once it is released using the `-revision` or `-r` flag.
 
 ## nf-core demo
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.
 
-![nf-core demo diagrom](../images/1_2_nf-core-demo-subway.png)
+![nf-core demo diagram](../images/1_2_nf-core-demo-subway.png)
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) pipeline was created with the nf-core `create` command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:
 
@@ -195,7 +143,6 @@ nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results
 
 The command line output will print something like this:
 
-<!-- TODO: Run and replace to make sure this is accurate -->
 ```console title="Output"
  N E X T F L O W   ~  version 25.10.4
 
@@ -261,7 +208,11 @@ Executing this pipeline will create a `work` directory and a `results` directory
 
 In the output above, the hexadecimal numbers, such as `27/5fa7c0`, identify the unique task execution. These numbers are also the prefix of the `work` directories where each task is executed.
 
-You can inspect the files produced by a task by looking inside the `work` directory and using these numbers to find the task-specific execution path:
+You can inspect the files produced by a task by looking inside its `work` directory. Use the prefix shown in the output to find the task-specific execution path — for example:
+
+```bash
+ls work/27/5fa7c0*
+```
 
 The files that have been selected for publication in the `results` folder can also be explored:
 
@@ -271,15 +222,19 @@ ls results
 
 If you look inside the `work` directory of a `FASTQC` task, you will find the files that were staged and created when this task was executed:
 
-The `FASTQC` process runs four times, executing in a different work directories for each set of inputs. Therefore, in the previous example, the work directory `[27/5fa7c0]` represents just one of the four sets of input data that was processed.
+```bash
+ls work/27/5fa7c0*/
+```
 
-To print all the relevant paths to the screen, use the `-ansi-log` option can be used when executing your pipeline:
+The `FASTQC` process runs three times, executing in a different work directory for each set of inputs. Therefore, in the previous example, the work directory `[27/5fa7c0]` represents just one of the three sets of input data that was processed.
+
+To print all the relevant paths to the screen, the `-ansi-log` option can be used when executing your pipeline:
 
 ```bash
 nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -ansi-log false
 ```
 
-It's very likely you will execute a pipeline multiple times as you find the parameters that best suit your data. You can save a lot of spaces (and time) if you **resume** a pipeline from the last step that was completed successfully or unmodified.
+It's very likely you will execute a pipeline multiple times as you find the parameters that best suit your data. You can save a lot of space (and time) if you **resume** a pipeline from the last step that was completed successfully or unmodified.
 
 By adding the `-resume` option to your `run` command you can use the cache rather than re-running successful tasks:
 
@@ -291,9 +246,10 @@ If you `run` the `nf-core/demo` pipeline again without making any changes you wi
 
 ```console title="Output"
 [truncated]
-[b2/873706] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE2_PE_T1)    [100%] 4 of 4, cached: 4 ✔
-[cc/123456] process > NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE2_PE_T1)[100%] 4 of 4, cached: 4 ✔
-[ca/e8e0a8] process > NFCORE_DEMO:DEMO:MULTIQC                    [100%] 1 of 1, cached: 1 ✔
+executor >  local (0)
+[27/5fa7c0] process > NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3, cached: 3 ✔
+[ce/582855] process > NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3, cached: 3 ✔
+[73/3bb38e] process > NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1, cached: 1 ✔
 [truncated]
 ```
 
@@ -331,7 +287,7 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
 
         In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was modified. Touching the symlink and changing the date of last modification caused Nextflow to re-run the affected task and all downstream tasks that depended on its output.
 
-Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of it's contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
+Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of its contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
 
 ```bash
@@ -343,7 +299,7 @@ The `-after`, `-before`, and `-but` options are all very useful to select specif
 
 !!! question "Exercise"
 
-    You Nextflow to `clean` your work `work` directory of staged files but **keep** your execution logs.
+    Use Nextflow to `clean` your `work` directory of staged files but **keep** your execution logs.
 
     ??? success "Solution"
 
@@ -353,9 +309,11 @@ The `-after`, `-before`, and `-but` options are all very useful to select specif
         nextflow clean -k -f
         ```
 
-<!-- TODO: Update, more? -->
 !!! cboard-list-2 "Key points"
 
     - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow.
-    - nf-core has its own tooling that can be used by users and developers.
-    - nf-core pipelines come wth test data and configuration profiles that help them run out of the box
+    - nf-core publishes a Python toolkit (`nf-core/tools`) that is most useful to pipeline developers, but also has helpers for users.
+    - nf-core pipelines come with test data and configuration profiles that help them run out of the box.
+    - `nextflow pull` and `nextflow run` will fetch a pipeline from GitHub, and `-revision`/`-r` pins a specific release.
+    - `-resume` reuses cached task results and is sensitive — even touching a staged file will invalidate the cache.
+    - `nextflow clean` removes data from previous runs selectively; use `-dry-run` first to see what would be removed.
