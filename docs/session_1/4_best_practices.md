@@ -2,8 +2,6 @@
 
 ## Configuration
 
-<!-- TODO: Add suggestions for organising configs into pipeline, system, and run configs. Plus any other suggestions for tracking runs. May be more abstract. -->
-
 For reproducibility and clarity, we recommend using the ability to stack Nextflow configurations and use three distinct `.config` files.
 
 - Pipeline-level config: This configuration is system and data agnostic, but should be untouched for any runs of the given pipeline
@@ -14,21 +12,29 @@ For reproducibility and clarity, we recommend using the ability to stack Nextflo
 
 ## Reporting
 
-Nextflow provides tools that can assist you in making efficient use of the HPC resources. We strongly recommend testing your pipeline with a small subset of data to determine optimal settings before running full datasets.
+Nextflow provides tools that can assist you in making efficient use of resources.
+
+### Execution reports
 
 The most human-readable, but least configurable option is the execution report which is an [HTML execution report](https://docs.seqera.io/nextflow/reports#execution-report) containing CPU and memory utilization information for each individual process as well as each process type. This information can be used to ensure processes are only getting the resources they need.
 
+!!! question "Exercise"
+
+    Download an execution report from one of our nf-core/demo runs and open it in your browser to view it.
+
+    Which process takes the most memory? CPU? Time?
+
+### Execution traces
+
 For a more configurable option, the [trace file](https://docs.seqera.io/nextflow/reports#trace-file) provides many potential fields of interest which can be requested. A full list of fields is available at the previous documentation link, but several of note for optimization and debugging:
 
-- `native_id` will provide the job ID for any jobs submitted to Slurm
+- `native_id` will provide the job ID for any jobs submitted to a job scheduler
 - `duration` will show the time from submission of the process to completion of the process
 - `realtime` will show the time from the start of the process to completion of the process (job run time)
 - `%cpu` will show the percentage of CPU used by the process
 - `%mem` will sow the percentage of memory used by the process
 - `peak_rss` will show the peak of real memory used
 - `workdir` will provide the path to the working directory of the process
-
-<!-- TODO: create exercise? -->
 
 ## Approaches for running Nextflow pipelines on HPCs
 
