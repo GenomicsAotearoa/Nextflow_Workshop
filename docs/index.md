@@ -9,7 +9,7 @@
 
 [Nextflow](https://www.nextflow.io/) is workflow management software that lets you write scalable, reproducible scientific workflows. It is widely used in bioinformatics for pipelines such as variant calling, RNA-seq, and metagenomics, and lets existing scripts in languages like R and Python be coupled together into a single workflow.
 
-Nextflow integrates with common software packaging and environment management systems, including Docker, Singularity, Conda, and environment modules. It simplifies running workflows on cloud and high-performance computing (HPC) infrastructures.
+Nextflow integrates with common software packaging and environment management systems, including Docker, Apptainer, Conda, and environment modules. It simplifies running workflows on cloud and high-performance computing (HPC) infrastructures.
 
 The workshop also covers [nf-core](https://nf-co.re/), a community-driven project providing peer-reviewed, best-practice analysis pipelines built with Nextflow.
 
@@ -32,14 +32,6 @@ The workshop also covers [nf-core](https://nf-co.re/), a community-driven projec
 
     - Familiarity with the Linux command line (navigating directories, running commands, editing files)
     - No prior experience with Nextflow or nf-core is required
-
-!!! calendar-days "Sessions"
-
-    - [Introduction to Session 1](./session_1/0_kickoff.md)
-    - [Introduction to Nextflow](./session_1/1_introduction.md)
-    - [Introduction to nf-core](./session_1/2_nfcore.md)
-    - [Configuring nf-core pipelines](./session_1/3_configuration.md)
-    - [Best practices](./session_1/4_best_practices.md)
 
 ## Setup
 

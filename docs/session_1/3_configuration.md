@@ -3,13 +3,13 @@
 !!! clipboard-list "Objectives"
 
     - Learn about the structure of an nf-core pipeline.
-    - Learn how to customize the execution of an nf-core pipeline.
+    - Learn how to customise the execution of an nf-core pipeline.
     - Customize a toy example of an nf-core pipeline.
 
 <!-- TODO: Consider this content could be own page or larger section, find balance between running and developing -->
 ## Pipeline structure
 
-nf-core pipelines follow a set of best practices and standardised conventions. nf-core pipelines start from a **common template** and follow the same structure. Although you won’t need to edit code in the pipeline project directory, having a basic understanding of the project structure and some core terminology will help you understand how to configure its execution.
+nf-core pipelines follow a set of best practices and standardised conventions. nf-core pipelines start from a **common template** and follow the same structure. Although you won't need to edit code in the pipeline project directory, having a basic understanding of the project structure and some core terminology will help you understand how to configure its execution.
 
 Nextflow DSL2 <span style="color:#087f5b;">**workflows**</span> are built up of <span style="color:#c92a2a;">**subworkflows**</span> and <span style="color:#364fc7;">**modules**</span> that are stored as separate `.nf` files.
 
@@ -25,7 +25,7 @@ Most nf-core pipelines consist of a single <span style="color:#087f5b;">**workfl
 
 A <span style="color:#c92a2a;">**subworkflow**</span> is a group of modules that are used in combination with each other and have a common purpose. For example, the [`SAMTOOLS_STATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/stats/main.nf), [`SAMTOOLS_IDXSTATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/faidx/main.nf), and [`SAMTOOLS_FLAGSTAT`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/flagstat/main.nf) modules are all included in the [`BAM_STATS_SAMTOOLS`](https://github.com/nf-core/modules/blob/master/subworkflows/nf-core/bam_stats_samtools/main.nf) subworkflow.
 
-Subworkflows improve pipeline readability and help with the reuse of modules within a pipeline. Within a nf-core pipeline, a subworkflow can be an nf-core subworkflow or as a local subworkflow. Like an nf-core pipeline, an nf-core subworkflow is developed by the community is shared in the [nf-core subworkflows GitHub repository](https://github.com/nf-core/modules/tree/master/subworkflows/nf-core). Local subworkflows are pipeline specific and are not shared in the nf-core subworkflows repository.
+Subworkflows improve pipeline readability and help with the reuse of modules within a pipeline. Within a nf-core pipeline, a subworkflow can be an nf-core subworkflow or a local subworkflow. Like an nf-core pipeline, an nf-core subworkflow is developed by the community and is shared in the [nf-core subworkflows GitHub repository](https://github.com/nf-core/modules/tree/master/subworkflows/nf-core). Local subworkflows are pipeline specific and are not shared in the nf-core subworkflows repository.
 
 A <span style="color:#364fc7;">**module**</span> is a wrapper for a process, the basic processing primitive to execute a user script. It can specify [directives](https://docs.seqera.io/nextflow/process#directives), [inputs](https://docs.seqera.io/nextflow/process#inputs), [outputs](https://docs.seqera.io/nextflow/process#outputs), [when statements](https://docs.seqera.io/nextflow/process#when), and a [script](https://docs.seqera.io/nextflow/process#script) block.
 
@@ -33,7 +33,7 @@ Most modules will execute a single tool in the script block and will make use of
 
 ## Configuration
 
-Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will almost certainly want to modify these to fit your own purposes and system requirements.
+Each nf-core pipeline comes with a set of "sensible defaults". While the defaults are a great place to start, you will almost certainly want to modify these to fit your own purposes and system requirements.
 
 **You do not need to edit the pipeline code to configure nf-core pipelines.**
 
@@ -41,7 +41,7 @@ When a pipeline is launched, Nextflow will look for configuration files in sever
 
 1. Parameters specified on the command line (`--parameter`)
 2. Parameters that are provided using the `-params-file` option
-3. Config file that are provided using the `-c` option
+3. Config files that are provided using the `-c` option
 4. The config file named `nextflow.config` in the current directory
 5. The config file named `nextflow.config` in the pipeline project directory
 6. The config file `$HOME/.nextflow/config`
@@ -53,7 +53,7 @@ When a pipeline is launched, Nextflow will look for configuration files in sever
 
 Notably, while some of these files are already included in the nf-core pipeline repository (e.g., the `nextflow.config` file in the nf-core pipeline repository), some are automatically identified on your local system (e.g., the `nextflow.config` in the launch directory), and others are only included if they are specified using `run` options (e.g., `-params-file`, and `-c`).
 
-Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipelines execution.
+Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipeline's execution.
 
 ### Parameters
 
@@ -88,7 +88,7 @@ nextflow run nf-core/<workflow> --help
 At the highest level, parameters can be customised using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (`--`):
 
 ```bash
-nextflow nf-core/<workflow> --<parameter>
+nextflow run nf-core/<workflow> --<parameter>
 ```
 
 !!! tip "When to use `--` and `-`"
@@ -98,19 +98,19 @@ nextflow nf-core/<workflow> --<parameter>
 Depending on the parameter type, you may be required to add additional information after your parameter flag. For example, for a string parameter, you would add the string after the parameter flag:
 
 ```bash
-nextflow nf-core/<workflow> --<parameter> string
+nextflow run nf-core/<workflow> --<parameter> string
 ```
 
 !!! question "Exercise" 
 
-    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favorite animal** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter using a command line flag:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favourite animal** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter using a command line flag:
 
     ??? success "Solution"
 
         Add the `--multiqc_title` flag to your command and execute it. Use the `-resume` option to save time:
 
         ```bash
-        nextflow run nf-core/demo -profile test,singularity -r 1.1.0 --outdir results --multiqc_title kiwi -resume
+        nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results --multiqc_title kiwi -resume
         ```
 
         In this example, you can check your parameter has been applied by listing the files created in the results folder (`results`):
@@ -172,7 +172,7 @@ nf-core pipelines are required to define **software containers** and **conda env
 
 !!! tip 
 
-    If you're computer has internet access and one of Conda, Apptainer, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile 'out of the box'.
+    If your computer has internet access and one of Conda, Apptainer, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile 'out of the box'.
     
     The `test` data profile will pull small test files directly from the `nf-core/test-data` GitHub repository and run it on your local system. The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline. Some pipelines have multiple test `profiles` for you to try.
 
@@ -215,7 +215,7 @@ nextflow run nf-core/<workflow> -profile test,apptainer -r 1.1.0 --outdir result
 
 !!! question "Exercise"
 
-    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favorite food** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a parameters file:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your **favourite food** using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a parameters file:
 
     ??? success "Solution"
 
@@ -230,7 +230,7 @@ nextflow run nf-core/<workflow> -profile test,apptainer -r 1.1.0 --outdir result
         Include the custom `.json` file in your execution command with the `-params-file` option:
 
         ```bash
-        nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -params-file my_custom_params.json
+        nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -params-file my-custom-params.json
         ```
 
         Check that it has been applied:
@@ -241,7 +241,7 @@ nextflow run nf-core/<workflow> -profile test,apptainer -r 1.1.0 --outdir result
 
 **Configuration files**
 
-Configuration files are `.config` files that can contain various pipeline properties. Custom paths passed in the command-line using the `-c` option:
+Configuration files are `.config` files that can contain various pipeline properties. Custom paths are passed on the command line using the `-c` option:
 
 ```bash
 nextflow run nf-core/<workflow> -profile test,apptainer -c <path/to/custom.config>
@@ -273,7 +273,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
 
 !!! question "Exercise"
 
-    Give the MultiQC report for the `nf-core/demo` pipeline the name of your favorite color using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a custom `.config` file:
+    Give the MultiQC report for the `nf-core/demo` pipeline the name of your favourite colour using the [`multiqc_title`](https://github.com/nf-core/demo/blob/main/nextflow.config) parameter in a custom `.config` file:
 
     ??? success "Solution"
 
@@ -297,7 +297,7 @@ Multiple scopes can be included in the same `.config` file using a mix of dot pr
 
         **Why did this fail?**
 
-        You **can not** use the `params` scope in custom configuration files. Parameters can only be configured using the `-params-file` option and the command line. While it parameter is listed as a parameter on the `STDOUT`, it **was not** applied to the executed command:
+        You **can not** use the `params` scope in custom configuration files. Parameters can only be configured using the `-params-file` option and the command line. While the parameter is listed in stdout, it **was not** applied to the executed command:
 
         ```bash
         nextflow log
@@ -340,10 +340,10 @@ For example, if you were trying to add arguments in the `MULTIQC` process in the
 
 ```console title="custom.config"
 process {
-    withName : ".*:MULTIQC" {
-        ext.args   = { "<your custom parameter>" }
-
+    withName: ".*:MULTIQC" {
+        ext.args = { "<your-custom-parameter>" }
     }
+}
 ```
 
 However, if a process is used multiple times in the same pipeline, an extended execution path of the module may be required to make it more specific:
@@ -356,7 +356,7 @@ process {
 }
 ```
 
-The extended execution path is built from the pipelines, subworkflows, and module used to execute the process.
+The extended execution path is built from the pipelines, subworkflows, and modules used to execute the process.
 
 In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/blob/main/modules/nf-core/multiqc/main.nf) module was called by the [`DEMO`](https://github.com/nf-core/demo/blob/main/workflows/demo.nf) workflow, which was called by the [`NFCORE_DEMO`](https://github.com/nf-core/demo/blob/main/main.nf) pipeline in the `main.nf` file.
 
@@ -385,7 +385,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
         Execute your run command again with the custom configuration file:
 
         ```bash
-        nextflow run nf-core/demo -r 1.1.0 -profile test,singularity --outdir results -resume -c custom.config
+        nextflow run nf-core/demo -r 1.1.0 -profile test,apptainer --outdir results -resume -c custom.config
         ```
 
         Check that it has been applied:
@@ -411,7 +411,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
         Execute your command with your params file (`-params-file`) and a command line flag (`--multiqc_title`):
 
         ```bash
-        nextflow run nf-core/demo -r 1.1.0 -profile test,singularity --outdir results -resume -params-file my_custom_params.json --multiqc_title "cake"
+        nextflow run nf-core/demo -r 1.1.0 -profile test,apptainer --outdir results -resume -params-file my-custom-params.json --multiqc_title "cake"
         ```
 
         In this example, as the command line is at the top of the hierarchy, the `multiqc_title` will be "cake".
@@ -421,7 +421,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
 
 !!! cboard-list-2 "Key points"
 
-    - nf-core pipelines follow a similar structure.
-    - nf-core pipelines are configured using multiple configuration sources.
-    - Configuration sources are ranked to decide which settings to apply.
-    - Pipeline parameters must be passed via the command line (`--<parameter>`) or Nextflow `-params-file` option.
+    - nf-core pipelines follow a similar structure
+    - nf-core pipelines are configured using multiple configuration sources
+    - Configuration sources are ranked to decide which settings to apply
+    - Pipeline parameters must be passed via the command line (`--<parameter>`) or Nextflow `-params-file` option

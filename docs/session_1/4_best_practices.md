@@ -4,9 +4,9 @@
 
 For reproducibility and clarity, we recommend using the ability to stack Nextflow configurations and use three distinct `.config` files.
 
-- Pipeline-level config: This configuration is system and data agnostic, but should be untouched for any runs of the given pipeline
-- System-level config: This configuration is pipeline agnostic but provides settings for running on a given computer system
-- Run-level config: This configuration is where changes are made to fine-tune for the specifics of a given run/system/pipeline combination
+- **Pipeline-level config**: This configuration is system and data agnostic, but should be untouched for any runs of the given pipeline
+- **System-level config**: This configuration is pipeline agnostic but provides settings for running on a given computer system
+- **Run-level config**: This configuration is where changes are made to fine-tune for the specifics of a given run/system/pipeline combination
 
 <!-- TODO: create exercise? kinda covered at the end of the last section -->
 

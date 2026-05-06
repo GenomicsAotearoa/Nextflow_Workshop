@@ -4,7 +4,7 @@
 
     - Learn about the core features of nf-core.
     - Learn how to use nf-core tooling.
-    - Use Nextflow to pull the `nf-core/demo` workflow
+    - Use Nextflow to pull the `nf-core/demo` workflow.
 
 ## What is nf-core?
 
@@ -21,7 +21,7 @@ The community is a diverse group of bioinformaticians, developers, and researche
 
 One of the key benefits of nf-core is that it promotes **open development**, **testing**, and **peer review**, ensuring that the workflows are robust, well-documented, and validated against real-world datasets. This helps to increase the reliability and reproducibility of bioinformatics analyses and ultimately enables researchers to accelerate their scientific discoveries.
 
-nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x)
+nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x).
 
 **Key Features of nf-core workflows**
 
@@ -32,13 +32,13 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 - **Stable Releases**
     - nf-core workflows use GitHub releases to tag stable versions of the code and software, making workflow runs totally reproducible.
 - **Packaged software**
-    - Pipeline dependencies are automatically downloaded and handled using Docker, apptainer, Conda, or other software management tools. There is no need for any software installations.
+    - Pipeline dependencies are automatically downloaded and handled using Docker, Apptainer, Conda, or other software management tools. There is no need for any software installations.
 - **Portable and reproducible**
     - nf-core workflows follow best practices to ensure maximum portability and reproducibility. The large community makes the workflows exceptionally well-tested and easy to execute.
 - **Cloud-ready**
     - nf-core workflows are tested on AWS after every major release. You can even browse results live on the website and use outputs for your own benchmarking.
 
-It is important to remember all nf-core workflows are **open-source** and **community driven**. Pipelines are under active community development and are regularly updated with fixes and other improvements. Even though the pipelines and tools undergo repeated community review and testing - it is important to check your results.
+It is important to remember all nf-core workflows are **open-source** and **community driven**. Pipelines are under active community development and are regularly updated with fixes and other improvements. Even though the pipelines and tools undergo repeated community review and testing — it is important to check your results.
 
 ## Events
 
@@ -50,19 +50,19 @@ Upcoming events are listed on the [nf-core event page](https://nf-co.re/events) 
 
 There are several ways you can join the nf-core community. You are welcome to join any or all of these at any time!
 
-<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" alt="Slack logo" width="90"/>
-<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" alt="GitHub logo" width="90"/>
-<a href="https://twitter.com/nf_core"><img src="../../images/1_2_twitter.png" alt="X logo" width="100"/> 
-<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" alt="Mastodon logo" width="80"/> 
-<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" alt="Youtube logo" width="120"/>
-<a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" alt="Bluesky logo" width="90"/>
-<a href="https://www.linkedin.com/company/nf-core"><img src="../../images/1_2_linkedin.png" alt="LinkedIn logo" width="90"/>
+<a href="https://nf-co.re/join/slack"><img src="../../images/1_2_slack.png" alt="Slack logo" width="90"/></a>
+<a href="https://github.com/nf-core"><img src="../../images/1_2_github.png" alt="GitHub logo" width="90"/></a>
+<a href="https://twitter.com/nf_core"><img src="../../images/1_2_x.png" alt="X logo" width="90"/></a>
+<a href="https://mstdn.science/@nf_core"><img src="../../images/1_2_mastodon.png" alt="Mastodon logo" width="80"/></a>
+<a href="https://www.youtube.com/c/nf-core"><img src="../../images/1_2_youtube.png" alt="Youtube logo" width="120"/></a>
+<a href="https://bsky.app/profile/nf-co.re"><img src="../../images/1_2_bluesky.png" alt="Bluesky logo" width="90"/></a>
+<a href="https://www.linkedin.com/company/nf-core"><img src="../../images/1_2_linkedin.png" alt="LinkedIn logo" width="90"/></a>
 
 The nf-core Slack is one of the primary resources for nf-core users. There are dedicated channels for all workflows as well as channels for common topics.
 
-If you are unsure of where to ask your questions - the `#help` and `#nostupidquestions` channels are a great place to start.
+If you are unsure of where to ask your questions — the `#help` and `#nostupidquestions` channels are a great place to start.
 
-Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) accounts on X (formerly Twitter) will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practises, workflows, and community developments.
+Joining multiple nf-core and Nextflow channels is important to keep up to date with the latest community developments and updates. In particular, following the [nf-core](https://twitter.com/nf_core) and [Nextflow](https://twitter.com/nextflowio) accounts on X (formerly Twitter) will keep you up-to-date with community announcements. If you are looking for more information about a workflow, the [nf-core YouTube channel](https://www.youtube.com/c/nf-core) regularly shares [ByteSize seminars](https://nf-co.re/events/bytesize/) about best practices, workflows, and community developments.
 
 !!! question "Optional exercise"
 
@@ -124,7 +124,7 @@ Nextflow will `pull` the default git branch if a workflow version is not specifi
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) is a very small nf-core pipeline. It uses real data and bioinformatics software and requires additional configuration to run successfully.
 
-![nf-core demo diagram](../images/1_2_nf-core-demo-subway.png)
+![nf-core demo diagram](../../images/1_2_nf-core-demo-subway.png)
 
 The [`nf-core/demo`](https://github.com/nf-core/demo) pipeline was created with the nf-core `create` command and has the same structure as nf-core pipelines. It is a toy example with 3 processes:
 
@@ -287,7 +287,7 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
 
         In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was modified. Touching the symlink and changing the date of last modification caused Nextflow to re-run the affected task and all downstream tasks that depended on its output.
 
-Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practise to `clean` your work directory regularly. Rather than removing the `work` folder with all of its contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
+Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practice to `clean` your work directory regularly. Rather than removing the `work` folder with all of its contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
 
 ```bash
@@ -311,9 +311,9 @@ The `-after`, `-before`, and `-but` options are all very useful to select specif
 
 !!! cboard-list-2 "Key points"
 
-    - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow.
-    - nf-core publishes a Python toolkit (`nf-core/tools`) that is most useful to pipeline developers, but also has helpers for users.
-    - nf-core pipelines come with test data and configuration profiles that help them run out of the box.
-    - `nextflow pull` and `nextflow run` will fetch a pipeline from GitHub, and `-revision`/`-r` pins a specific release.
-    - `-resume` reuses cached task results and is sensitive — even touching a staged file will invalidate the cache.
-    - `nextflow clean` removes data from previous runs selectively; use `-dry-run` first to see what would be removed.
+    - nf-core is a community effort to collect a curated set of analysis workflows built using Nextflow
+    - nf-core publishes a Python toolkit (`nf-core/tools`) that is most useful to pipeline developers, but also has helpers for users
+    - nf-core pipelines come with test data and configuration profiles that help them run out of the box
+    - `nextflow pull` and `nextflow run` will fetch a pipeline from GitHub, and `-revision`/`-r` pins a specific release
+    - `-resume` reuses cached task results and is sensitive — even touching a staged file will invalidate the cache
+    - `nextflow clean` removes data from previous runs selectively; use `-dry-run` first to see what would be removed

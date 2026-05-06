@@ -62,7 +62,7 @@ Nextflow is a [**Groovy**](https://groovy-lang.org/)-based workflow language (Gr
 
 Process scripts can be written in any Linux-compatible language (Bash, Python, Perl, Ruby, R, etc.), so you can reuse existing programming knowledge without a steep learning curve.
 
-For today's workshop Nextflow is already installed on the system we will be using, so no additional steps are needed.
+For today's workshop, Nextflow is already installed on the system we will be using, so no additional steps are needed.
 
 !!! info "How to install Nextflow locally"
 
@@ -423,7 +423,7 @@ If you `run` a pipeline, it will look for a local file with the pipeline name yo
 
 !!! warning
 
-    Be aware of what is already in your current working directory where you launch your pipeline. If your current working directory contains nextflow configuration files you may encounter unexpected results.
+    Be aware of what is already in your current working directory where you launch your pipeline. If your current working directory contains Nextflow configuration files you may encounter unexpected results.
 
 !!! question "Exercise"
 
@@ -471,7 +471,7 @@ This output summarises a lot of key information about a Nextflow run, including 
 
 ## Executing a revision
 
-When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique number, which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.
+When a Nextflow pipeline is created or updated using GitHub (or another code repository), a new revision is created. Each revision is identified by a unique git reference (branch, tag, or commit SHA), which can be used to track changes made to the pipeline and to ensure that the same version of the pipeline is used consistently across different runs.
 
 The Nextflow `info` command can be used to view pipeline properties, such as the project name, repository, local path, main script, and revisions. The `*` indicates which revision of the pipeline is pinned and will be executed when using the `run` command.
 
@@ -493,7 +493,6 @@ Nextflow automatically provides built-in support for version control using Git. 
 
     Execute the `hello` pipeline directly from the `nextflow-io` GitHub using the `v1.1` revision tag.
 
-    <!-- TODO: Expected fail, use NXF_VER=22.10.0 nextflow run nextflow-io/hello -r v1.1 -->
     ??? success "Solution"
 
         Use the `nextflow run` command to execute the `nextflow-io/hello` pipeline with the `v1.1` revision tag:
@@ -657,8 +656,8 @@ nextflow drop <pipeline>
 
 !!! cboard-list-2 "Key points"
 
-    - Nextflow is a pipeline orchestration engine that makes it easy to write data-intensive computational pipelines
+    - Nextflow is a workflow orchestration engine that makes it easy to write data-intensive computational pipelines
     - Environment variables can be used to control your Nextflow runtime and the underlying Java virtual machine
-    - Nextflow supports version control and has automatic integrations with online code repositories.
+    - Nextflow supports version control and has automatic integrations with online code repositories
     - Nextflow will cache your runs and they can be resumed with the `-resume` option
     - You can manage pipelines with Nextflow commands (e.g., `pull`, `clone`, `list`, and `drop`)
