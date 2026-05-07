@@ -13,14 +13,6 @@ Nextflow integrates with common software packaging and environment management sy
 
 The workshop also covers [nf-core](https://nf-co.re/), a community-driven project providing peer-reviewed, best-practice analysis pipelines built with Nextflow.
 
-!!! clipboard-list "Objectives"
-
-    - Explain the structure of a Nextflow workflow.
-    - Use the fundamental Nextflow commands and options.
-    - Describe the key features of an nf-core pipeline.
-    - Customise the execution of an nf-core pipeline.
-    - Evaluate the resource usage of a pipeline and adjust settings to improve efficiency.
-
 !!! tutor "Trainers"
 
     - [Chris Hakkaart](https://github.com/christopher-hakkaart) ([Seqera](https://seqera.io/))
