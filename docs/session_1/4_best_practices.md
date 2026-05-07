@@ -6,7 +6,6 @@
     - Produce reports on the efficiency of a workflow.
     - Compare methods for running a Nextflow workflow on an HPC.
 
-
 ## Configuration
 
 For reproducibility and clarity, we recommend using the ability to stack Nextflow configurations and use three distinct `.config` files.
@@ -15,7 +14,10 @@ For reproducibility and clarity, we recommend using the ability to stack Nextflo
 - **System-level config**: This configuration is pipeline agnostic but provides settings for running on a given computer system
 - **Run-level config**: This configuration is where changes are made to fine-tune for the specifics of a given run/system/pipeline combination
 
-<!-- TODO: create exercise? kinda covered at the end of the last section -->
+!!! question "Exercise"
+
+    You've used a test profile to run a workflow you want to use for your data and it worked!
+    Which config do you need to adjust to do the first run with your data in this environment?
 
 ## Reporting
 
@@ -50,8 +52,14 @@ Caveat: this is generally true on different HPC systems, but the notes below are
 - Running Nextflow in an interactive Slurm session
   - This method is best for setting up or debugging pipeline executions as the pipeline will end as soon as the interactive session ends.
 - Submitting a Nextflow workflow as a batch job
-  - This method will run all sub-processes in the same Slurm job. This is best if your workflow would spawn a large number of short jobs.
+  - This method will run all sub-processes in the same Slurm job. This is best if your workflow would mostly spawn a large number of short jobs.
 - Submitting a Nextflow workflow via a head job
   - This method requires submitting a low resource but long running batch job which will control the Nextflow workflow and all processes will be submitted by Nextflow as separate jobs to Slurm. This method is useful for workflows with lots of variation in their computational needs and which comprise mostly long running processes.
 
-<!-- TODO: add demo info? -->
+!!! question "Exercise"
+
+    Find the Mahuika nf-core configuration file and identify what profile you might use for each of the above methods.
+
+!!! question "Exercise -  Advanced"
+
+    What configuration settings could you use if you have a workflow that is a mix of very short and very long processes?
