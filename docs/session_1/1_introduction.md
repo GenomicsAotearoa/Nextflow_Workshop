@@ -2,9 +2,9 @@
 
 !!! clipboard-list "Objectives"
 
-    - Learn about the core features of Nextflow
-    - Learn Nextflow terminology
-    - Learn fundamental commands and options for executing pipelines
+    - Describe the core features of Nextflow.
+    - Define Nextflow terminology.
+    - Use the fundamental commands and options for executing pipelines.
 
 ## What is Nextflow?
 

@@ -1,5 +1,12 @@
 # Best practices
 
+!!! clipboard-list "Objectives"
+
+    - Distinguish between the different types of configuration files.
+    - Produce reports on the efficiency of a workflow.
+    - Compare methods for running a Nextflow workflow on an HPC.
+
+
 ## Configuration
 
 For reproducibility and clarity, we recommend using the ability to stack Nextflow configurations and use three distinct `.config` files.

@@ -2,9 +2,10 @@
 
 !!! clipboard-list "Objectives"
 
-    - Learn about the structure of an nf-core pipeline.
-    - Learn how to customise the execution of an nf-core pipeline.
-    - Customize a toy example of an nf-core pipeline.
+    - Describe the features of an nf-core pipeline.
+    - Use command line options to alter a workflow's execution.
+    - Customize an nf-core pipeline using a configuration file.
+    - Employ a profile to switch configurations.
 
 <!-- TODO: Consider this content could be own page or larger section, find balance between running and developing -->
 ## Pipeline structure
@@ -17,8 +18,8 @@ Nextflow DSL2 <span style="color:#087f5b;">**workflows**</span> are built up of 
 <p align="left"><img src="../../images/1_3_structure.excalidraw.png" alt="nf-core pipeline file structure" width="400"/></p> 
 <br>
 
-Most nf-core pipelines consist of a single <span style="color:#087f5b;">**workflow**</span> file (there are a few exceptions). This is the main `<workflow>.nf` file that is used to bring everything else together. Instead of having one large monolithic script, it is broken up into a combination of <span style="color:#c92a2a;">**subworkflows**</span> and <span style="color:#364fc7;">**modules**</span>.
-
+Most nf-core pipelines consist of mbination of <span style="color:#c92a2a;">**subworkflows**</span> and <span style="color:#364fc7;">**modules**</span>.
+a single <span style="color:#087f5b;">**workflow**</span> file (there are a few exceptions). This is the main `<workflow>.nf` file that is used to bring everything else together. Instead of having one large monolithic script, it is broken up into a co
 <br>
 <p align="center"><img src="../../images/1_3_worksubmod.excalidraw.png" alt="scaffolding of nf-core pipeline" width="900"/></p> 
 <br>

@@ -2,9 +2,9 @@
 
 !!! clipboard-list "Objectives"
 
-    - Learn about the core features of nf-core.
-    - Learn how to use nf-core tooling.
+    - Describe the nf-core resources.
     - Use Nextflow to pull the `nf-core/demo` workflow.
+    - Practice resuming and cleaning Nextflow workflows.
 
 ## What is nf-core?
 
