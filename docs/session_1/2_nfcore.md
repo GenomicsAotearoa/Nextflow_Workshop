@@ -255,11 +255,15 @@ executor >  local (0)
 
 In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files. If this condition is satisfied, the task execution is skipped and previously computed results are used as the process results.
 
-The `-resume` functionality is very sensitive. Even touching a file in the work directory can invalidate the cache.
+The `-resume` functionality is very sensitive. Even touching a file in the work directory may invalidate the cache.
+
+!!! note
+
+    Because `nf-core/demo` is written without many parameters or local input files (test data is fetched remotely via the `test` profile), demonstrating cache invalidation by `touch`ing a staged linked file won't invalidate the cache. We can demonstrate the same idea by deleting a staged file.
 
 !!! question "Exercise"
 
-    Invalidate the cache by touching a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `touch` command). Execute the pipeline again with the `-resume` option to show that the cache has been invalidated.
+    Invalidate the cache by deleting a `.fastq.gz` file in a `FASTQC` task work directory (you can use the `rm` command). Execute the pipeline again with the `-resume` option to show that the cache has been invalidated.
 
     ??? success "Solution"
 
@@ -269,10 +273,10 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
         nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results
         ```
 
-        Use the task ID shown for the `FASTQC` process and use it to find and `touch` a `.fastq.gz` file in that task's work directory:
+        Use the task ID shown for the `FASTQC` process and use it to find and `rm` a `.fastq.gz` file in that task's work directory:
 
         ```bash
-        touch work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+        rm work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
         ```
 
         Execute the pipeline again with the `-resume` command option:
@@ -285,7 +289,7 @@ The `-resume` functionality is very sensitive. Even touching a file in the work 
 
         **Why did this happen?**
 
-        In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was modified. Touching the symlink and changing the date of last modification caused Nextflow to re-run the affected task and all downstream tasks that depended on its output.
+        In this example, the cache of the `FASTQC` task was invalidated because the `sample1_R1.fastq.gz` file was removed. Deleting the staged file meant Nextflow could no longer verify the task's inputs, so it re-ran the affected task and all downstream tasks that depended on its output.
 
 Your work directory can get very big very quickly (especially if you are using full sized datasets). It is good practice to `clean` your work directory regularly. Rather than removing the `work` folder with all of its contents, the Nextflow `clean` function allows you to selectively remove data associated with specific runs.
 
