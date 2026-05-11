@@ -102,7 +102,7 @@ nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -res
 
 # --- Exercise: invalidate cache ----------------------------------------------
 # Replace path with the actual FASTQC task work dir / file from your run:
-touch work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
+rm work/b2/87370687cc7cdec037ce4f36807d32/sample1_R1.fastq.gz
 nextflow run nf-core/demo -profile test,apptainer -r 1.1.0 --outdir results -resume
 
 
