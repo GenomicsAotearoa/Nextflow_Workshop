@@ -45,6 +45,16 @@ For a more configurable option, the [trace file](https://docs.seqera.io/nextflow
 - `peak_rss` will show the peak of real memory used
 - `workdir` will provide the path to the working directory of the process
 
+## Data lineage
+
+Reproducibility is more than re-running the same pipeline. To trust a result, you also need to know which inputs, parameters, and process executions produced it. Nextflow's [data lineage](https://docs.seqera.io/nextflow/data-lineage) feature records this provenance automatically, capturing the relationships between inputs, tasks, and outputs across runs.
+
+Enable it by setting `lineage.enabled = true` in your configuration. You can then explore the recorded metadata with the `nextflow lineage` subcommands to trace any output back to the exact run, parameters, and source files that produced it.
+
+!!! question "Exercise"
+
+    Enable data lineage in your config and re-run nf-core/demo. Use `nextflow lineage list` to find your run.
+
 ## Approaches for running Nextflow pipelines on HPCs
 
 Caveat: this is generally true on different HPC systems, but the notes below are tailored for Mahuika.
