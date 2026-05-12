@@ -1,0 +1,5 @@
+mkdocs
+mkdocs-glightbox
+mkdocs-awesome-pages-plugin
+mkdocs-material==9.7.1
+mkdocs-material-extensions==1.3.1
