@@ -13,10 +13,10 @@
   background-color: black;
 }
 
-.md-header {
+/* .md-header {
   top: 30px;
-  /* This setting prevents the Material header from imposing into the space of the banner! */
-}
+ This setting prevents the Material header from imposing into the space of the banner! 
+ } */
 
 /* Header colors for light mode */
 [data-md-color-scheme="default"] .md-header {
