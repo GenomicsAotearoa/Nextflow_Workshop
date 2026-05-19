@@ -41,7 +41,7 @@ For a more configurable option, the [trace file](https://docs.seqera.io/nextflow
 - `duration` will show the time from submission of the process to completion of the process
 - `realtime` will show the time from the start of the process to completion of the process (job run time)
 - `%cpu` will show the percentage of CPU used by the process
-- `%mem` will sow the percentage of memory used by the process
+- `%mem` will show the percentage of memory used by the process
 - `peak_rss` will show the peak of real memory used
 - `workdir` will provide the path to the working directory of the process
 
